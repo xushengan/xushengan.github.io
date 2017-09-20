@@ -1,483 +1,1040 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="xushengan.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="zh-CN">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+<!doctype html>
+
+
+
   
 
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Xu_Blog">
+<meta property="og:url" content="xushengan.github.io/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xu_Blog">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/"/>
+
+
+
+
+
+  <title> Xu_Blog </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">aa</a>
-        </h2>
-      
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="xushengan.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/20/test/" class="article-date">
-  <time datetime="2017-09-20T12:01:30.026Z" itemprop="datePublished">2017-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>[toc]</p>
-<h2 id="1、基础权限"><a href="#1、基础权限" class="headerlink" title="1、基础权限"></a>1、基础权限</h2><ul>
-<li>权限（是相对于文件来说的）<h4 id="1-1、查看权限ls-l（ll）"><a href="#1-1、查看权限ls-l（ll）" class="headerlink" title="1.1、查看权限ls -l（ll）"></a>1.1、查看权限ls -l（ll）</h4>|rw-                  |    r-                     |r-    |<br>|——————|———————-|——|<br>|拥有者的权限|    所属组的权限    |其他人|</li>
-</ul>
-<h4 id="1-2、基本权限："><a href="#1-2、基本权限：" class="headerlink" title="1.2、基本权限："></a>1.2、基本权限：</h4><table>
-<thead>
-<tr>
-<th>r</th>
-<th>readable，可读</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>文件</td>
-<td>可以查看文件内容（cat,vim,more,less）</td>
-</tr>
-<tr>
-<td>目录</td>
-<td>可以查看目录   </td>
-</tr>
-<tr>
-<td>w</td>
-<td>writable，可写</td>
-</tr>
-<tr>
-<td>文件</td>
-<td>可以修改文件内容（vim）</td>
-</tr>
-<tr>
-<td>目录</td>
-<td>可以修改目录的内容（创建文件，目录，修改文件名，删除文件或目录）</td>
-</tr>
-<tr>
-<td>x</td>
-<td>excutable，可执行</td>
-</tr>
-<tr>
-<td>文件</td>
-<td>可以修改文件内容（vim）</td>
-</tr>
-<tr>
-<td>目录</td>
-<td>可以切换到目录中（cd)</td>
-</tr>
-<tr>
-<td>-</td>
-<td>没有权限</td>
-</tr>
-</tbody>
-</table>
-<h4 id="1-3、进程访问模型："><a href="#1-3、进程访问模型：" class="headerlink" title="1.3、进程访问模型："></a>1.3、进程访问模型：</h4><ul>
-<li>用户执行程序访问资源，进程在执行时，携带用户uid和gid和group附加组的id</li>
-<li>两者匹配值可获得相应的权限</li>
-<li>id    查看当前用户</li>
-<li>ll     查看文件权限</li>
-</ul>
-<h4 id="1-4、三种用户访问类型："><a href="#1-4、三种用户访问类型：" class="headerlink" title="1.4、三种用户访问类型："></a>1.4、三种用户访问类型：</h4><table>
-<thead>
-<tr>
-<th>拥有者（owner）：</th>
-<th>进程uid和资源的uid一致</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>所属组（Group）：</td>
-<td>进程gid和资源的gid一致</td>
-</tr>
-<tr>
-<td>其他人（oteher)：</td>
-<td>uid和gid都不匹配</td>
-</tr>
-</tbody>
-</table>
-<h4 id="1-5修改文件权限：chmod"><a href="#1-5修改文件权限：chmod" class="headerlink" title="1.5修改文件权限：chmod"></a>1.5修改文件权限：chmod</h4><h5 id="1-5-1-符号表示法"><a href="#1-5-1-符号表示法" class="headerlink" title="1.5.1.符号表示法"></a>1.5.1.符号表示法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">chmod MODE FILE</div><div class="line">            u    +    r</div><div class="line">            g    -    w</div><div class="line">            o    =   x</div><div class="line">                       s</div><div class="line">                       t</div><div class="line"> </div><div class="line">chmod    u+x,g+x haha</div><div class="line">chmod    ug+x      haha</div><div class="line">chmod    ugo+x  haha</div><div class="line">chmod    a+x        haha</div><div class="line">chmod    u=rwx    haha(重新定义）</div></pre></td></tr></table></figure>
-<h5 id="1-5-2-数字表示法（二进制，0和1表示有无）"><a href="#1-5-2-数字表示法（二进制，0和1表示有无）" class="headerlink" title="1.5.2.数字表示法（二进制，0和1表示有无）"></a>1.5.2.数字表示法（二进制，0和1表示有无）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">chmod    xxx    file</div><div class="line">rwx    rwx    r-x</div><div class="line">000    000    000</div><div class="line">111    111    111</div><div class="line">7         7        7</div><div class="line"> </div><div class="line">**chmod    777    file**</div><div class="line"> </div><div class="line">chmod    777 haha</div></pre></td></tr></table></figure>
-<h4 id="1-6、修改拥有者（所属组）：chown"><a href="#1-6、修改拥有者（所属组）：chown" class="headerlink" title="1.6、修改拥有者（所属组）：chown"></a>1.6、修改拥有者（所属组）：chown</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">chown haha haha（目录)</div><div class="line">chgrp   haha haha</div><div class="line">chown haha.haha test</div><div class="line">chown user.group file</div><div class="line">chown user:group file</div><div class="line">chown .group file</div></pre></td></tr></table></figure>
-<h4 id="1-7、umask-权限掩码，定义文件创建时的默认权限"><a href="#1-7、umask-权限掩码，定义文件创建时的默认权限" class="headerlink" title="1.7、umask(权限掩码，定义文件创建时的默认权限)"></a>1.7、umask(权限掩码，定义文件创建时的默认权限)</h4><p>umask    命令，查看用户的umask值<br>root    022（— -w- -w-）<br>普通用户 002（— — -w-）</p>
-<h4 id="1-8、普通用户创建"><a href="#1-8、普通用户创建" class="headerlink" title="1.8、普通用户创建"></a>1.8、普通用户创建</h4><h5 id="1-8-1、文件权限："><a href="#1-8-1、文件权限：" class="headerlink" title="1.8.1、文件权限："></a>1.8.1、文件权限：</h5><table>
-<thead>
-<tr>
-<th>默认/初始权限（666）</th>
-<th>rw- rw- rw-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-umask(root)</td>
-<td>—  -w-  -w-=644</td>
-</tr>
-<tr>
-<td></td>
-<td>rw- r– r–</td>
-</tr>
-<tr>
-<td>-umask（普通用户）</td>
-<td>—  —   -w- =664</td>
-</tr>
-<tr>
-<td></td>
-<td>rw- rw- r–</td>
-</tr>
-</tbody>
-</table>
-<h5 id="1-8-2、目录权限："><a href="#1-8-2、目录权限：" class="headerlink" title="1.8.2、目录权限："></a>1.8.2、目录权限：</h5><table>
-<thead>
-<tr>
-<th>初始权限（777)</th>
-<th>rwx rwx rwx</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-umask(root)</td>
-<td>—  -w-  -w-=755</td>
-</tr>
-<tr>
-<td>-umask（普通用户）</td>
-<td>—  —   -w- =775</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>若普通用户umask改成333（-wx -wx -wx）则算出444而不是333，因为本来就没有x权限（r– r– r–）</li>
-</ul>
-<h2 id="2、特殊权限"><a href="#2、特殊权限" class="headerlink" title="2、特殊权限"></a>2、特殊权限</h2><ul>
-<li>注意：对没有x执行权限的文件加s是没有意义的<h4 id="2-1、suid-set-uid）"><a href="#2-1、suid-set-uid）" class="headerlink" title="2.1、suid(set uid）"></a>2.1、suid(set uid）</h4>|只能对文件拥有者的权限设置，临时取得文件拥有者的权限|<br>|————————————————-|</li>
-</ul>
-<h4 id="2-2、sgid-set-gid"><a href="#2-2、sgid-set-gid" class="headerlink" title="2.2、sgid(set gid)"></a>2.2、sgid(set gid)</h4><table>
-<thead>
-<tr>
-<th>文件：</th>
-<th>对可执行的所属组设置，临时取得文件所属组的权限</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>目录：</td>
-<td>目录下文件继承目录的所属组</td>
-</tr>
-<tr>
-<td>命令</td>
-<td>chrom g+s</td>
-</tr>
-</tbody>
-</table>
-<h4 id="2-3、sbit（sticky-bit-黏贴位"><a href="#2-3、sbit（sticky-bit-黏贴位" class="headerlink" title="2.3、sbit（sticky bit)黏贴位"></a>2.3、sbit（sticky bit)黏贴位</h4><table>
-<thead>
-<tr>
-<th>用户之间的文件不能删除</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>chrom o+t file</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>suid</th>
-<th>sgid</th>
-<th>sbit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod  2770 file</div><div class="line">rwx    rws   ---</div></pre></td></tr></table></figure>
-<h4 id="2-4、如何给文件设置特殊权限。"><a href="#2-4、如何给文件设置特殊权限。" class="headerlink" title="2.4、如何给文件设置特殊权限。"></a>2.4、如何给文件设置特殊权限。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">chmod u+s xxx # 设置setuid权限</div><div class="line">chmod g+s xxx # 设置setgid权限</div><div class="line">chmod o+t xxx # 设置stick bit权限，针对目录</div><div class="line">chmod 4775 xxx # 设置setuid权限</div><div class="line">hmod 2775 xxx # 设置setgid权限</div><div class="line">chmod 1775 xxx # 设置stick bit权限，针对目录</div></pre></td></tr></table></figure>
-<h4 id="2-5、特殊权限实例：-usr-bin-passwd与-etc-passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限"><a href="#2-5、特殊权限实例：-usr-bin-passwd与-etc-passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限" class="headerlink" title="2.5、特殊权限实例：/usr/bin/passwd与/etc/passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限"></a>2.5、特殊权限实例：/usr/bin/passwd与/etc/passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">which passwd</div><div class="line">/usr/bin/passwd</div><div class="line">ll    /etc/shadow</div><div class="line">----------. 1 root root 1319 Oct  9 13:13 /etc/shadow   </div><div class="line">&quot;没有权限&quot;</div><div class="line">虽然没有权限，但是普通用户仍然可以修改自己的密码</div></pre></td></tr></table></figure>
-<h4 id="2-6、解释"><a href="#2-6、解释" class="headerlink" title="2.6、解释"></a>2.6、解释</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">1、setuid 和setgid：</div><div class="line"> </div><div class="line">以/etc/passwd和/usr/bin/passwd为例</div><div class="line"> </div><div class="line">Linux三个特殊权限 setuid   setgid   stick bit</div><div class="line"> </div><div class="line">/etc/passwd的权限为 -rw-r--r--。也就是说：该文件的所有者拥有读写的权限，而用户组成员和其它成员只有查看的权限。我们知道，在系统中我们要修改一个用户的密码，root用户和普通用户均可以用“/usr/bin/passwd 用户名” 这个命令来修改这个/etc/passwd这个文件，root用户本身拥有对/etc/passwd的写权限，可以理解;那普通用户没有写权限，那他怎么也能修改呢？这里就用到了setuid，setuid的作用是让执行该命令的用户以该命令拥有者的权限去执行，就是普通用户执行passwd时会拥有root的权限，这样就可以修改/etc/passwd这个文件了。它的标志为：s，会出现在x的地方，例：-rwsr-xr-x  。而setgid的意思和它是一样的，即让执行文件的用户以该文件所属组的权限去执行。</div><div class="line"> </div><div class="line">2、stick bit(粘滞位)</div><div class="line"> </div><div class="line">以/tmp为例：</div><div class="line"> </div><div class="line">Linux三个特殊权限 setuid   setgid   stick bit</div><div class="line"> </div><div class="line">我们知道/tmp是系统的临时文件目录，所有的用户在该目录下拥有所有的权限，也就是说在该目录下可以任意创建、修改、删除文件，那如果用户A在该目录下创建了一个文件，</div><div class="line"> </div><div class="line">用户B将该文件删除了，这种情况我们是不能允许的。为了达到该目的，就出现了stick  bit(粘滞位)的概念。它是针对目录来说的，如果该目录设置了stick  bit(粘滞位)，则该目录下的文件除了该文件的创建者和root用户可以删除和修改/tmp目录下的stuff，别的用户均不能动别人的，这就是粘滞位的作用。</div></pre></td></tr></table></figure>
-<h4 id="2-7、注意-s-t需要执行权限，否则ll显示S-T"><a href="#2-7、注意-s-t需要执行权限，否则ll显示S-T" class="headerlink" title="2.7、注意(+s+t需要执行权限，否则ll显示S\T)"></a>2.7、注意(+s+t需要执行权限，否则ll显示S\T)</h4><p>有时你设置了s或t  权限，你会发现它变成了S或T，这是因为在那个位置上你没有给它x(可执行)的权限，这样的话这样的设置是不会有效的，你可以先给它赋上x的权限，然后再给s或t的权限。<br>如下,本来没有x权限，显示大S，添加x后变s,+号表示有acl<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ll</div><div class="line">-rwSrw-r--+ 1 xu101 xu101     4 Aug 21 14:13 xu101</div><div class="line">[xu101@Xu tmp]$ chmod u+x xu101</div><div class="line">-rwsrw-r--+ 1 xu101 xu101     4 Aug 21 14:13 xu101</div></pre></td></tr></table></figure></p>
-<p>特殊权限一般赋给可执行的二进制，setuid的作用是让执行该命令的用户以该命令拥有者的权限去执行</p>
-<h4 id="2-8、-t实例，用户102无法删除101创建的"><a href="#2-8、-t实例，用户102无法删除101创建的" class="headerlink" title="2.8、+t实例，用户102无法删除101创建的"></a>2.8、+t实例，用户102无法删除101创建的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[xu101@Xu tmp]$ mkdir xu10x</div><div class="line">chmod +t xu10x</div><div class="line">cd xu10x</div><div class="line">touch sb102</div><div class="line">ll /tmp</div><div class="line">drwxrwxrwt. 2 xu101 xu101  4096 Aug 21 15:35 xu10x</div><div class="line"></div><div class="line"></div><div class="line">[xu102@Xu xu10x]$ ll</div><div class="line">total 0</div><div class="line">-rwxrwxrwx. 1 xu101 xu101 0 Aug 21 15:28 sb</div><div class="line">-rwxrwxrwx. 1 xu101 xu101 0 Aug 21 15:35 sb102</div><div class="line">[xu102@Xu xu10x]$ rm sb102 </div><div class="line">rm: remove write-protected regular empty file `sb102&apos;? y</div><div class="line">rm: cannot remove `sb102&apos;: Permission denied</div></pre></td></tr></table></figure>
-<h2 id="3、扩展权限：-添加其他用户的特殊权限）"><a href="#3、扩展权限：-添加其他用户的特殊权限）" class="headerlink" title="3、扩展权限：(添加其他用户的特殊权限）"></a>3、扩展权限：(添加其他用户的特殊权限）</h2><ul>
-<li>ACL（access control list）定义特定用户对文件的特定权限<h4 id="3-1、getfacl和setfacl"><a href="#3-1、getfacl和setfacl" class="headerlink" title="3.1、getfacl和setfacl"></a>3.1、getfacl和setfacl</h4>|getfacl|查看修改结果|<br>|——–|——————-|<br>|setfacl|添加其他用户的特殊权限|<br>|增加权限|setfacl -m u：user：权限 文件名|<br>|删除权限|setfal   -m x：user:权限 文件名 |<br>查看结果|getfac user2</li>
-</ul>
-<h4 id="3-2、4种指定默认的权限"><a href="#3-2、4种指定默认的权限" class="headerlink" title="3.2、4种指定默认的权限"></a>3.2、4种指定默认的权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[d[efault]:] [u[ser]:]uid [:perms] 指定用户的权限，文件所有者的权限（如果uid没有指定）。 </div><div class="line">[d[efault]:] g[roup]:gid [:perms] 指定群组的权限，文件所有群组的权限（如果gid未指定） </div><div class="line">[d[efault]:] m[ask][:] [:perms] 有效权限掩码 </div><div class="line">[d[efault]:] o[ther] [:perms] 其他的权限</div></pre></td></tr></table></figure>
-<h4 id="3-3、命令例子"><a href="#3-3、命令例子" class="headerlink" title="3.3、命令例子"></a>3.3、命令例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">user::rw- 定义了ACL_USER_OBJ, 说明file owner拥有read and write permission </div><div class="line">user:john:rw- 定义了ACL_USER,这样用户john就拥有了对文件的读写权限,实现了我们一开始要达到的目的 </div><div class="line">group::rw- 定义了ACL_GROUP_OBJ,说明文件的group拥有read and write permission </div><div class="line">group:dev:r-- 定义了ACL_GROUP,使得dev组拥有了对文件的read permission </div><div class="line">mask::rw- 定义了ACL_MASK的权限为read and write </div><div class="line">other::r-- 定义了ACL_OTHER的权限为read</div></pre></td></tr></table></figure>
-<h4 id="3-4、添加用户特殊权限实例"><a href="#3-4、添加用户特殊权限实例" class="headerlink" title="3.4、添加用户特殊权限实例"></a>3.4、添加用户特殊权限实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# setfacl -m user:john:rw- ./test.txt </div><div class="line">[root@localhost ~]# getfacl --omit-header </div><div class="line">./test.txt </div><div class="line">user::rw- </div><div class="line">user:john:rw- </div><div class="line">group::rw- </div><div class="line">mask::rw- </div><div class="line">other::r--</div></pre></td></tr></table></figure>
-<p>然后我在ll这个文件的时候，我们会发现在最后会多了一个+号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[xu101@Xu tmp]$ ll xu101 </div><div class="line">-rwxrw-r--+ 1 xu101 xu101 4 Aug 21 14:13 xu101</div></pre></td></tr></table></figure></p>
-<p>来自: <a href="http://man.linuxde.net/setfacl" target="_blank" rel="external">http://man.linuxde.net/setfacl</a> </p>
-<h2 id="4、selinux"><a href="#4、selinux" class="headerlink" title="4、selinux"></a>4、selinux</h2><ul>
-<li>SElinux规则用来定义哪种类型的进程可以访问哪种类型的资源<h4 id="4-1、两种访问控制"><a href="#4-1、两种访问控制" class="headerlink" title="4.1、两种访问控制"></a>4.1、两种访问控制</h4></li>
-<li>MAC(Mandatory Access Control) 强制性访问控制 —-&gt;  rwx权限</li>
-<li>DAC(Descriptionary Access Control) 委任式访问控制 —&gt;  SElinux</li>
-</ul>
-<h4 id="4-2、我们的访问模型"><a href="#4-2、我们的访问模型" class="headerlink" title="4.2、我们的访问模型:"></a>4.2、我们的访问模型:</h4><ul>
-<li>进程—&gt;资源</li>
-</ul>
-<p>#####4.3查看相关属性(安全上下文—context)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ls -Z     查看资源的状态</div><div class="line">ps -Z   查看进程的状态</div><div class="line">unconfined_u:object_r:admin_home_t:s0</div></pre></td></tr></table></figure></p>
-<h5 id="4-4、以web为例查看httpd进程的类型和index-html文件的类型"><a href="#4-4、以web为例查看httpd进程的类型和index-html文件的类型" class="headerlink" title="4.4、以web为例查看httpd进程的类型和index.html文件的类型:"></a>4.4、以web为例查看httpd进程的类型和index.html文件的类型:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ll -Z  /var/www/html/index.html</div><div class="line">ps aux -Z | grep httpd</div><div class="line">httpd_t (httpd)  (程序的type)-----&gt;     httpd_sys_content_t   (index.html)（文件的类型）匹配才能访问</div></pre></td></tr></table></figure>
-<h4 id="4-5、修改context"><a href="#4-5、修改context" class="headerlink" title="4.5、修改context"></a>4.5、修改context</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chcon -Rt  TYPE  FILE</div></pre></td></tr></table></figure>
-<h4 id="4-6、还原context"><a href="#4-6、还原context" class="headerlink" title="4.6、还原context"></a>4.6、还原context</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">restorecon -R  FILE</div></pre></td></tr></table></figure>
-<h4 id="4-7、控制selinux开启-关闭"><a href="#4-7、控制selinux开启-关闭" class="headerlink" title="4.7、控制selinux开启/关闭"></a>4.7、控制selinux开启/关闭</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">getenforce    查看</div><div class="line">        permissive   不检查,只警告</div><div class="line">        enforcing     强制检查</div><div class="line">        disabled       关闭</div><div class="line">    setenforce 0 | 1      #0 关闭  1开启</div><div class="line">``` </div><div class="line">-    永久修改selinux状态: 修改配置文件/etc/sysconfig/selinux</div><div class="line"> </div><div class="line">#### 4.8、SElinux 布尔值</div></pre></td></tr></table></figure>
-<pre><code>getsebool -a   查看
-setsebool -P NAME on|off 设置
-</code></pre><p><a href="http://man.linuxde.net/setsebool" target="_blank" rel="external">http://man.linuxde.net/setsebool</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">## 5、chattr(用root权限都不能修改某个文件，可能是使用root锁定了文件)</div><div class="line">chattr命令的作用很大，其中一些功能是由Linux内核版本来支持的，不过现在生产绝大部分跑的linux系统都是2.6以上内核了。通过chattr命令修改属性能够提高系统的安全性，但是它并不适合所有的目录。chattr命令不能保护/、/dev、/tmp、/var目录。</div><div class="line">lsattr    显示chattr命令设置的文件属性</div><div class="line"> </div><div class="line">这两个命令是用来查看和改变文件、目录属性的，与chmod这个命令相比，chmod只是改变文件的读写、执行权限，更底层的属性控制是由chattr来改变的。</div><div class="line"> </div><div class="line">chattr命令的用法：chattr [ -RVf ] [ -v version ] [ mode ] files…</div><div class="line">最关键的是在[mode]部分，[mode]部分是由+-=和[ASacDdIijsTtu]这些字符组合的，这部分是用来控制文件的</div><div class="line">属性。</div><div class="line"></div><div class="line">#### mode参数</div></pre></td></tr></table></figure></p>
-<ul>
-<li>：在原有参数设定基础上，追加参数。</li>
-</ul>
-<ul>
-<li>：在原有参数设定基础上，移除参数。<br>= ：更新为指定参数设定。<br>A：文件或目录的 atime (access time)不可被修改(modified), 可以有效预防例如手提电脑磁盘I/O错误的发生。<br>S：硬盘I/O同步选项，功能类似sync。<br>a：即append，设定该参数后，只能向文件中添加数据，而不能删除，多用于服务器日志文件安全，只有root才能设定这个属性。<br>c：即compresse，设定文件是否经压缩后再存储。读取时需要经过自动解压操作。<br>d：即no dump，设定文件不能成为dump程序的备份目标。<br>i：设定文件不能被删除、改名、设定链接关系，同时不能写入或新增内容。i参数对于文件 系统的安全设置有很大帮助。<br>j：即journal，设定此参数使得当通过mount参数：data=ordered 或者 data=writeback 挂 载的文件系统，文件在写入时会先被记录(在journal中)。如果filesystem被设定参数为 data=journal，则该参数自动失效。<br>s：保密性地删除文件或目录，即硬盘空间被全部收回。<br>u：与s相反，当设定为u时，数据内容其实还存在磁盘中，可以用于undeletion。<br>各参数选项中常用到的是a和i。a选项强制只可添加不可删除，多用于日志系统的安全设定。而i是更为严格的安全设定，只有superuser (root) 或具有CAP_LINUX_IMMUTABLE处理能力（标识）的进程能够施加该选项。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 应用举例：</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>1、用chattr命令防止系统中某个关键文件被修改：</p>
-<h1 id="chattr-i-etc-resolv-conf"><a href="#chattr-i-etc-resolv-conf" class="headerlink" title="chattr +i /etc/resolv.conf"></a>chattr +i /etc/resolv.conf</h1><p>然后用mv /etc/resolv.conf等命令操作于该文件，都是得到Operation not permitted 的结果。vim编辑该文件时会提示W10: Warning: Changing a readonly file错误。要想修改此文件就要把i属性去掉： chattr -i /etc/resolv.conf</p>
-<h1 id="lsattr-etc-resolv-conf"><a href="#lsattr-etc-resolv-conf" class="headerlink" title="lsattr /etc/resolv.conf"></a>lsattr /etc/resolv.conf</h1><p>会显示如下属性<br>—-i——– /etc/resolv.conf</p>
-<p>2、让某个文件只能往里面追加数据，但不能删除，适用于各种日志文件：</p>
-<h1 id="chattr-a-var-log-messages"><a href="#chattr-a-var-log-messages" class="headerlink" title="chattr +a /var/log/messages"></a>chattr +a /var/log/messages</h1><p>```</p>
-<p>课外知识<br>rm -rf *：<br>mv 重命名<br>chgrp 【组】    file</p>
-
+        <p class="site-subtitle">学而后知不足</p>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="xushengan.github.io/2017/09/20/test/" data-id="cj7szbxfm0001v4u1107prl15" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/20/hello/" class="article-date">
-  <time datetime="2017-09-20T10:51:16.000Z" itemprop="datePublished">2017-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/20/hello/">hello</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="xushengan.github.io/2017/09/20/hello/" data-id="cj7szbxfq0002v4u15t48ajov" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/20/hello-world/" class="article-date">
-  <time datetime="2017-09-20T10:45:16.820Z" itemprop="datePublished">2017-09-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="xushengan.github.io/2017/09/20/hello-world/" data-id="cj7szbxff0000v4u1w3e9gww3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li></ul>
-    </div>
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
+    <ul id="menu" class="menu">
+      
         
-          <li>
-            <a href="/2017/09/20/test/">(no title)</a>
-          </li>
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
         
-          <li>
-            <a href="/2017/09/20/hello/">hello</a>
-          </li>
+        <li class="menu-item menu-item-linux">
+          <a href="/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
         
-          <li>
-            <a href="/2017/09/20/hello-world/">Hello World</a>
-          </li>
+        <li class="menu-item menu-item-net">
+          <a href="/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
         
-      </ul>
-    </div>
-  </div>
+        <li class="menu-item menu-item-elk">
+          <a href="/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
 
+      
+    </ul>
   
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
   
 </nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/em/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/20/em/" itemprop="url">
+                  hello
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:51:16+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1234567import matplotlib.pyplot as pltimport numpy as npx = np.arange(20)y = x**2plt.plot(x, y)
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/20/em/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-<script src="/js/script.js"></script>
+    
+      
 
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/20/test/" itemprop="url">
+                  文件权限
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:51:16+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1、基础权限
+权限（是相对于文件来说的）1.1、查看权限ls -l（ll）|rw-| r- |r-–|—|–拥有者的权限|所属组的权限|其他人
+
+1.2、基本权限：
+
+
+r
+readable，可读
+
+
+
+
+文件
+可以查看文件内容（cat,vim,more,less）
+
+
+目录
+可以查看目录   
+
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/20/test/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/hello/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/20/hello/" itemprop="url">
+                  hello
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:51:16+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          hello world
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/20/hello/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/20/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:45:16+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/20/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+
+          
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
   </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
 </body>
 </html>
