@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="##Flume（基础概念&amp;amp;配置） 1、介绍Flume NG是Cloudera提供的一个分布式、可靠、可用的系统，它能够将不同数据源的海量日志数据进行高效收集、聚合、移动，最后存储到一个中心化数据存储系统中。由原来的Flume OG到现在的Flume NG，进行了架构重构，并且现在NG版本完全不兼容原来的OG版本。经过架构重构后，Flume NG更像是一个轻量的小工具，非常简单，容易适应各种">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-22T08:49:30.232Z">
+<meta property="og:updated_time" content="2017-09-22T15:25:09.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume（基础概念&amp;配置）">
 <meta name="twitter:description" content="##Flume（基础概念&amp;amp;配置） 1、介绍Flume NG是Cloudera提供的一个分布式、可靠、可用的系统，它能够将不同数据源的海量日志数据进行高效收集、聚合、移动，最后存储到一个中心化数据存储系统中。由原来的Flume OG到现在的Flume NG，进行了架构重构，并且现在NG版本完全不兼容原来的OG版本。经过架构重构后，Flume NG更像是一个轻量的小工具，非常简单，容易适应各种">
@@ -401,12 +401,11 @@
 <p>官方网站：<a href="http://flume.apache.org/" target="_blank" rel="external">http://flume.apache.org/</a><br>用户文档：<a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeUserGuide.html</a><br>开发文档：<a href="http://flume.apache.org/FlumeDeveloperGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeDeveloperGuide.html</a></p>
 <h3 id="2、系统要求"><a href="#2、系统要求" class="headerlink" title="2、系统要求"></a>2、系统要求</h3><p>1、Java运行时环境，Java 1.7或更高版本<br>2、内存，源、通道或汇点使用的配置足够的内存<br>3、磁盘空间，用于通道或接收器使用的配置的足够的磁盘空间<br>4、目录权限，代理使用的目录的读/写权限</p>
 <h3 id="3、安装"><a href="#3、安装" class="headerlink" title="3、安装"></a>3、安装</h3><p>配置文件路径</p>
-<h3 id="4、关键词"><a href="#4、关键词" class="headerlink" title="4、关键词"></a>4、关键词</h3><p>Flume的架构主要有一下几个核心概念：</p>
-<p>Event：数据流最小单元，带有一个可选的消息头header<br>Flow：Event从源点到达目的点的迁移的抽象<br>Client：操作位于源点处的Event，将其发送到Flume Agent<br>Agent：一个独立的Flume进程，包含组件Source、Channel、Sink<br>Source：用来消费传递到该组件的Event<br>Channel：中转Event的一个临时存储，保存有Source组件传递过来的Event<br>Sink：从Channel中读取并移除Event，将Event传递到Flow Pipeline中的下一个Agent（如果有的话）</p>
+<h3 id="4、关键词"><a href="#4、关键词" class="headerlink" title="4、关键词"></a>4、关键词</h3><p><strong>Flume的架构主要有一下几个核心概念：</strong><br>Event：数据流最小单元，带有一个可选的消息头header<br>Flow：Event从源点到达目的点的迁移的抽象<br>Client：操作位于源点处的Event，将其发送到Flume Agent<br>Agent：一个独立的Flume进程，包含组件Source、Channel、Sink<br>Source：用来消费传递到该组件的Event<br>Channel：中转Event的一个临时存储，保存有Source组件传递过来的Event<br>Sink：从Channel中读取并移除Event，将Event传递到Flow Pipeline中的下一个Agent（如果有的话）</p>
 <h3 id="5、数据流"><a href="#5、数据流" class="headerlink" title="5、数据流"></a>5、数据流</h3><p>1、Flume 的核心是把数据从数据源收集过来，再送到目的地。为了保证输送一定成功，在送到目的地之前，会先缓存数据，待数据真正到达目的地后，删除自己缓存的数据。</p>
 <p>2、Flume 传输的数据的基本单位是 Event，如果是文本文件，通常是一行记录，这也是事务的基本单位。Event 从 Source，流向 Channel，再到 Sink，本身为一个 byte 数组，并可携带 headers 信息。Event 代表着一个数据流的最小完整单元，从外部数据源来，向外部的目的地去。</p>
 <p>3、Flume 运行的核心是 Agent。它是一个完整的数据收集工具，含有三个核心组件，分别是 source、channel、sink。通过这些组件，Event 可以从一个地方流向另一个地方，如下图所示。</p>
-<p>#图片</p>
+
 <p>由图易得，flume有三个部分<br>source–&gt;channel–&gt;sink<br>（以为source怎么确保channel已经缓存，channel怎么确保sink已经消费（tcp看多了））</p>
 <p>1、source 可以接收外部源发送过来的数据。不同的 source，可以接受不同的数据格式。比如有目录池(spooling directory)数据源，可以监控指定文件夹中的新文件变化，如果目录中有文件产生，就会立刻读取其内容。<br>2、channel 是一个存储地，接收 source 的输出，直到有 sink 消费掉 channel 中的数据。channel 中的数据直到进入到下一个channel中或者进入终端才会被删除。当 sink 写入失败后，可以自动重启，不会造成数据丢失，因此很可靠。<br>3、sink 会消费 channel 中的数据，然后送给外部源或者其他 source。如数据可以写入到 HDFS 或者 HBase 中。</p>
 <h3 id="6、核心组件"><a href="#6、核心组件" class="headerlink" title="6、核心组件"></a>6、核心组件</h3><h4 id="6-1、source"><a href="#6-1、source" class="headerlink" title="6.1、source:"></a>6.1、source:</h4><h5 id="6-1-1-source介绍"><a href="#6-1-1-source介绍" class="headerlink" title="6.1.1 source介绍"></a>6.1.1 source介绍</h5><p>Client端操作消费数据的来源，Flume 支持 Avro，log4j，syslog 和 http post(body为json格式)。可以让应用程序同已有的Source直接打交道，如AvroSource，SyslogTcpSource。也可以 写一个 Source，以 IPC 或 RPC 的方式接入自己的应用，Avro和 Thrift 都可以(分别有 NettyAvroRpcClient 和 ThriftRpcClient 实现了 RpcClient接口)，其中 Avro 是默认的 RPC 协议。具体代码级别的 Client 端数据接入，可以参考官方手册。</p>
@@ -436,7 +435,64 @@
 <h5 id="6-2-2-Flume-Channel-支持的类型："><a href="#6-2-2-Flume-Channel-支持的类型：" class="headerlink" title="6.2.2 Flume Channel 支持的类型："></a>6.2.2 Flume Channel 支持的类型：</h5><p>Channel类型    |说明<br>Memory Channel    |Event数据存储在内存中<br>–|–<br>JDBC Channel    |Event数据存储在持久化存储中，当前Flume Channel内置支持Derby<br>File Channel    |Event数据存储在磁盘文件中<br>Spillable Memory Channel|    Event数据存储在内存中和磁盘上，当内存队列满了，会持久化到磁盘文件（当前试验性的，不建议生产环境使用）<br>Pseudo Transaction Channel|    测试用途<br>Custom Channel|    自定义Channel实现</p>
 <h5 id="6-2-3-channel配置段"><a href="#6-2-3-channel配置段" class="headerlink" title="6.2.3 channel配置段"></a>6.2.3 channel配置段</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#设置Kafka接收器</div><div class="line">agent.sinks.k1.type= org.apache.flume.sink.kafka.KafkaSink</div><div class="line">#设置Kafka的broker地址和端口号</div><div class="line">agent.sinks.k1.brokerList=127.0.0.1:9092</div><div class="line">#设置Kafka的Topic</div><div class="line">agent.sinks.k1.topic=testKJ1</div><div class="line">#设置序列化方式</div><div class="line">agent.sinks.k1.serializer.class=kafka.serializer.StringEncoder</div><div class="line">agent.sinks.k1.channel=c1</div></pre></td></tr></table></figure>
 <h4 id="6-3、-sink"><a href="#6-3、-sink" class="headerlink" title="6.3、 sink"></a>6.3、 sink</h4><h5 id="6-3-1-sink介绍"><a href="#6-3-1-sink介绍" class="headerlink" title="6.3.1 sink介绍"></a>6.3.1 sink介绍</h5><p>Sink在设置存储数据时，可以向文件系统、数据库、hadoop存数据，在日志数据较少时，可以将数据存储在文件系中，并且设定一定的时间间隔保存数据。在日志数据较多时，可以将相应的日志数据存储到Hadoop中，便于日后进行相应的数据分析。</p>
-<h5 id="6-3-2-Flume-Sink支持的类型（居然没有kafka）"><a href="#6-3-2-Flume-Sink支持的类型（居然没有kafka）" class="headerlink" title="6.3.2 Flume Sink支持的类型（居然没有kafka）"></a>6.3.2 Flume Sink支持的类型（居然没有kafka）</h5><p>Sink类型    |说明<br>HDFS Sink    |数据写入HDFS<br>Logger Sink    |数据写入日志文件<br>Avro Sink    |数据被转换成Avro Event，然后发送到配置的RPC端口上<br>Thrift Sink    |数据被转换成Thrift Event，然后发送到配置的RPC端口上<br>IRC Sink    |数据在IRC上进行回放<br>File Roll Sink|存储数据到本地文件系统<br>Null Sink    |丢弃到所有数据<br>HBase Sink    |数据写入HBase数据库<br>Morphline Solr Sink    |数据发送到Solr搜索服务器（集群）<br>ElasticSearch Sink    |数据发送到Elastic Search搜索服务器（集群）<br>Kite Dataset Sink    |写数据到Kite Dataset，试验性质的<br>Custom Sink    |自定义Sink实现</p>
+<h5 id="6-3-2-Flume-Sink支持的类型（居然没有kafka）"><a href="#6-3-2-Flume-Sink支持的类型（居然没有kafka）" class="headerlink" title="6.3.2 Flume Sink支持的类型（居然没有kafka）"></a>6.3.2 Flume Sink支持的类型（居然没有kafka）</h5><table>
+<thead>
+<tr>
+<th>Sink类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDFS Sink</td>
+<td>数据写入HDFS</td>
+</tr>
+<tr>
+<td>Logger Sink</td>
+<td>数据写入日志文件</td>
+</tr>
+<tr>
+<td>Avro Sink</td>
+<td>数据被转换成Avro Event，然后发送到配置的RPC端口上</td>
+</tr>
+<tr>
+<td>Thrift Sink</td>
+<td>数据被转换成Thrift Event，然后发送到配置的RPC端口上</td>
+</tr>
+<tr>
+<td>IRC Sink</td>
+<td>数据在IRC上进行回放</td>
+</tr>
+<tr>
+<td>File Roll Sink</td>
+<td>存储数据到本地文件系统</td>
+</tr>
+<tr>
+<td>Null Sink</td>
+<td>丢弃到所有数据</td>
+</tr>
+<tr>
+<td>HBase Sink</td>
+<td>数据写入HBase数据库</td>
+</tr>
+<tr>
+<td>Morphline Solr Sink</td>
+<td>数据发送到Solr搜索服务器（集群）</td>
+</tr>
+<tr>
+<td>ElasticSearch Sink</td>
+<td>数据发送到Elastic Search搜索服务器（集群）</td>
+</tr>
+<tr>
+<td>Kite Dataset Sink</td>
+<td>写数据到Kite Dataset，试验性质的</td>
+</tr>
+<tr>
+<td>Custom Sink</td>
+<td>自定义Sink实现</td>
+</tr>
+</tbody>
+</table>
 <h5 id="6-3-3配置段"><a href="#6-3-3配置段" class="headerlink" title="6.3.3配置段"></a>6.3.3配置段</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#设置Kafka接收器</div><div class="line">agent.sinks.k1.type= org.apache.flume.sink.kafka.KafkaSink</div><div class="line">#设置Kafka的broker地址和端口号</div><div class="line">agent.sinks.k1.brokerList=127.0.0.1:9092</div><div class="line">#设置Kafka的Topic</div><div class="line">agent.sinks.k1.topic=testKJ1</div><div class="line">#设置序列化方式</div><div class="line">agent.sinks.k1.serializer.class=kafka.serializer.StringEncoder</div><div class="line"></div><div class="line">agent.sinks.k1.channel=c1</div></pre></td></tr></table></figure>
 <h4 id="6-4-可靠性-三者的关系"><a href="#6-4-可靠性-三者的关系" class="headerlink" title="6.4 可靠性 三者的关系"></a>6.4 可靠性 三者的关系</h4><p>Flume 的核心是把数据从数据源收集过来，再送到目的地。为了保证输送一定成功，在送到目的地之前，会先缓存数据，待数据真正到达目的地后，删除自己缓存的数据。</p>
 <p>Flume 使用事务性的方式保证传送Event整个过程的可靠性。Sink 必须在 Event 被存入 Channel 后，或者，已经被传达到下一站agent里，又或者，已经被存入外部数据目的地之后，才能把 Event 从 Channel 中 remove 掉。这样数据流里的 event 无论是在一个 agent 里还是多个 agent 之间流转，都能保证可靠，因为以上的事务保证了 event 会被成功存储起来。</p>
