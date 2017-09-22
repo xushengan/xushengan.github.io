@@ -91,14 +91,16 @@
 <meta name="keywords" content="flume">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flume（基础概念&amp;配置）">
-<meta property="og:url" content="xushengan.github.io/2017/09/22/flume/flume/index.html">
+<meta property="og:url" content="xushengan.github.io/2017/09/22/flume/index.html">
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="1、介绍Flume NG是Cloudera提供的一个分布式、可靠、可用的系统，它能够将不同数据源的海量日志数据进行高效收集、聚合、移动，最后存储到一个中心化数据存储系统中。由原来的Flume OG到现在的Flume NG，进行了架构重构，并且现在NG版本完全不兼容原来的OG版本。经过架构重构后，Flume NG更像是一个轻量的小工具，非常简单，容易适应各种方式日志收集，并支持failover和负载">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/2017/09/22/flume/1.png">
 <meta property="og:updated_time" content="2017-09-22T15:34:57.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume（基础概念&amp;配置）">
 <meta name="twitter:description" content="1、介绍Flume NG是Cloudera提供的一个分布式、可靠、可用的系统，它能够将不同数据源的海量日志数据进行高效收集、聚合、移动，最后存储到一个中心化数据存储系统中。由原来的Flume OG到现在的Flume NG，进行了架构重构，并且现在NG版本完全不兼容原来的OG版本。经过架构重构后，Flume NG更像是一个轻量的小工具，非常简单，容易适应各种方式日志收集，并支持failover和负载">
+<meta name="twitter:image" content="/2017/09/22/flume/1.png">
 
 
 
@@ -126,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="xushengan.github.io/2017/09/22/flume/flume/"/>
+  <link rel="canonical" href="xushengan.github.io/2017/09/22/flume/"/>
 
 
 
@@ -301,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/22/flume/flume/">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/22/flume/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -405,7 +407,7 @@
 <h3 id="4、数据流"><a href="#4、数据流" class="headerlink" title="4、数据流"></a>4、数据流</h3><p>1、Flume 的核心是把数据从数据源收集过来，再送到目的地。为了保证输送一定成功，在送到目的地之前，会先缓存数据，待数据真正到达目的地后，删除自己缓存的数据。</p>
 <p>2、Flume 传输的数据的基本单位是 Event，如果是文本文件，通常是一行记录，这也是事务的基本单位。Event 从 Source，流向 Channel，再到 Sink，本身为一个 byte 数组，并可携带 headers 信息。Event 代表着一个数据流的最小完整单元，从外部数据源来，向外部的目的地去。</p>
 <p>3、Flume 运行的核心是 Agent。它是一个完整的数据收集工具，含有三个核心组件，分别是 source、channel、sink。通过这些组件，Event 可以从一个地方流向另一个地方，如下图所示。</p>
-
+<img src="/2017/09/22/flume/1.png" alt="1.png" title="">
 <p>由图易得，flume有三个部分<br>source–&gt;channel–&gt;sink<br>（以为source怎么确保channel已经缓存，channel怎么确保sink已经消费（tcp看多了））</p>
 <p>1、source 可以接收外部源发送过来的数据。不同的 source，可以接受不同的数据格式。比如有目录池(spooling directory)数据源，可以监控指定文件夹中的新文件变化，如果目录中有文件产生，就会立刻读取其内容。<br>2、channel 是一个存储地，接收 source 的输出，直到有 sink 消费掉 channel 中的数据。channel 中的数据直到进入到下一个channel中或者进入终端才会被删除。当 sink 写入失败后，可以自动重启，不会造成数据丢失，因此很可靠。<br>3、sink 会消费 channel 中的数据，然后送给外部源或者其他 source。如数据可以写入到 HDFS 或者 HBase 中。</p>
 <h3 id="5、核心组件"><a href="#5、核心组件" class="headerlink" title="5、核心组件"></a>5、核心组件</h3><h4 id="5-1、source"><a href="#5-1、source" class="headerlink" title="5.1、source:"></a>5.1、source:</h4><h5 id="5-1-1-source介绍"><a href="#5-1-1-source介绍" class="headerlink" title="5.1.1 source介绍"></a>5.1.1 source介绍</h5><p>Client端操作消费数据的来源，Flume 支持 Avro，log4j，syslog 和 http post(body为json格式)。可以让应用程序同已有的Source直接打交道，如AvroSource，SyslogTcpSource。也可以 写一个 Source，以 IPC 或 RPC 的方式接入自己的应用，Avro和 Thrift 都可以(分别有 NettyAvroRpcClient 和 ThriftRpcClient 实现了 RpcClient接口)，其中 Avro 是默认的 RPC 协议。具体代码级别的 Client 端数据接入，可以参考官方手册。</p>
@@ -646,8 +648,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/20/index/" rel="next" title="分类操作">
-                <i class="fa fa-chevron-left"></i> 分类操作
+              <a href="/2017/09/22/flume/flume/" rel="next" title="Flume（基础概念&配置）">
+                <i class="fa fa-chevron-left"></i> Flume（基础概念&配置）
               </a>
             
           </div>
@@ -655,10 +657,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/22/flume/" rel="prev" title="Flume（基础概念&配置）">
-                Flume（基础概念&配置） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
