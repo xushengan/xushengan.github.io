@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bloc">
+<meta name="description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode -     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bl">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux文件权限">
 <meta property="og:url" content="xushengan.github.io/2017/09/24/filepermission/filepermission/index.html">
 <meta property="og:site_name" content="Xu_Blog">
-<meta property="og:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bloc">
+<meta property="og:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode -     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-24T10:22:09.849Z">
+<meta property="og:updated_time" content="2017-09-24T10:27:48.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件权限">
-<meta name="twitter:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bloc">
+<meta name="twitter:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode -     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bl">
 
 
 
@@ -421,6 +421,7 @@
 <thead>
 <tr>
 <th>inode</th>
+<th>-</th>
 </tr>
 </thead>
 <tbody>
@@ -529,12 +530,14 @@
 <tr>
 <th>目录原始权限777</th>
 <th>rwxrwxrwx</th>
+<th>-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>文件原始权限666</td>
 <td>rw-rw-rw</td>
+<td></td>
 </tr>
 <tr>
 <td>root的umask为022</td>
