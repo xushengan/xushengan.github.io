@@ -1,0 +1,804 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1、用户1.1、存放用户账号信息： /etc/passwd     用户名 ：保留 ：UID :GID :描述 ：家目录 ：shell     root :x :0 :0 :root :/root :/bin/bash    1.2、用户分类    0 root用户      1-499 系统用户     500-65535 普通用户     1.3、创建用户useradd123456789101">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件权限">
+<meta property="og:url" content="xushengan.github.io/2017/09/24/user/user/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:description" content="1、用户1.1、存放用户账号信息： /etc/passwd     用户名 ：保留 ：UID :GID :描述 ：家目录 ：shell     root :x :0 :0 :root :/root :/bin/bash    1.2、用户分类    0 root用户      1-499 系统用户     500-65535 普通用户     1.3、创建用户useradd123456789101">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-24T11:18:50.293Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux文件权限">
+<meta name="twitter:description" content="1、用户1.1、存放用户账号信息： /etc/passwd     用户名 ：保留 ：UID :GID :描述 ：家目录 ：shell     root :x :0 :0 :root :/root :/bin/bash    1.2、用户分类    0 root用户      1-499 系统用户     500-65535 普通用户     1.3、创建用户useradd123456789101">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/2017/09/24/user/user/"/>
+
+
+
+
+
+  <title> Linux文件权限 | Xu_Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学而后知不足</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-net">
+          <a href="/categories/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-elk">
+          <a href="/categories/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/24/user/user/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux文件权限
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T19:18:50+08:00">
+                2017-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、用户"><a href="#1、用户" class="headerlink" title="1、用户"></a>1、用户</h3><h4 id="1-1、存放用户账号信息："><a href="#1-1、存放用户账号信息：" class="headerlink" title="1.1、存放用户账号信息："></a>1.1、存放用户账号信息：</h4><ul>
+<li>/etc/passwd</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>用户名</th>
+<th>：保留</th>
+<th>：UID</th>
+<th>:GID</th>
+<th>:描述</th>
+<th>：家目录</th>
+<th>：shell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td>:x</td>
+<td>:0</td>
+<td>:0</td>
+<td>:root</td>
+<td>:/root</td>
+<td>:/bin/bash</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-2、用户分类"><a href="#1-2、用户分类" class="headerlink" title="1.2、用户分类"></a>1.2、用户分类</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>root用户</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>1-499</td>
+<td>系统用户</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>500-65535</td>
+<td>普通用户</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-3、创建用户useradd"><a href="#1-3、创建用户useradd" class="headerlink" title="1.3、创建用户useradd"></a>1.3、创建用户useradd</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">新建用户 uesradd    [option] username </div><div class="line"></div><div class="line">- option：</div><div class="line">    -u UID 指定UID</div><div class="line">    -g GID或组名 指定基本组</div><div class="line">    -G GID或组名 制定附加值</div><div class="line">    -s SHELL        指定shell类型</div><div class="line">        /bin/bash</div><div class="line">        /sbin/nologin    非登陆式的，不允许远程登陆</div><div class="line">    -d directory      指定家目录</div><div class="line">    -r system        创建系统用户</div></pre></td></tr></table></figure>
+<p>创建新用户时,系统会自动创建同名的组,作为用户基本组,并且自动创建home目录/home/USERNAME,从/etc/skel目录中拷贝配置文件,还会在/var/spool/mail/USERNAME邮箱文件</p>
+<h4 id="1-4、删除用户userdel"><a href="#1-4、删除用户userdel" class="headerlink" title="1.4、删除用户userdel"></a>1.4、删除用户userdel</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">userdel -r  USERNAME   #remove家目录和邮箱</div><div class="line"></div><div class="line">rm -rf  /var/spool/mail/用户名 (邮箱)</div><div class="line">（不加r的话只删用户，但是家目录下的很多文件都还在，创建下一个的时候home被占坑）</div><div class="line">userdel    -r    username</div></pre></td></tr></table></figure>
+<h4 id="1-5、指定密码passwd-还有过期的说法"><a href="#1-5、指定密码passwd-还有过期的说法" class="headerlink" title="1.5、指定密码passwd,还有过期的说法"></a>1.5、指定密码passwd,还有过期的说法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">passwd 用户名</div><div class="line">    -l    lock，锁定用户，root用户可以锁定其他用户，其他用户不发修改密码</div><div class="line">    -u   unlock 解锁</div><div class="line"></div><div class="line">    --stdin，节后标准输入</div><div class="line">echo‘xxx’ | passwd --stdin username</div></pre></td></tr></table></figure>
+<h4 id="1-6、修改用户属性usermod"><a href="#1-6、修改用户属性usermod" class="headerlink" title="1.6、修改用户属性usermod"></a>1.6、修改用户属性usermod</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">usermod</div><div class="line">    -u</div><div class="line">    -g</div><div class="line">    -s</div><div class="line">    -d</div><div class="line">    -G</div></pre></td></tr></table></figure>
+<h3 id="2、组"><a href="#2、组" class="headerlink" title="2、组"></a>2、组</h3><h4 id="2-1、存放组账号信息文件："><a href="#2-1、存放组账号信息文件：" class="headerlink" title="2.1、存放组账号信息文件："></a>2.1、存放组账号信息文件：</h4><ul>
+<li>/etc/group<br>|组名|：保留|：组成员|<br>|—–|———|————-|<br>|cisco|:x|:500:|</li>
+</ul>
+<h4 id="2-2、创建用户组groupadd"><a href="#2-2、创建用户组groupadd" class="headerlink" title="2.2、创建用户组groupadd"></a>2.2、创建用户组groupadd</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">groupadd</div><div class="line">-option</div><div class="line">-g    制定GID</div><div class="line">-R    创建系统组</div></pre></td></tr></table></figure>
+<h4 id="2-3、删除用户组groupdel"><a href="#2-3、删除用户组groupdel" class="headerlink" title="2.3、删除用户组groupdel"></a>2.3、删除用户组groupdel</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">groupdel    删除组</div></pre></td></tr></table></figure>
+<h3 id="3密码"><a href="#3密码" class="headerlink" title="3密码"></a>3密码</h3><h4 id="3-1、存放用户密码信息文件"><a href="#3-1、存放用户密码信息文件" class="headerlink" title="3.1、存放用户密码信息文件"></a>3.1、存放用户密码信息文件</h4><p>/etc/shadow</p>
+<h3 id="4、su-和su-l"><a href="#4、su-和su-l" class="headerlink" title="4、su 和su -l"></a>4、su 和su -l</h3><p>su命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">su      不获取环境变量</div><div class="line">su -l   获取环境变量，完整登陆，/etc/profile-~/.bash_profile-~/.bashrc-/etc/bashrc</div><div class="line">su -    获取root的环境变量</div><div class="line">su -c   执行命令后退出</div></pre></td></tr></table></figure>
+<p>su详细参考: <a href="http://man.linuxde.net/su" target="_blank" rel="external">http://man.linuxde.net/su</a></p>
+<h3 id="5、sudo"><a href="#5、sudo" class="headerlink" title="5、sudo"></a>5、sudo</h3><p>su和su -l 都可以登陆到root权限从而使用root命令，但是这是就需要很多人知道root的命令了<br>sudo恰好相反，只需要输入自己的sudo密码就可以使用root命令了，甚至不用输入密码<br>1、sudo 命令<br>2、sudo su -<br>3、sudo -u usernanme command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/etc/sudoers</div><div class="line">默认只有root用户可以使用sudo命令，visudo编辑/etc/sudoers修改</div><div class="line"></div><div class="line">使用者账号 登入主机（可变换的身份）可以下达的指令</div><div class="line">user111   All=(ALL)       /usr/bin/vim /etc/resolv.conf</div><div class="line"></div><div class="line">所有的wheel组都sudo all to all</div><div class="line">%wheel        ALL=(ALL)       ALL</div><div class="line"></div><div class="line">这个组登陆不需要密码</div><div class="line">%wheel        ALL=(ALL)       NOPASSWD: ALL</div><div class="line"></div><div class="line">实例</div><div class="line">User_Alias DNSMASTER = vbird, dmtsai    #定义用户别名</div><div class="line">Cmnd_Alias DNSCMD = /etc/init.d/named, /usr/bin/vim /var/named/*    #定义命令别名</div><div class="line">DNSMASTER ALL = DNSCMD       #定义用户可以sudo到root使用命令</div><div class="line"></div><div class="line">DNSMASTER localhost=NOPASSWD: /bin/cat, /bin/ls	#免密码</div></pre></td></tr></table></figure>
+<p>sudo详细参考<a href="http://man.linuxde.net/sudo" target="_blank" rel="external">http://man.linuxde.net/sudo</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/24/filepermission/filepermission/" rel="next" title="Linux文件权限">
+                <i class="fa fa-chevron-left"></i> Linux文件权限
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、用户"><span class="nav-text">1、用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、存放用户账号信息："><span class="nav-text">1.1、存放用户账号信息：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、用户分类"><span class="nav-text">1.2、用户分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、创建用户useradd"><span class="nav-text">1.3、创建用户useradd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4、删除用户userdel"><span class="nav-text">1.4、删除用户userdel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5、指定密码passwd-还有过期的说法"><span class="nav-text">1.5、指定密码passwd,还有过期的说法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6、修改用户属性usermod"><span class="nav-text">1.6、修改用户属性usermod</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、组"><span class="nav-text">2、组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、存放组账号信息文件："><span class="nav-text">2.1、存放组账号信息文件：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2、创建用户组groupadd"><span class="nav-text">2.2、创建用户组groupadd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3、删除用户组groupdel"><span class="nav-text">2.3、删除用户组groupdel</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3密码"><span class="nav-text">3密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1、存放用户密码信息文件"><span class="nav-text">3.1、存放用户密码信息文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、su-和su-l"><span class="nav-text">4、su 和su -l</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、sudo"><span class="nav-text">5、sudo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
