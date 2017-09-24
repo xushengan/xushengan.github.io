@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -87,18 +87,17 @@
 
 
 
-<meta name="description" content="0、软件包组成软件包组成：不同类型的文件会装到不同的目录1234可执行文件 #/bin /sbin/ usr/sbin..binary二进制库文件dll，封装好的 #/lib /lib64   /usr/lib ...配置文件    #/etc帮助手册    #/usr/share/man ###1、rpm(redhat packet manager)后缀是.rpm ####1.1、单个rpm包，">
-<meta name="keywords" content="linux">
+<meta name="description" content="title: Linux软件安装date: 2017-08-30tags: “linux”type: “tags”categories: linux  0、软件包组成软件包组成：不同类型的文件会装到不同的目录 可执行文件 #/bin /sbin/ usr/sbin..binary二进制 库文件dll，封装好的 #/lib /lib64   /usr/lib ... 配置文件    #/etc 帮">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux软件安装">
+<meta property="og:title" content="Xu_Blog">
 <meta property="og:url" content="xushengan.github.io/2017/09/24/rpm_yum/rpm_yum/index.html">
 <meta property="og:site_name" content="Xu_Blog">
-<meta property="og:description" content="0、软件包组成软件包组成：不同类型的文件会装到不同的目录1234可执行文件 #/bin /sbin/ usr/sbin..binary二进制库文件dll，封装好的 #/lib /lib64   /usr/lib ...配置文件    #/etc帮助手册    #/usr/share/man ###1、rpm(redhat packet manager)后缀是.rpm ####1.1、单个rpm包，">
+<meta property="og:description" content="title: Linux软件安装date: 2017-08-30tags: “linux”type: “tags”categories: linux  0、软件包组成软件包组成：不同类型的文件会装到不同的目录 可执行文件 #/bin /sbin/ usr/sbin..binary二进制 库文件dll，封装好的 #/lib /lib64   /usr/lib ... 配置文件    #/etc 帮">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-24T12:26:23.586Z">
+<meta property="og:updated_time" content="2017-09-24T12:34:04.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux软件安装">
-<meta name="twitter:description" content="0、软件包组成软件包组成：不同类型的文件会装到不同的目录1234可执行文件 #/bin /sbin/ usr/sbin..binary二进制库文件dll，封装好的 #/lib /lib64   /usr/lib ...配置文件    #/etc帮助手册    #/usr/share/man ###1、rpm(redhat packet manager)后缀是.rpm ####1.1、单个rpm包，">
+<meta name="twitter:title" content="Xu_Blog">
+<meta name="twitter:description" content="title: Linux软件安装date: 2017-08-30tags: “linux”type: “tags”categories: linux  0、软件包组成软件包组成：不同类型的文件会装到不同的目录 可执行文件 #/bin /sbin/ usr/sbin..binary二进制 库文件dll，封装好的 #/lib /lib64   /usr/lib ... 配置文件    #/etc 帮">
 
 
 
@@ -132,7 +131,7 @@
 
 
 
-  <title> Linux软件安装 | Xu_Blog </title>
+  <title>  | Xu_Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -300,7 +299,7 @@
   
   
 
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/24/rpm_yum/rpm_yum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -322,7 +321,7 @@
             
             
               
-                Linux软件安装
+                
               
             
           </h1>
@@ -347,28 +346,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -395,35 +372,101 @@
       
 
       
-        <h3 id="0、软件包组成"><a href="#0、软件包组成" class="headerlink" title="0、软件包组成"></a>0、软件包组成</h3><p>软件包组成：<br>不同类型的文件会装到不同的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">可执行文件 #/bin /sbin/ usr/sbin..binary二进制</div><div class="line">库文件dll，封装好的 #/lib /lib64   /usr/lib ...</div><div class="line">配置文件    #/etc</div><div class="line">帮助手册    #/usr/share/man</div></pre></td></tr></table></figure></p>
-<p>###1、rpm(redhat packet manager)<br>后缀是.rpm</p>
-<p>####1.1、单个rpm包，rpm包命名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wireshark-1.8.10-17.el6.x86_64.rpm</div><div class="line">软件名称-软件版本-修订号.使用的系统版本.硬件架构.rpm####使用rpm去管理软件</div></pre></td></tr></table></figure></p>
-<p>####1.2、命令格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm [options] [Package——Name]</div></pre></td></tr></table></figure></p>
-<h4 id="1-3、查询"><a href="#1-3、查询" class="headerlink" title="1.3、查询"></a>1.3、查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-q    #query    后面要加参数 软件名称</div><div class="line">-qa    #all    查询所有安装过的rpm包</div><div class="line">-qf    #file    -qf /usr/bin/xxd 找出这个文件是哪个包里面的，那就可以在别的服务器上安装某个特定的文件</div><div class="line">-ql    #list，列表，查询rpm包包含哪些文件</div><div class="line">-qi    #info，rpm -qi  vim-common查询软件包信息</div><div class="line">--info            列出软件包的描述信息</div><div class="line">-qc   查询指定程序安装生成的配置文件</div><div class="line">-qd   查询指定安装包成成的文档</div><div class="line">-q --scripts    </div><div class="line">-p       查询针对是未安装的程序包文件</div><div class="line">-qR    列出与软件有关的依赖软件所含的文件</div></pre></td></tr></table></figure>
-<h4 id="1-4、导入证书"><a href="#1-4、导入证书" class="headerlink" title="1.4、导入证书"></a>1.4、导入证书</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">单个软件包存在依赖性</div><div class="line">所有rpm包都会携带证书    软件和系统各有证书</div><div class="line">导入证书 ls /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6</div><div class="line">rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6</div><div class="line">把有依赖的包全部安装</div></pre></td></tr></table></figure>
-<h4 id="1-5、安装"><a href="#1-5、安装" class="headerlink" title="1.5、安装"></a>1.5、安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-ivh    </div><div class="line">	i：install    v：verbose    h：hash</div><div class="line">	i:install    安装</div><div class="line">	v:verbose    显示安装过程信息</div><div class="line">	h:hash    以#显示安装进度</div><div class="line"></div><div class="line">实例：</div><div class="line">rpm -ivh wireshark-1.8.10-17.el6.x86_64.rpm // --force强制重装</div></pre></td></tr></table></figure>
-<h4 id="1-6、升级"><a href="#1-6、升级" class="headerlink" title="1.6、升级"></a>1.6、升级</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh    //man --help</div><div class="line">rpm -Fvh    // </div><div class="line"></div><div class="line">注意：内核不能用-Uvh方式去升级而是用rpm -ivh方式去更新（uname、rpm -q kernel）</div><div class="line">ivh方式可以在系统里面生成两个内核，可倒退</div></pre></td></tr></table></figure>
-<h4 id="1-7、卸载"><a href="#1-7、卸载" class="headerlink" title="1.7、卸载"></a>1.7、卸载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -e +路径/直接软件名</div></pre></td></tr></table></figure>
-<h4 id="1-8、附加"><a href="#1-8、附加" class="headerlink" title="1.8、附加"></a>1.8、附加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">--oldpackage降级</div><div class="line">--nodeps：当发生软件属性依赖问题而无法安装，可使用此参数强行安装</div><div class="line">--replacefiles：覆盖文件</div><div class="line">--replacepkgs：重新安装某个已安装的软件</div><div class="line">--forc：强制安装</div><div class="line">--test：检查软件的依赖性</div></pre></td></tr></table></figure>
-<h4 id="1-9、校验：Verify"><a href="#1-9、校验：Verify" class="headerlink" title="1.9、校验：Verify"></a>1.9、校验：Verify</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">rpm &#123;-V|--verify&#125; [select-options] [verify-options]</div><div class="line">参数：</div><div class="line">-V： 后面接软件的名称，若该软件所含的文件被改动过，才会列出来</div><div class="line">-Va：列出目前系统上所有可能被改动过的文件</div><div class="line">-Vp：接文件名称，列出该软件可能改动的文件</div><div class="line">-Vf：列出某个文件是否改动</div></pre></td></tr></table></figure>
-<p>###2、yum：yellowdog updater modified</p>
-<ul>
+        <hr>
+<p>title: Linux软件安装<br>date: 2017-08-30<br>tags: “linux”<br>type: “tags”<br>categories: linux</p>
+<hr>
+<h3 id="0、软件包组成"><a href="#0、软件包组成" class="headerlink" title="0、软件包组成"></a>0、软件包组成</h3><p>软件包组成：<br>不同类型的文件会装到不同的目录</p>
+<pre><code>可执行文件 #/bin /sbin/ usr/sbin..binary二进制
+库文件dll，封装好的 #/lib /lib64   /usr/lib ...
+配置文件    #/etc
+帮助手册    #/usr/share/man
+</code></pre><h3 id="1、rpm-redhat-packet-manager"><a href="#1、rpm-redhat-packet-manager" class="headerlink" title="1、rpm(redhat packet manager)"></a>1、rpm(redhat packet manager)</h3><p>后缀是.rpm</p>
+<h4 id="1-1、单个rpm包，rpm包命名"><a href="#1-1、单个rpm包，rpm包命名" class="headerlink" title="1.1、单个rpm包，rpm包命名"></a>1.1、单个rpm包，rpm包命名</h4><pre><code>wireshark-1.8.10-17.el6.x86_64.rpm
+软件名称-软件版本-修订号.使用的系统版本.硬件架构.rpm####使用rpm去管理软件
+</code></pre><h4 id="1-2、命令格式"><a href="#1-2、命令格式" class="headerlink" title="1.2、命令格式"></a>1.2、命令格式</h4><pre><code>rpm [options] [Package——Name]
+</code></pre><h4 id="1-3、查询"><a href="#1-3、查询" class="headerlink" title="1.3、查询"></a>1.3、查询</h4><pre><code>-q    #query    后面要加参数 软件名称
+-qa    #all    查询所有安装过的rpm包
+-qf    #file    -qf /usr/bin/xxd 找出这个文件是哪个包里面的，那就可以在别的服务器上安装某个特定的文件
+-ql    #list，列表，查询rpm包包含哪些文件
+-qi    #info，rpm -qi  vim-common查询软件包信息
+--info            列出软件包的描述信息
+-qc   查询指定程序安装生成的配置文件
+-qd   查询指定安装包成成的文档
+-q --scripts    
+-p       查询针对是未安装的程序包文件
+-qR    列出与软件有关的依赖软件所含的文件
+</code></pre><h4 id="1-4、导入证书"><a href="#1-4、导入证书" class="headerlink" title="1.4、导入证书"></a>1.4、导入证书</h4><pre><code>单个软件包存在依赖性
+所有rpm包都会携带证书    软件和系统各有证书
+导入证书 ls /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
+把有依赖的包全部安装
+</code></pre><h4 id="1-5、安装"><a href="#1-5、安装" class="headerlink" title="1.5、安装"></a>1.5、安装</h4><pre><code>-ivh    
+    i：install    v：verbose    h：hash
+    i:install    安装
+    v:verbose    显示安装过程信息
+    h:hash    以#显示安装进度
+
+实例：
+rpm -ivh wireshark-1.8.10-17.el6.x86_64.rpm // --force强制重装
+</code></pre><h4 id="1-6、升级"><a href="#1-6、升级" class="headerlink" title="1.6、升级"></a>1.6、升级</h4><pre><code>rpm -Uvh    //man --help
+rpm -Fvh    // 
+
+注意：内核不能用-Uvh方式去升级而是用rpm -ivh方式去更新（uname、rpm -q kernel）
+ivh方式可以在系统里面生成两个内核，可倒退
+</code></pre><h4 id="1-7、卸载"><a href="#1-7、卸载" class="headerlink" title="1.7、卸载"></a>1.7、卸载</h4><pre><code>rpm -e +路径/直接软件名
+</code></pre><h4 id="1-8、附加"><a href="#1-8、附加" class="headerlink" title="1.8、附加"></a>1.8、附加</h4><pre><code>--oldpackage降级
+--nodeps：当发生软件属性依赖问题而无法安装，可使用此参数强行安装
+--replacefiles：覆盖文件
+--replacepkgs：重新安装某个已安装的软件
+--forc：强制安装
+--test：检查软件的依赖性
+</code></pre><h4 id="1-9、校验：Verify"><a href="#1-9、校验：Verify" class="headerlink" title="1.9、校验：Verify"></a>1.9、校验：Verify</h4><pre><code>rpm {-V|--verify} [select-options] [verify-options]
+参数：
+-V： 后面接软件的名称，若该软件所含的文件被改动过，才会列出来
+-Va：列出目前系统上所有可能被改动过的文件
+-Vp：接文件名称，列出该软件可能改动的文件
+-Vf：列出某个文件是否改动
+</code></pre><h3 id="2、yum：yellowdog-updater-modified"><a href="#2、yum：yellowdog-updater-modified" class="headerlink" title="2、yum：yellowdog updater modified"></a>2、yum：yellowdog updater modified</h3><ul>
 <li>yum：是一个基于rpm的前端管理工具，解决依赖性</li>
 </ul>
-<p>####2.1、删除官方的仓库配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm /etc/yum.repos.d/*    //rm-remove</div></pre></td></tr></table></figure></p>
-<p>####2.2、配置yum源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//仓库repository的配置文件</div><div class="line">//创建仓库配置文件    vim    /etc/yum.repos.d/xx.repo</div><div class="line">[local]    //仓库名称（不要漏掉中括号）</div><div class="line">name=    //仓库描述</div><div class="line">baseurl=http://mirrors.163.com/centos/6/os/x86_64    //仓库url</div><div class="line">//baseurl=file：///media/cd</div><div class="line">//baseurl=ftp：//10.1.1.251/cdrom repodata</div><div class="line">mirrorlist</div><div class="line">gpgkey：file：//etc/pki/rpm-gpg/RPM-GPG-KEY-Centos-6</div><div class="line">gpgcheck=0 | 1//是否检查证书</div><div class="line">enabled=0 | 1是否启用仓库（默认启用）</div></pre></td></tr></table></figure></p>
-<p>####2.3清空yum缓存(当启用新的仓库时候)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum clear all</div></pre></td></tr></table></figure></p>
-<p>####2.4、查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">yum list      //查询仓库所有软件包名称</div><div class="line">yum info     //查看软件包的信息--rpm -qa</div><div class="line">yum list all  //</div><div class="line">yum list installed //查看所有已经安装的软件包</div><div class="line">yum --installroot==/ 指定安装目录</div><div class="line">yum provides python    由文件查询安装包</div></pre></td></tr></table></figure></p>
-<p>####2.5、安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install    +软件名称就可以，不是rpm包的完整路径</div><div class="line">yum reinstall    重装</div></pre></td></tr></table></figure></p>
-<p>####2.6、 升级<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum update   #升级所有能够升级的软件包</div><div class="line">yum update zsh   #升级指定软件包</div></pre></td></tr></table></figure></p>
-<p>####2.7、卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove</div></pre></td></tr></table></figure></p>
-<p>####2.8、管理软件包组</p>
-<p>#####2.8.1、查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum grouplist</div><div class="line">yum groupinfo +包组</div></pre></td></tr></table></figure></p>
-<p>#####2.8.2、安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall &quot;X Window Systerm&quot; &quot;Desktop&quot;</div></pre></td></tr></table></figure></p>
-<p>#####2.8.3、卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall &quot;web server&quot;</div></pre></td></tr></table></figure></p>
-<p>#####2.8.4、图形化相关包组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">X window System  //图形化底层的框架</div><div class="line">Desktop 或者 KDE Desktop  //根据框架制作桌面（主题）</div><div class="line">(Gnome,KDE,XFCE)</div></pre></td></tr></table></figure></p>
-<p>#####2.8.5、进入图形化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    startx</div><div class="line">    init 5</div><div class="line">wim test</div><div class="line">which yum</div><div class="line">vim /usr/bin/yum</div></pre></td></tr></table></figure></p>
-<p>###3、编译安装</p>
+<h4 id="2-1、删除官方的仓库配置文件"><a href="#2-1、删除官方的仓库配置文件" class="headerlink" title="2.1、删除官方的仓库配置文件"></a>2.1、删除官方的仓库配置文件</h4><pre><code>rm /etc/yum.repos.d/*    //rm-remove
+</code></pre><h4 id="2-2、配置yum源"><a href="#2-2、配置yum源" class="headerlink" title="2.2、配置yum源"></a>2.2、配置yum源</h4><pre><code>//仓库repository的配置文件
+//创建仓库配置文件    vim    /etc/yum.repos.d/xx.repo
+[local]    //仓库名称（不要漏掉中括号）
+name=    //仓库描述
+baseurl=http://mirrors.163.com/centos/6/os/x86_64    //仓库url
+//baseurl=file：///media/cd
+//baseurl=ftp：//10.1.1.251/cdrom repodata
+mirrorlist
+gpgkey：file：//etc/pki/rpm-gpg/RPM-GPG-KEY-Centos-6
+gpgcheck=0 | 1//是否检查证书
+enabled=0 | 1是否启用仓库（默认启用）
+</code></pre><h4 id="2-3清空yum缓存-当启用新的仓库时候"><a href="#2-3清空yum缓存-当启用新的仓库时候" class="headerlink" title="2.3清空yum缓存(当启用新的仓库时候)"></a>2.3清空yum缓存(当启用新的仓库时候)</h4><pre><code>yum clear all
+</code></pre><h4 id="2-4、查询"><a href="#2-4、查询" class="headerlink" title="2.4、查询"></a>2.4、查询</h4><pre><code>yum list      //查询仓库所有软件包名称
+yum info     //查看软件包的信息--rpm -qa
+yum list all  //
+yum list installed //查看所有已经安装的软件包
+yum --installroot==/ 指定安装目录
+yum provides python    由文件查询安装包
+</code></pre><h4 id="2-5、安装"><a href="#2-5、安装" class="headerlink" title="2.5、安装"></a>2.5、安装</h4><pre><code>yum install    +软件名称就可以，不是rpm包的完整路径
+yum reinstall    重装
+</code></pre><h4 id="2-6、-升级"><a href="#2-6、-升级" class="headerlink" title="2.6、 升级"></a>2.6、 升级</h4><pre><code>yum update   #升级所有能够升级的软件包
+yum update zsh   #升级指定软件包
+</code></pre><h4 id="2-7、卸载"><a href="#2-7、卸载" class="headerlink" title="2.7、卸载"></a>2.7、卸载</h4><pre><code>yum remove
+</code></pre><h4 id="2-8、管理软件包组"><a href="#2-8、管理软件包组" class="headerlink" title="2.8、管理软件包组"></a>2.8、管理软件包组</h4><h5 id="2-8-1、查询"><a href="#2-8-1、查询" class="headerlink" title="2.8.1、查询"></a>2.8.1、查询</h5><pre><code>yum grouplist
+yum groupinfo +包组
+</code></pre><p>#####2.8.2、安装</p>
+<pre><code>yum groupinstall &quot;X Window Systerm&quot; &quot;Desktop&quot;
+</code></pre><h5 id="2-8-3、卸载"><a href="#2-8-3、卸载" class="headerlink" title="2.8.3、卸载"></a>2.8.3、卸载</h5><pre><code>yum groupinstall &quot;web server&quot;
+</code></pre><h5 id="2-8-4、图形化相关包组："><a href="#2-8-4、图形化相关包组：" class="headerlink" title="2.8.4、图形化相关包组："></a>2.8.4、图形化相关包组：</h5><pre><code>X window System  //图形化底层的框架
+Desktop 或者 KDE Desktop  //根据框架制作桌面（主题）
+(Gnome,KDE,XFCE)
+</code></pre><h5 id="2-8-5、进入图形化："><a href="#2-8-5、进入图形化：" class="headerlink" title="2.8.5、进入图形化："></a>2.8.5、进入图形化：</h5><pre><code>    startx
+    init 5
+wim test
+which yum
+vim /usr/bin/yum
+</code></pre><p>###3、编译安装</p>
 
       
     </div>
@@ -445,12 +488,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
-        </div>
-      
 
       
         
@@ -460,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/24/network_conf/" rel="next" title="Linux网络配置">
-                <i class="fa fa-chevron-left"></i> Linux网络配置
+              <a href="/2017/09/24/network_conf/network_conf/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -593,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、软件包组成"><span class="nav-text">0、软件包组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、查询"><span class="nav-text">1.3、查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4、导入证书"><span class="nav-text">1.4、导入证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5、安装"><span class="nav-text">1.5、安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6、升级"><span class="nav-text">1.6、升级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7、卸载"><span class="nav-text">1.7、卸载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8、附加"><span class="nav-text">1.8、附加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9、校验：Verify"><span class="nav-text">1.9、校验：Verify</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、软件包组成"><span class="nav-text">0、软件包组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、rpm-redhat-packet-manager"><span class="nav-text">1、rpm(redhat packet manager)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、单个rpm包，rpm包命名"><span class="nav-text">1.1、单个rpm包，rpm包命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、命令格式"><span class="nav-text">1.2、命令格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、查询"><span class="nav-text">1.3、查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4、导入证书"><span class="nav-text">1.4、导入证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5、安装"><span class="nav-text">1.5、安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6、升级"><span class="nav-text">1.6、升级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7、卸载"><span class="nav-text">1.7、卸载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8、附加"><span class="nav-text">1.8、附加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9、校验：Verify"><span class="nav-text">1.9、校验：Verify</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、yum：yellowdog-updater-modified"><span class="nav-text">2、yum：yellowdog updater modified</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、删除官方的仓库配置文件"><span class="nav-text">2.1、删除官方的仓库配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2、配置yum源"><span class="nav-text">2.2、配置yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3清空yum缓存-当启用新的仓库时候"><span class="nav-text">2.3清空yum缓存(当启用新的仓库时候)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4、查询"><span class="nav-text">2.4、查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5、安装"><span class="nav-text">2.5、安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6、-升级"><span class="nav-text">2.6、 升级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7、卸载"><span class="nav-text">2.7、卸载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8、管理软件包组"><span class="nav-text">2.8、管理软件包组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-8-1、查询"><span class="nav-text">2.8.1、查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-8-3、卸载"><span class="nav-text">2.8.3、卸载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-8-4、图形化相关包组："><span class="nav-text">2.8.4、图形化相关包组：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-8-5、进入图形化："><span class="nav-text">2.8.5、进入图形化：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
