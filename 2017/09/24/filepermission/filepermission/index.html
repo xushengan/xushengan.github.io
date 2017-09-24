@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限：   r readable，可读     文件 可以查看文件内容（cat,vim,more,less）   目录 可以查看目录      w writable，可写   文件 可以修改文件内容（vim）   目录 可以修改目录的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-24T07:16:10.408Z">
+<meta property="og:updated_time" content="2017-09-24T07:22:51.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件权限">
 <meta name="twitter:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限：   r readable，可读     文件 可以查看文件内容（cat,vim,more,less）   目录 可以查看目录      w writable，可写   文件 可以修改文件内容（vim）   目录 可以修改目录的">
@@ -573,7 +573,8 @@
 <ul>
 <li>永久修改selinux状态: 修改配置文件/etc/sysconfig/selinux</li>
 </ul>
-<h4 id="4-8、SElinux-布尔值"><a href="#4-8、SElinux-布尔值" class="headerlink" title="4.8、SElinux 布尔值"></a>4.8、SElinux 布尔值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    getsebool -a   查看</div><div class="line">    setsebool -P NAME on|off 设置</div><div class="line">http://man.linuxde.net/setsebool</div></pre></td></tr></table></figure>
+<h4 id="4-8、SElinux-布尔值"><a href="#4-8、SElinux-布尔值" class="headerlink" title="4.8、SElinux 布尔值"></a>4.8、SElinux 布尔值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">getsebool -a   查看</div><div class="line">setsebool -P NAME on|off 设置</div></pre></td></tr></table></figure>
+<p><a href="http://man.linuxde.net/setsebool" target="_blank" rel="external">http://man.linuxde.net/setsebool</a></p>
 <h3 id="5、chattr-用root权限都不能修改某个文件，可能是使用root锁定了文件"><a href="#5、chattr-用root权限都不能修改某个文件，可能是使用root锁定了文件" class="headerlink" title="5、chattr(用root权限都不能修改某个文件，可能是使用root锁定了文件)"></a>5、chattr(用root权限都不能修改某个文件，可能是使用root锁定了文件)</h3><p>chattr命令的作用很大，其中一些功能是由Linux内核版本来支持的，不过现在生产绝大部分跑的linux系统都是2.6以上内核了。通过chattr命令修改属性能够提高系统的安全性，但是它并不适合所有的目录。chattr命令不能保护/、/dev、/tmp、/var目录。<br>lsattr    显示chattr命令设置的文件属性</p>
 <p>这两个命令是用来查看和改变文件、目录属性的，与chmod这个命令相比，chmod只是改变文件的读写、执行权限，更底层的属性控制是由chattr来改变的。</p>
 <p>chattr命令的用法：chattr [ -RVf ] [ -v version ] [ mode ] files…<br>最关键的是在[mode]部分，[mode]部分是由+-=和[ASacDdIijsTtu]这些字符组合的，这部分是用来控制文件的<br>属性。</p>
