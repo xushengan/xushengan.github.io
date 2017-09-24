@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限：   r readable，可读     文件 可以查看文件内容（cat,vim,more,less）   目录 可以查看目录      w writable，可写   文件 可以修改文件内容（vim）   目录 可以修改目录的">
+<meta name="description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bloc">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux文件权限">
 <meta property="og:url" content="xushengan.github.io/2017/09/24/filepermission/filepermission/index.html">
 <meta property="og:site_name" content="Xu_Blog">
-<meta property="og:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限：   r readable，可读     文件 可以查看文件内容（cat,vim,more,less）   目录 可以查看目录      w writable，可写   文件 可以修改文件内容（vim）   目录 可以修改目录的">
+<meta property="og:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bloc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-24T07:39:31.920Z">
+<meta property="og:updated_time" content="2017-09-24T08:56:56.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件权限">
-<meta name="twitter:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限：   r readable，可读     文件 可以查看文件内容（cat,vim,more,less）   目录 可以查看目录      w writable，可写   文件 可以修改文件内容（vim）   目录 可以修改目录的">
+<meta name="twitter:description" content="1、基础权限 权限（是相对于文件来说的）  1.1、查看权限ls -l（ll）   rw- r- r-     拥有者的权限 所属组的权限 其他人    1.2、基本权限： 权限问题应该结合文件和目录的内容来理解     inode     文件 记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码   目录 记录目录的权限，actime,大小等等属性和目录内容具体的bloc">
 
 
 
@@ -414,7 +414,39 @@
 </tr>
 </tbody>
 </table>
-<h4 id="1-2、基本权限："><a href="#1-2、基本权限：" class="headerlink" title="1.2、基本权限："></a>1.2、基本权限：</h4><table>
+<h4 id="1-2、基本权限："><a href="#1-2、基本权限：" class="headerlink" title="1.2、基本权限："></a>1.2、基本权限：</h4><ul>
+<li>权限问题应该结合文件和目录的内容来理解</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>inode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件</td>
+<td>记录文件的权限，acmtime,大小等等属性和文件俺内容具体block号码</td>
+</tr>
+<tr>
+<td>目录</td>
+<td>记录目录的权限，actime,大小等等属性和目录内容具体的block号码</td>
+</tr>
+<tr>
+<td>block</td>
+<td></td>
+</tr>
+<tr>
+<td>文件</td>
+<td>记录文件内容</td>
+</tr>
+<tr>
+<td>目录</td>
+<td>记录文件名和inode的映射</td>
+</tr>
+</tbody>
+</table>
+<table>
 <thead>
 <tr>
 <th>r</th>
@@ -428,7 +460,7 @@
 </tr>
 <tr>
 <td>目录</td>
-<td>可以查看目录   </td>
+<td>可以查看目录的文件名和子目录名(不包括权限)</td>
 </tr>
 <tr>
 <td>w</td>
@@ -448,11 +480,11 @@
 </tr>
 <tr>
 <td>文件</td>
-<td>可以修改文件内容（vim）</td>
+<td>文件是否可以被系统执行</td>
 </tr>
 <tr>
 <td>目录</td>
-<td>可以切换到目录中（cd)</td>
+<td>进入目录并使该目录成为工作目录（cd)，</td>
 </tr>
 <tr>
 <td>-</td>
@@ -460,6 +492,7 @@
 </tr>
 </tbody>
 </table>
+<p>详细:<a href="http://fromwiz.com/share/s/1y2hr_10xAhW2MWZS93eA1rv0EWfHG3OUAvv2iAtiW1Q0GhC" target="_blank" rel="external">http://fromwiz.com/share/s/1y2hr_10xAhW2MWZS93eA1rv0EWfHG3OUAvv2iAtiW1Q0GhC</a></p>
 <h4 id="1-3、进程访问模型："><a href="#1-3、进程访问模型：" class="headerlink" title="1.3、进程访问模型："></a>1.3、进程访问模型：</h4><ul>
 <li>用户执行程序访问资源，进程在执行时，携带用户uid和gid和group附加组的id</li>
 <li>两者匹配值可获得相应的权限</li>
@@ -488,7 +521,34 @@
 <h5 id="1-5-2-数字表示法（二进制，0和1表示有无）"><a href="#1-5-2-数字表示法（二进制，0和1表示有无）" class="headerlink" title="1.5.2.数字表示法（二进制，0和1表示有无）"></a>1.5.2.数字表示法（二进制，0和1表示有无）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">chmod    xxx    file</div><div class="line">rwx    rwx    r-x</div><div class="line">000    000    000</div><div class="line">111    111    111</div><div class="line">7         7        7</div><div class="line"> </div><div class="line">**chmod    777    file**</div><div class="line"> </div><div class="line">chmod    777 haha</div></pre></td></tr></table></figure>
 <h4 id="1-6、修改拥有者（所属组）：chown"><a href="#1-6、修改拥有者（所属组）：chown" class="headerlink" title="1.6、修改拥有者（所属组）：chown"></a>1.6、修改拥有者（所属组）：chown</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">chown haha haha（目录)</div><div class="line">chgrp   haha haha</div><div class="line">chown haha.haha test</div><div class="line">chown user.group file</div><div class="line">chown user:group file</div><div class="line">chown .group file</div></pre></td></tr></table></figure>
 <h4 id="1-7、umask-权限掩码，定义文件创建时的默认权限"><a href="#1-7、umask-权限掩码，定义文件创建时的默认权限" class="headerlink" title="1.7、umask(权限掩码，定义文件创建时的默认权限)"></a>1.7、umask(权限掩码，定义文件创建时的默认权限)</h4><p>umask    命令，查看用户的umask值<br>root    022（— -w- -w-）<br>普通用户 002（— — -w-）</p>
-<h4 id="1-8、普通用户创建"><a href="#1-8、普通用户创建" class="headerlink" title="1.8、普通用户创建"></a>1.8、普通用户创建</h4><h5 id="1-8-1、文件权限："><a href="#1-8-1、文件权限：" class="headerlink" title="1.8.1、文件权限："></a>1.8.1、文件权限：</h5><table>
+<h4 id="1-8、新创建的文件和目录权限"><a href="#1-8、新创建的文件和目录权限" class="headerlink" title="1.8、新创建的文件和目录权限"></a>1.8、新创建的文件和目录权限</h4><ul>
+<li><strong>目录或文件原始权限 减去 用户umask</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>目录原始权限777</th>
+<th>rwxrwxrwx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件原始权限666</td>
+<td>rw-rw-rw</td>
+</tr>
+<tr>
+<td>root的umask为022</td>
+<td>—-w–w-</td>
+<td>得出目录rwxr-xr-x,文件rw-r–r–</td>
+</tr>
+<tr>
+<td>普通用户的umask为002</td>
+<td>——-w-</td>
+<td>得出目录rwxrwxr-x,文件rw-rw-r-</td>
+</tr>
+</tbody>
+</table>
+<h5 id="1-8-1、文件权限："><a href="#1-8-1、文件权限：" class="headerlink" title="1.8.1、文件权限："></a>1.8.1、文件权限：</h5><table>
 <thead>
 <tr>
 <th>默认/初始权限（666）</th>
@@ -538,18 +598,10 @@
 <h3 id="2、特殊权限"><a href="#2、特殊权限" class="headerlink" title="2、特殊权限"></a>2、特殊权限</h3><ul>
 <li>注意：对没有x执行权限的文件加s是没有意义的</li>
 </ul>
-<h4 id="2-1、suid-set-uid）"><a href="#2-1、suid-set-uid）" class="headerlink" title="2.1、suid(set uid）"></a>2.1、suid(set uid）</h4><table>
-<thead>
-<tr>
-<th>只能对文件拥有者的权限设置，临时取得文件拥有者的权限</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h4 id="2-1、suid-set-uid）"><a href="#2-1、suid-set-uid）" class="headerlink" title="2.1、suid(set uid）"></a>2.1、suid(set uid）</h4><p>文件拥有者的权限设置，执行临时取得文件拥有者的权限</p>
+<blockquote>
+<p>（意思是有一个执行程序，比如httpd,拥有者是apache,属组是apache,权限是rwx-r-xr-x，配置文件权限是rwxr—–,现在我以user11的身份去执行apache，虽然user11对httpd的二进制有执行权限，但是user11却没有conf文件的读权限，应该是启动失败的，此时给/user/sbin/httpd执行chmod u+s，则在使用user11用户启动httpd时候使用apache的权限去调用需要的文件）</p>
+</blockquote>
 <h4 id="2-2、sgid-set-gid"><a href="#2-2、sgid-set-gid" class="headerlink" title="2.2、sgid(set gid)"></a>2.2、sgid(set gid)</h4><table>
 <thead>
 <tr>
@@ -596,15 +648,38 @@
 </tbody>
 </table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod  2770 file</div><div class="line">rwx    rws   ---</div></pre></td></tr></table></figure>
-<h4 id="2-4、如何给文件设置特殊权限。"><a href="#2-4、如何给文件设置特殊权限。" class="headerlink" title="2.4、如何给文件设置特殊权限。"></a>2.4、如何给文件设置特殊权限。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">chmod u+s xxx # 设置setuid权限</div><div class="line">chmod g+s xxx # 设置setgid权限</div><div class="line">chmod o+t xxx # 设置stick bit权限，针对目录</div><div class="line">chmod 4775 xxx # 设置setuid权限</div><div class="line">hmod 2775 xxx # 设置setgid权限</div><div class="line">chmod 1775 xxx # 设置stick bit权限，针对目录</div></pre></td></tr></table></figure>
-<h4 id="2-5、特殊权限实例：-usr-bin-passwd与-etc-passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限"><a href="#2-5、特殊权限实例：-usr-bin-passwd与-etc-passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限" class="headerlink" title="2.5、特殊权限实例：/usr/bin/passwd与/etc/passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限"></a>2.5、特殊权限实例：/usr/bin/passwd与/etc/passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">which passwd</div><div class="line">/usr/bin/passwd</div><div class="line">ll    /etc/shadow</div><div class="line">----------. 1 root root 1319 Oct  9 13:13 /etc/shadow   </div><div class="line">&quot;没有权限&quot;</div><div class="line">虽然没有权限，但是普通用户仍然可以修改自己的密码</div></pre></td></tr></table></figure>
+<h4 id="2-4、如何给文件设置特殊权限"><a href="#2-4、如何给文件设置特殊权限" class="headerlink" title="2.4、如何给文件设置特殊权限"></a>2.4、如何给文件设置特殊权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">chmod u+s xxx # 设置setuid权限</div><div class="line">chmod g+s xxx # 设置setgid权限</div><div class="line">chmod o+t xxx # 设置stick bit权限，针对目录</div><div class="line">chmod 4775 xxx # 设置setuid权限</div><div class="line">hmod 2775 xxx # 设置setgid权限</div><div class="line">chmod 1775 xxx # 设置stick bit权限，针对目录</div></pre></td></tr></table></figure>
+<h4 id="2-5、特殊权限实例"><a href="#2-5、特殊权限实例" class="headerlink" title="2.5、特殊权限实例"></a>2.5、特殊权限实例</h4><p>/usr/bin/passwd与/etc/passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">which passwd</div><div class="line">/usr/bin/passwd</div><div class="line">ll    /etc/shadow</div><div class="line">----------. 1 root root 1319 Oct  9 13:13 /etc/shadow   </div><div class="line">&quot;没有权限&quot;</div><div class="line">虽然没有权限，但是普通用户仍然可以修改自己的密码</div></pre></td></tr></table></figure></p>
 <h4 id="2-6、解释"><a href="#2-6、解释" class="headerlink" title="2.6、解释"></a>2.6、解释</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">1、setuid 和setgid：</div><div class="line"> </div><div class="line">以/etc/passwd和/usr/bin/passwd为例</div><div class="line"> </div><div class="line">Linux三个特殊权限 setuid   setgid   stick bit</div><div class="line"> </div><div class="line">/etc/passwd的权限为 -rw-r--r--。也就是说：该文件的所有者拥有读写的权限，而用户组成员和其它成员只有查看的权限。我们知道，在系统中我们要修改一个用户的密码，root用户和普通用户均可以用“/usr/bin/passwd 用户名” 这个命令来修改这个/etc/passwd这个文件，root用户本身拥有对/etc/passwd的写权限，可以理解;那普通用户没有写权限，那他怎么也能修改呢？这里就用到了setuid，setuid的作用是让执行该命令的用户以该命令拥有者的权限去执行，就是普通用户执行passwd时会拥有root的权限，这样就可以修改/etc/passwd这个文件了。它的标志为：s，会出现在x的地方，例：-rwsr-xr-x  。而setgid的意思和它是一样的，即让执行文件的用户以该文件所属组的权限去执行。</div><div class="line"> </div><div class="line">2、stick bit(粘滞位)</div><div class="line"> </div><div class="line">以/tmp为例：</div><div class="line"> </div><div class="line">Linux三个特殊权限 setuid   setgid   stick bit</div><div class="line"> </div><div class="line">我们知道/tmp是系统的临时文件目录，所有的用户在该目录下拥有所有的权限，也就是说在该目录下可以任意创建、修改、删除文件，那如果用户A在该目录下创建了一个文件，</div><div class="line"> </div><div class="line">用户B将该文件删除了，这种情况我们是不能允许的。为了达到该目的，就出现了stick  bit(粘滞位)的概念。它是针对目录来说的，如果该目录设置了stick  bit(粘滞位)，则该目录下的文件除了该文件的创建者和root用户可以删除和修改/tmp目录下的stuff，别的用户均不能动别人的，这就是粘滞位的作用。</div></pre></td></tr></table></figure>
 <h4 id="2-7、注意-s-t需要执行权限，否则ll显示S-T"><a href="#2-7、注意-s-t需要执行权限，否则ll显示S-T" class="headerlink" title="2.7、注意(+s+t需要执行权限，否则ll显示S\T)"></a>2.7、注意(+s+t需要执行权限，否则ll显示S\T)</h4><p>有时你设置了s或t  权限，你会发现它变成了S或T，这是因为在那个位置上你没有给它x(可执行)的权限，这样的话这样的设置是不会有效的，你可以先给它赋上x的权限，然后再给s或t的权限。<br>如下,本来没有x权限，显示大S，添加x后变s,+号表示有acl<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ll</div><div class="line">-rwSrw-r--+ 1 xu101 xu101     4 Aug 21 14:13 xu101</div><div class="line">[xu101@Xu tmp]$ chmod u+x xu101</div><div class="line">-rwsrw-r--+ 1 xu101 xu101     4 Aug 21 14:13 xu101</div></pre></td></tr></table></figure></p>
 <p>特殊权限一般赋给可执行的二进制，setuid的作用是让执行该命令的用户以该命令拥有者的权限去执行</p>
 <h4 id="2-8、-t实例，用户102无法删除101创建的"><a href="#2-8、-t实例，用户102无法删除101创建的" class="headerlink" title="2.8、+t实例，用户102无法删除101创建的"></a>2.8、+t实例，用户102无法删除101创建的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[xu101@Xu tmp]$ mkdir xu10x</div><div class="line">chmod +t xu10x</div><div class="line">cd xu10x</div><div class="line">touch sb102</div><div class="line">ll /tmp</div><div class="line">drwxrwxrwt. 2 xu101 xu101  4096 Aug 21 15:35 xu10x</div><div class="line"></div><div class="line"></div><div class="line">[xu102@Xu xu10x]$ ll</div><div class="line">total 0</div><div class="line">-rwxrwxrwx. 1 xu101 xu101 0 Aug 21 15:28 sb</div><div class="line">-rwxrwxrwx. 1 xu101 xu101 0 Aug 21 15:35 sb102</div><div class="line">[xu102@Xu xu10x]$ rm sb102 </div><div class="line">rm: remove write-protected regular empty file `sb102&apos;? y</div><div class="line">rm: cannot remove `sb102&apos;: Permission denied</div></pre></td></tr></table></figure>
 <h3 id="3、扩展权限：-添加其他用户的特殊权限）"><a href="#3、扩展权限：-添加其他用户的特殊权限）" class="headerlink" title="3、扩展权限：(添加其他用户的特殊权限）"></a>3、扩展权限：(添加其他用户的特殊权限）</h3><ul>
-<li>ACL（access control list）定义特定用户对文件的特定权限<br>####3.1、getfacl和setfacl<br>|getfacl|查看修改结果|<br>|——–|——————-|<br>|setfacl|添加其他用户的特殊权限|<br>|增加权限|setfacl -m u：user：权限 文件名|<br>|删除权限|setfal   -m x：user:权限 文件名 |<br>查看结果|getfac user2</li>
+<li>ACL（access control list）定义特定用户对文件的特定权限</li>
 </ul>
+<h4 id="3-1、getfacl和setfacl"><a href="#3-1、getfacl和setfacl" class="headerlink" title="3.1、getfacl和setfacl"></a>3.1、getfacl和setfacl</h4><table>
+<thead>
+<tr>
+<th>getfacl</th>
+<th>查看修改结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setfacl</td>
+<td>添加其他用户的特殊权限</td>
+</tr>
+<tr>
+<td>增加权限</td>
+<td>setfacl -m u：user：权限 文件名</td>
+</tr>
+<tr>
+<td>删除权限</td>
+<td>setfal -m x：user:权限 文件名</td>
+</tr>
+</tbody>
+</table>
+<p>查看结果|getfac user2</p>
 <h4 id="3-2、4种指定默认的权限"><a href="#3-2、4种指定默认的权限" class="headerlink" title="3.2、4种指定默认的权限"></a>3.2、4种指定默认的权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[d[efault]:] [u[ser]:]uid [:perms] 指定用户的权限，文件所有者的权限（如果uid没有指定）。 </div><div class="line">[d[efault]:] g[roup]:gid [:perms] 指定群组的权限，文件所有群组的权限（如果gid未指定） </div><div class="line">[d[efault]:] m[ask][:] [:perms] 有效权限掩码 </div><div class="line">[d[efault]:] o[ther] [:perms] 其他的权限</div></pre></td></tr></table></figure>
 <h4 id="3-3、命令例子"><a href="#3-3、命令例子" class="headerlink" title="3.3、命令例子"></a>3.3、命令例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">user::rw- 定义了ACL_USER_OBJ, 说明file owner拥有read and write permission </div><div class="line">user:john:rw- 定义了ACL_USER,这样用户john就拥有了对文件的读写权限,实现了我们一开始要达到的目的 </div><div class="line">group::rw- 定义了ACL_GROUP_OBJ,说明文件的group拥有read and write permission </div><div class="line">group:dev:r-- 定义了ACL_GROUP,使得dev组拥有了对文件的read permission </div><div class="line">mask::rw- 定义了ACL_MASK的权限为read and write </div><div class="line">other::r-- 定义了ACL_OTHER的权限为read</div></pre></td></tr></table></figure>
 <h4 id="3-4、添加用户特殊权限实例"><a href="#3-4、添加用户特殊权限实例" class="headerlink" title="3.4、添加用户特殊权限实例"></a>3.4、添加用户特殊权限实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]# setfacl -m user:john:rw- ./test.txt </div><div class="line">[root@localhost ~]# getfacl --omit-header </div><div class="line">./test.txt </div><div class="line">user::rw- </div><div class="line">user:john:rw- </div><div class="line">group::rw- </div><div class="line">mask::rw- </div><div class="line">other::r--</div></pre></td></tr></table></figure>
@@ -805,7 +880,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、基础权限"><span class="nav-text">1、基础权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、查看权限ls-l（ll）"><span class="nav-text">1.1、查看权限ls -l（ll）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、基本权限："><span class="nav-text">1.2、基本权限：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、进程访问模型："><span class="nav-text">1.3、进程访问模型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4、三种用户访问类型："><span class="nav-text">1.4、三种用户访问类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5修改文件权限：chmod"><span class="nav-text">1.5修改文件权限：chmod</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-1-符号表示法"><span class="nav-text">1.5.1.符号表示法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-2-数字表示法（二进制，0和1表示有无）"><span class="nav-text">1.5.2.数字表示法（二进制，0和1表示有无）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6、修改拥有者（所属组）：chown"><span class="nav-text">1.6、修改拥有者（所属组）：chown</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7、umask-权限掩码，定义文件创建时的默认权限"><span class="nav-text">1.7、umask(权限掩码，定义文件创建时的默认权限)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8、普通用户创建"><span class="nav-text">1.8、普通用户创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-1、文件权限："><span class="nav-text">1.8.1、文件权限：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-2、目录权限："><span class="nav-text">1.8.2、目录权限：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、特殊权限"><span class="nav-text">2、特殊权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、suid-set-uid）"><span class="nav-text">2.1、suid(set uid）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2、sgid-set-gid"><span class="nav-text">2.2、sgid(set gid)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4、如何给文件设置特殊权限。"><span class="nav-text">2.4、如何给文件设置特殊权限。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5、特殊权限实例：-usr-bin-passwd与-etc-passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限"><span class="nav-text">2.5、特殊权限实例：/usr/bin/passwd与/etc/passwd普通用户没有修改密码文件的权限，可采用临时获取拥有者权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6、解释"><span class="nav-text">2.6、解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7、注意-s-t需要执行权限，否则ll显示S-T"><span class="nav-text">2.7、注意(+s+t需要执行权限，否则ll显示S\T)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8、-t实例，用户102无法删除101创建的"><span class="nav-text">2.8、+t实例，用户102无法删除101创建的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、扩展权限：-添加其他用户的特殊权限）"><span class="nav-text">3、扩展权限：(添加其他用户的特殊权限）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2、4种指定默认的权限"><span class="nav-text">3.2、4种指定默认的权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3、命令例子"><span class="nav-text">3.3、命令例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4、添加用户特殊权限实例"><span class="nav-text">3.4、添加用户特殊权限实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、selinux"><span class="nav-text">4、selinux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1、两种访问控制"><span class="nav-text">4.1、两种访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2、我们的访问模型"><span class="nav-text">4.2、我们的访问模型:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3查看相关属性-安全上下文—context"><span class="nav-text">4.3查看相关属性(安全上下文—context)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4、以web为例查看httpd进程的类型和index-html文件的类型"><span class="nav-text">4.4、以web为例查看httpd进程的类型和index.html文件的类型:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-5、修改context"><span class="nav-text">4.5、修改context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-6、还原context"><span class="nav-text">4.6、还原context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-7、控制selinux开启-关闭"><span class="nav-text">4.7、控制selinux开启/关闭</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-8、SElinux-布尔值"><span class="nav-text">4.8、SElinux 布尔值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、chattr-用root权限都不能修改某个文件，可能是使用root锁定了文件"><span class="nav-text">5、chattr(用root权限都不能修改某个文件，可能是使用root锁定了文件)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-mode参数"><span class="nav-text">5.1 mode参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-应用举例："><span class="nav-text">5.2 应用举例：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、基础权限"><span class="nav-text">1、基础权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、查看权限ls-l（ll）"><span class="nav-text">1.1、查看权限ls -l（ll）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、基本权限："><span class="nav-text">1.2、基本权限：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、进程访问模型："><span class="nav-text">1.3、进程访问模型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4、三种用户访问类型："><span class="nav-text">1.4、三种用户访问类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5修改文件权限：chmod"><span class="nav-text">1.5修改文件权限：chmod</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-1-符号表示法"><span class="nav-text">1.5.1.符号表示法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-2-数字表示法（二进制，0和1表示有无）"><span class="nav-text">1.5.2.数字表示法（二进制，0和1表示有无）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6、修改拥有者（所属组）：chown"><span class="nav-text">1.6、修改拥有者（所属组）：chown</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7、umask-权限掩码，定义文件创建时的默认权限"><span class="nav-text">1.7、umask(权限掩码，定义文件创建时的默认权限)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8、新创建的文件和目录权限"><span class="nav-text">1.8、新创建的文件和目录权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-1、文件权限："><span class="nav-text">1.8.1、文件权限：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-2、目录权限："><span class="nav-text">1.8.2、目录权限：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、特殊权限"><span class="nav-text">2、特殊权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、suid-set-uid）"><span class="nav-text">2.1、suid(set uid）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2、sgid-set-gid"><span class="nav-text">2.2、sgid(set gid)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4、如何给文件设置特殊权限"><span class="nav-text">2.4、如何给文件设置特殊权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5、特殊权限实例"><span class="nav-text">2.5、特殊权限实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6、解释"><span class="nav-text">2.6、解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7、注意-s-t需要执行权限，否则ll显示S-T"><span class="nav-text">2.7、注意(+s+t需要执行权限，否则ll显示S\T)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8、-t实例，用户102无法删除101创建的"><span class="nav-text">2.8、+t实例，用户102无法删除101创建的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、扩展权限：-添加其他用户的特殊权限）"><span class="nav-text">3、扩展权限：(添加其他用户的特殊权限）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1、getfacl和setfacl"><span class="nav-text">3.1、getfacl和setfacl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2、4种指定默认的权限"><span class="nav-text">3.2、4种指定默认的权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3、命令例子"><span class="nav-text">3.3、命令例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4、添加用户特殊权限实例"><span class="nav-text">3.4、添加用户特殊权限实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、selinux"><span class="nav-text">4、selinux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1、两种访问控制"><span class="nav-text">4.1、两种访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2、我们的访问模型"><span class="nav-text">4.2、我们的访问模型:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3查看相关属性-安全上下文—context"><span class="nav-text">4.3查看相关属性(安全上下文—context)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4、以web为例查看httpd进程的类型和index-html文件的类型"><span class="nav-text">4.4、以web为例查看httpd进程的类型和index.html文件的类型:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-5、修改context"><span class="nav-text">4.5、修改context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-6、还原context"><span class="nav-text">4.6、还原context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-7、控制selinux开启-关闭"><span class="nav-text">4.7、控制selinux开启/关闭</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-8、SElinux-布尔值"><span class="nav-text">4.8、SElinux 布尔值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、chattr-用root权限都不能修改某个文件，可能是使用root锁定了文件"><span class="nav-text">5、chattr(用root权限都不能修改某个文件，可能是使用root锁定了文件)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-mode参数"><span class="nav-text">5.1 mode参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-应用举例："><span class="nav-text">5.2 应用举例：</span></a></li></ol></li></ol></div>
             
 
           </div>
