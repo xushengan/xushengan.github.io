@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -87,17 +87,18 @@
 
 
 
-<meta name="description" content="##iptables 1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：i">
+<meta name="description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xu_Blog">
+<meta property="og:title" content="Flume（基础概念&amp;配置）">
 <meta property="og:url" content="xushengan.github.io/2017/09/24/iptales/iptables/index.html">
 <meta property="og:site_name" content="Xu_Blog">
-<meta property="og:description" content="##iptables 1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：i">
+<meta property="og:description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-25T05:55:22.450Z">
+<meta property="og:updated_time" content="2017-09-25T05:57:12.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xu_Blog">
-<meta name="twitter:description" content="##iptables 1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：i">
+<meta name="twitter:title" content="Flume（基础概念&amp;配置）">
+<meta name="twitter:description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
 
 
 
@@ -131,7 +132,7 @@
 
 
 
-  <title>  | Xu_Blog </title>
+  <title> Flume（基础概念&配置） | Xu_Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -321,7 +322,7 @@
             
             
               
-                
+                Flume（基础概念&配置）
               
             
           </h1>
@@ -346,6 +347,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -372,8 +395,7 @@
       
 
       
-        <p>##iptables</p>
-<h3 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h3><p>实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。</p>
+        <h3 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h3><p>实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。</p>
 <p>1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。<br>2.rule utils：iptables 规则管理工具</p>
 <h4 id="1-1、基本概念"><a href="#1-1、基本概念" class="headerlink" title="1.1、基本概念"></a>1.1、基本概念</h4><p>1、kernel的netfilter实现的过滤功能，不是服务（deamon），工作在osi的2/3/4层（接口、ip、tcp），只检查数据包头部信息，不能过滤网址，网址在七层</p>
 <p>2、iptables是内核netfilter模块面向用户的工具，通过iptables编写策略写入内核</p>
@@ -428,6 +450,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
       
 
       
