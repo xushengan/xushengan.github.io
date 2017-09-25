@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-25T06:19:07.258Z">
+<meta property="og:updated_time" content="2017-09-25T06:22:06.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iptables">
 <meta name="twitter:description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
@@ -431,8 +431,8 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@server100 ~]# chkconfig --list | grep iptables</div><div class="line">iptables       0:off    1:off    2:on    3:on    4:on    5:on    6:off</div><div class="line">You have new mail in /var/spool/mail/root</div><div class="line">[root@server100 ~]# chkconfig ipconfig off 永久性关闭</div></pre></td></tr></table></figure>
 <h3 id="3、NAT规则："><a href="#3、NAT规则：" class="headerlink" title="3、NAT规则："></a>3、NAT规则：</h3><p>iptables -t nat -A POSTROUTING -s 10.1.1.0/24 -o eth1-j MASQUERADE伪装<br>注意需要开启ip转发功能 (echo 1 &gt; /proc/sys/net/ipv4/ip_forward)</p>
-<p>来源： <a href="http://blog.csdn.net/u011456940/article/details/52634184" target="_blank" rel="external">http://blog.csdn.net/u011456940/article/details/52634184</a></p>
-
+<pre><code>来源： http://blog.csdn.net/u011456940/article/details/52634184
+</code></pre>
       
     </div>
 
