@@ -1,0 +1,790 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="linux基础:文件系统文件系统有几个比较重要的组成：super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个blockblock：实际记录档案内容，若档案太大则会占用多个block ext2结构由于indoe和block的数量实际很多，如果每次都遍历全部">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件系统:ext2">
+<meta property="og:url" content="xushengan.github.io/2017/09/28/filesystem/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:description" content="linux基础:文件系统文件系统有几个比较重要的组成：super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个blockblock：实际记录档案内容，若档案太大则会占用多个block ext2结构由于indoe和block的数量实际很多，如果每次都遍历全部">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/2017/09/28/filesystem/2.jpg">
+<meta property="og:image" content="/2017/09/28/filesystem/3.jpg">
+<meta property="og:updated_time" content="2017-09-28T11:39:17.713Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux文件系统:ext2">
+<meta name="twitter:description" content="linux基础:文件系统文件系统有几个比较重要的组成：super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个blockblock：实际记录档案内容，若档案太大则会占用多个block ext2结构由于indoe和block的数量实际很多，如果每次都遍历全部">
+<meta name="twitter:image" content="/2017/09/28/filesystem/2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/2017/09/28/filesystem/"/>
+
+
+
+
+
+  <title> Linux文件系统:ext2 | Xu_Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学而后知不足</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-net">
+          <a href="/categories/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-elk">
+          <a href="/categories/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/28/filesystem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux文件系统:ext2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-28T19:38:59+08:00">
+                2017-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="linux基础-文件系统"><a href="#linux基础-文件系统" class="headerlink" title="linux基础:文件系统"></a>linux基础:文件系统</h3><p>文件系统有几个比较重要的组成：<br>super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息<br>inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个block<br>block：实际记录档案内容，若档案太大则会占用多个block</p>
+<h3 id="ext2结构"><a href="#ext2结构" class="headerlink" title="ext2结构"></a>ext2结构</h3><p>由于indoe和block的数量实际很多，如果每次都遍历全部inode和block的话效率会比较低，因此ext2实际上分成多个block group，结合硬盘结构，如下图：</p>
+<img src="/2017/09/28/filesystem/2.jpg" alt="2.jpg" title="">
+<h3 id="各部分的含义"><a href="#各部分的含义" class="headerlink" title="各部分的含义"></a>各部分的含义</h3><h4 id="1、-super-block"><a href="#1、-super-block" class="headerlink" title="1、 super block"></a>1、 super block</h4><ul>
+<li>记录文件系统的相关信息<br>1、block与inode总量<br>2、已经使用和未使用的inode/block数量<br>3、block和inode的大小（block为1,2,4K;inode为128bytes或256BYTES）<br>4、文件系统的挂在时间、最近一次写入时间、最近一次金叉磁盘（fsck）时间等文件系统的相关信息<br>5、一个valid bit数值，若此档案被挂在则为0，否则为1</li>
+</ul>
+<p>一般superblock的大小为1024bytes，相关的信息使用<strong>dumpe2fs</strong>指令查看<br>另外，每一个block group都可能有一个super block，可能有也可能没有，除了第一个block group其他都是对它的备份。 </p>
+<h4 id="2、file-system-description"><a href="#2、file-system-description" class="headerlink" title="2、file system description"></a>2、file system description</h4><p>-描述每个block group的开始和结束block号码，以及说明每个部分（super block、block bitmap、inode bitmap等）介于哪个block之间</p>
+<h4 id="3、block-bitmap"><a href="#3、block-bitmap" class="headerlink" title="3、block bitmap"></a>3、block bitmap</h4><p>-记录哪些block已经使用，哪些block未使用，在创建和删除文件的时候用到</p>
+<h4 id="4、inode-bitmap"><a href="#4、inode-bitmap" class="headerlink" title="4、inode bitmap"></a>4、inode bitmap</h4><p>-记录哪些indoe已经使用，哪些inode未使用，在创建和删除文件的时候用到</p>
+<h4 id="5、data-block"><a href="#5、data-block" class="headerlink" title="5、data block"></a>5、data block</h4><ul>
+<li>实际用来使用的block的集合，block存放文件内容的地方，ext2支持的block大小为1k,2k,4k</li>
+</ul>
+<h5 id="block大小和文件大小的关系"><a href="#block大小和文件大小的关系" class="headerlink" title="block大小和文件大小的关系"></a>block大小和文件大小的关系</h5><table>
+<thead>
+<tr>
+<th>block大小</th>
+<th>1KB</th>
+<th>2KB</th>
+<th>4KB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个文件最大</td>
+<td>16GB</td>
+<td>256GB</td>
+<td>2TB</td>
+</tr>
+<tr>
+<td>文件系统最大</td>
+<td>2TB</td>
+<td>8TB</td>
+<td>16TB</td>
+</tr>
+</tbody>
+</table>
+<h5 id="block的限制"><a href="#block的限制" class="headerlink" title="block的限制"></a>block的限制</h5><p>1、blcok的大小和数量在格式化后就不能改变（只能重新格式化）<br>2、一个block只能存一个文件，一个文件可以有多个block，单个block太大可能会造成浪费</p>
+<h4 id="6、inode-table"><a href="#6、inode-table" class="headerlink" title="6、inode table"></a>6、inode table</h4><ul>
+<li>实际用来的使用的inode集合，inode记录文件属性以及内容存放的实际block<br>1、文件的权限<br>2、文件的拥有者和属组<br>3、文件的大小<br>4、文件的访问时间atime、权限改变时间ctime和修改时间mtime<br>5、文件的特殊属性如suid<br>6、文件真正内容的指向pointer</li>
+</ul>
+<h4 id="indoe注意的地方"><a href="#indoe注意的地方" class="headerlink" title="indoe注意的地方"></a>indoe注意的地方</h4><p>ext2的block为128bytes（新的ext4和xfs可以到256byets)<br>每个文件一个inode<br>文件系统的文件数量和inode数量有关<br>读取文件时先找到inode，并分析inode里面记录的权限和使用者的权限是否符合。</p>
+<p>设想一个文件100M,block 1k,一个文件有102400个block即一个indoe要指向102400个block，记录一block 4bytes,不是不是够呢？实际上会采用直接和间接结合的方式来处理，间接指的是借用block来记录block号<br>12个直接，1个间接，1个双间接，1个三间接完成这项任务</p>
+<img src="/2017/09/28/filesystem/3.jpg" alt="3.jpg" title="">
+<h5 id="super-block的信息"><a href="#super-block的信息" class="headerlink" title="super block的信息"></a>super block的信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">[root@~]#dumpe2fs -h /dev/xvda1    #dumpe2fs仅查看super block的信息</div><div class="line">dumpe2fs 1.41.12 (17-May-2010)</div><div class="line">Filesystem volume name:   &lt;none&gt;    #文件系统的名称，不一样有</div><div class="line">Last mounted on:          /         #上一次挂在目录的位置</div><div class="line">Filesystem UUID:          3d083579-f5d9-4df5-9347-8d27925805d4    #UUID</div><div class="line">Filesystem magic number:  0xEF53</div><div class="line">Filesystem revision #:    1 (dynamic)</div><div class="line">Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent flex_bg sparse_super large_file huge_file uninit_bg dir_nlink extra_isize</div><div class="line">Filesystem flags:         signed_directory_hash </div><div class="line">Default mount options:    user_xattr acl    #挂在时候默认加上的参数</div><div class="line">Filesystem state:         clean</div><div class="line">Errors behavior:          Continue</div><div class="line">Filesystem OS type:       Linux</div><div class="line">Inode count:              2621440    #inode总数</div><div class="line">Block count:              10485504    #block总数</div><div class="line">Reserved block count:     524275    #保留block</div><div class="line">Free blocks:              7442337    #空闲block</div><div class="line">Free inodes:              2302345    #空闲indoe</div><div class="line">First block:              0</div><div class="line">Block size:               4096        #block大小4k</div><div class="line">Fragment size:            4096</div><div class="line">Reserved GDT blocks:      1021</div><div class="line">Blocks per group:         32768</div><div class="line">Fragments per group:      32768</div><div class="line">Inodes per group:         8192</div><div class="line">Inode blocks per group:   512</div><div class="line">Flex block group size:    16</div><div class="line">Filesystem created:       Thu Feb 23 07:28:11 2017    #文件系统创建时间</div><div class="line">Last mount time:          Sun Jun 11 16:05:11 2017    #挂载时间</div><div class="line">Last write time:          Sat Apr 15 01:10:06 2017    #写时间</div><div class="line">Mount count:              15</div><div class="line">Maximum mount count:      -1</div><div class="line">Last checked:             Thu Feb 23 07:28:11 2017    #最后一次检查</div><div class="line">Check interval:           0 (&lt;none&gt;)</div><div class="line">Lifetime writes:          28 GB</div><div class="line">Reserved blocks uid:      0 (user root)</div><div class="line">Reserved blocks gid:      0 (group root)</div><div class="line">First inode:              11</div><div class="line">Inode size:	          256        #inode大小</div><div class="line">Required extra isize:     28</div><div class="line">Desired extra isize:      28</div><div class="line">Journal inode:            8</div><div class="line">First orphan inode:       2108484</div><div class="line">Default directory hash:   half_md4</div><div class="line">Directory Hash Seed:      76cfbecf-5ff1-41c6-9fa1-31db7a3073e4</div><div class="line">Journal backup:           inode blocks</div><div class="line">Journal features:         journal_incompat_revoke</div><div class="line">Journal size:             128M        #journal日志信息大小</div><div class="line">Journal length:           32768</div><div class="line">Journal sequence:         0x00102c10</div><div class="line">Journal start:            23319</div></pre></td></tr></table></figure>
+<h4 id="group-1"><a href="#group-1" class="headerlink" title="group 1"></a>group 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Group 0: (Blocks 0-32767) [ITABLE_ZEROED]</div><div class="line">  Checksum 0x3305, unused inodes 2638</div><div class="line">  Primary superblock at 0, Group descriptors at 1-3</div><div class="line">  Reserved GDT blocks at 4-1024</div><div class="line">  Block bitmap at 1025 (+1025), Inode bitmap at 1041 (+1041)</div><div class="line">  Inode table at 1057-1568 (+1057)</div><div class="line">  16448 free blocks, 2656 free inodes, 920 directories, 2638 unused inodes</div><div class="line">  Free blocks: 16271, 16321-32767</div><div class="line">  Free inodes: 4953-4968, 5553-8192</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/25/boot/boot/" rel="next" title="系统启动流程">
+                <i class="fa fa-chevron-left"></i> 系统启动流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/03/vmstat/vmstat/" rel="prev" title="vmstat 监视内存使用情况">
+                vmstat 监视内存使用情况 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux基础-文件系统"><span class="nav-text">linux基础:文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ext2结构"><span class="nav-text">ext2结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各部分的含义"><span class="nav-text">各部分的含义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-super-block"><span class="nav-text">1、 super block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、file-system-description"><span class="nav-text">2、file system description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、block-bitmap"><span class="nav-text">3、block bitmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、inode-bitmap"><span class="nav-text">4、inode bitmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、data-block"><span class="nav-text">5、data block</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#block大小和文件大小的关系"><span class="nav-text">block大小和文件大小的关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#block的限制"><span class="nav-text">block的限制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、inode-table"><span class="nav-text">6、inode table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#indoe注意的地方"><span class="nav-text">indoe注意的地方</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#super-block的信息"><span class="nav-text">super block的信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#group-1"><span class="nav-text">group 1</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
