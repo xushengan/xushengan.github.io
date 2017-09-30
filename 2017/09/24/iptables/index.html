@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables">
+<meta property="og:url" content="xushengan.github.io/2017/09/24/iptables/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/2017/09/24/iptables/1.jpg">
+<meta property="og:image" content="/2017/09/24/iptables/2.jpg">
+<meta property="og:image" content="/2017/09/24/iptables/1.jpg">
+<meta property="og:image" content="/2017/09/24/iptables/2.jpg">
+<meta property="og:updated_time" content="2017-09-25T06:25:56.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iptables">
+<meta name="twitter:description" content="1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。 1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管">
+<meta name="twitter:image" content="/2017/09/24/iptables/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/2017/09/24/iptables/"/>
+
+
+
+
+
+  <title> iptables | Xu_Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学而后知不足</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-net">
+          <a href="/categories/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-elk">
+          <a href="/categories/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/24/iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iptables
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T22:08:43+08:00">
+                2017-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h3><p>实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。</p>
+<p>1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。<br>2.rule utils：iptables 规则管理工具</p>
+<h4 id="1-1、基本概念"><a href="#1-1、基本概念" class="headerlink" title="1.1、基本概念"></a>1.1、基本概念</h4><p>1、kernel的netfilter实现的过滤功能，不是服务（deamon），工作在osi的2/3/4层（接口、ip、tcp），只检查数据包头部信息，不能过滤网址，网址在七层</p>
+<p>2、iptables是内核netfilter模块面向用户的工具，通过iptables编写策略写入内核</p>
+<h4 id="1-2、四表：（table小写）"><a href="#1-2、四表：（table小写）" class="headerlink" title="1.2、四表：（table小写）"></a>1.2、四表：（table小写）</h4><p>filter：过滤，防火墙<br>nat：network address translation 网络地址转换,用于对特定数据包的修改<br>mangle：拆解报文，作出修改，封装报文<br>raw： 关闭nat表上启用的链接追踪机制,有限级最高，提高性能</p>
+<p>表小写和链大写</p>
+<blockquote>
+<h5 id="表与链：（每张表都有5条链）"><a href="#表与链：（每张表都有5条链）" class="headerlink" title="表与链：（每张表都有5条链）"></a>表与链：（每张表都有5条链）</h5><p><strong>filter    实现数据包过滤（一般在这里做策略）</strong><br>INPUT<br>OUTPUT<br>FORWARD</p>
+<p><strong>nat    实现地址转换</strong><br>PREROUTING    目的地址转换，静态映射<br>FORWARD<br>POSTROUTING NAT,PAT源地址转换</p>
+<p><strong>mangle    修改数据包，用于qos,用于自定义</strong><br>拥有所有链</p>
+<p><strong>raw</strong><br>PREROUTING<br>OUTPUT</p>
+<p>1、RAW 表只使用在PREROUTING链和OUTPUT链上,因为优先级最高，从而可以对收到的数据包在连接跟踪前进行处理。一但用户使用了RAW表,在某个链 上,RAW表处理完后,将跳过NAT表和 ip_conntrack处理,即不再做地址转换和数据包的链接跟踪处理了.<br>2、RAW表可以应用在那些不需要做nat的情况下，以提高性能。如大量访问的web服务器，可以让80端口不再让iptables做数据包的链接跟踪处理，以提高用户的访问速度。</p>
+</blockquote>
+<h4 id="1-3、五链：（CHAIN大写）"><a href="#1-3、五链：（CHAIN大写）" class="headerlink" title="1.3、五链：（CHAIN大写）"></a>1.3、五链：（CHAIN大写）</h4><p>PREROUTING：路由决策之前，目的地址转换（静态转换）<br>POSTROUTING:路由决策之后<br>INPUT：目的地址为本机<br>FORWARD：实现转发<br>OUTPUT ：地址为本机，向外发送</p>
+<img src="/2017/09/24/iptables/1.jpg" alt="1.jpg" title="">
+<img src="/2017/09/24/iptables/2.jpg" alt="2.jpg" title="">
+<h3 id="2、基础语法"><a href="#2、基础语法" class="headerlink" title="2、基础语法"></a>2、基础语法</h3><p>iptables [-t table] -A CHAIN RULE -j TARGET(针对规则做动作) append追加规则到链 </p>
+<h4 id="2-1、查看指定表中规则"><a href="#2-1、查看指定表中规则" class="headerlink" title="2.1、查看指定表中规则"></a>2.1、查看指定表中规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -t 哪张表 -L 查看规则</div><div class="line">            --line-number显示编号</div><div class="line">            -n number数字化</div></pre></td></tr></table></figure>
+<img src="/2017/09/24/iptables/1.jpg" alt="1.jpg" title="">
+<img src="/2017/09/24/iptables/2.jpg" alt="2.jpg" title="">
+<h4 id="2-2、设置链规则"><a href="#2-2、设置链规则" class="headerlink" title="2.2、设置链规则"></a>2.2、设置链规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">iptables [-t TABLE] -A CHAIN RULE -j TARGET(针对规则做动作) append追加规则到链</div><div class="line">iptables -I insert插入规则到链</div><div class="line">iptables -D delete删除规则</div><div class="line"></div><div class="line">例子：iptables -A INPUT -s 10.1.1.84/32 -p icmp -j REJECT</div></pre></td></tr></table></figure>
+<h4 id="2-3、RULE（选项后！代表取反-）"><a href="#2-3、RULE（选项后！代表取反-）" class="headerlink" title="2.3、RULE（选项后！代表取反   ）"></a>2.3、RULE（选项后！代表取反   ）</h4><h5 id="2-3-1、ip地址："><a href="#2-3-1、ip地址：" class="headerlink" title="2.3.1、ip地址："></a>2.3.1、ip地址：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-s    源地址</div><div class="line">-d    目的地址</div></pre></td></tr></table></figure>
+<h5 id="2-3-2、协议："><a href="#2-3-2、协议：" class="headerlink" title="2.3.2、协议："></a>2.3.2、协议：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-p    udp|tcp|icmp等</div><div class="line">-p tcp --dport x 目的端口</div><div class="line">-p tcp --sport x 源端口</div><div class="line">-p tcp --sport 21:50 21-50端口</div></pre></td></tr></table></figure>
+<h5 id="2-3-3、接口："><a href="#2-3-3、接口：" class="headerlink" title="2.3.3、接口："></a>2.3.3、接口：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-i  input，如接口</div><div class="line">-o  output，出接口</div></pre></td></tr></table></figure>
+<h5 id="2-3-4、扩展匹配–隐式匹配"><a href="#2-3-4、扩展匹配–隐式匹配" class="headerlink" title="2.3.4、扩展匹配–隐式匹配"></a>2.3.4、扩展匹配–隐式匹配</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-m multiport使--dporet --sport支持多端口</div><div class="line">实例：</div></pre></td></tr></table></figure>
+<h4 id="2-4、TARGET-动作"><a href="#2-4、TARGET-动作" class="headerlink" title="2.4、TARGET(动作)"></a>2.4、TARGET(动作)</h4><p><strong>filter：</strong></p>
+<p>ACCEPT 允许<br>DROP   丢弃(没有回复)<br>REJECT 拒绝（有回复，外部动作）内部动作执行效率更高</p>
+<h4 id="2-5、管理表规则"><a href="#2-5、管理表规则" class="headerlink" title="2.5、管理表规则"></a>2.5、管理表规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">iptables -F flush，清楚链上规则</div><div class="line">iptables -P    CHAIN TARGET 设置链的默认策略</div><div class="line">iptables -X    清除自定义链</div><div class="line">iptables -Z zero，</div></pre></td></tr></table></figure>
+<ul>
+<li>先允许自己</li>
+</ul>
+<h4 id="2-6、保存规则：（-etc-syconfig-iptables）"><a href="#2-6、保存规则：（-etc-syconfig-iptables）" class="headerlink" title="2.6、保存规则：（/etc/syconfig/iptables）"></a>2.6、保存规则：（/etc/syconfig/iptables）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/iptables save</div></pre></td></tr></table></figure>
+<h4 id="2-7、关闭防火墙"><a href="#2-7、关闭防火墙" class="headerlink" title="2.7、关闭防火墙"></a>2.7、关闭防火墙</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/iptables stop</div><div class="line">chkconfig iptables off</div></pre></td></tr></table></figure>
+<ul>
+<li>chkconfig –list</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@server100 ~]# chkconfig --list | grep iptables</div><div class="line">iptables       0:off    1:off    2:on    3:on    4:on    5:on    6:off</div><div class="line">You have new mail in /var/spool/mail/root</div><div class="line">[root@server100 ~]# chkconfig ipconfig off 永久性关闭</div></pre></td></tr></table></figure>
+<h3 id="3、NAT规则："><a href="#3、NAT规则：" class="headerlink" title="3、NAT规则："></a>3、NAT规则：</h3><p>iptables -t nat -A POSTROUTING -s 10.1.1.0/24 -o eth1-j MASQUERADE伪装<br>注意需要开启ip转发功能 (echo 1 &gt; /proc/sys/net/ipv4/ip_forward)</p>
+<pre><code>来源： http://blog.csdn.net/u011456940/article/details/52634184
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/24/rpm_yum/rpm_yum/" rel="next" title="Linux软件安装">
+                <i class="fa fa-chevron-left"></i> Linux软件安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/25/boot/boot/" rel="prev" title="系统启动流程">
+                系统启动流程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、基本概念"><span class="nav-text">1、基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、基本概念"><span class="nav-text">1.1、基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、四表：（table小写）"><span class="nav-text">1.2、四表：（table小写）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#表与链：（每张表都有5条链）"><span class="nav-text">表与链：（每张表都有5条链）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、五链：（CHAIN大写）"><span class="nav-text">1.3、五链：（CHAIN大写）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、基础语法"><span class="nav-text">2、基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、查看指定表中规则"><span class="nav-text">2.1、查看指定表中规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2、设置链规则"><span class="nav-text">2.2、设置链规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3、RULE（选项后！代表取反-）"><span class="nav-text">2.3、RULE（选项后！代表取反   ）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-1、ip地址："><span class="nav-text">2.3.1、ip地址：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-2、协议："><span class="nav-text">2.3.2、协议：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-3、接口："><span class="nav-text">2.3.3、接口：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-4、扩展匹配–隐式匹配"><span class="nav-text">2.3.4、扩展匹配–隐式匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4、TARGET-动作"><span class="nav-text">2.4、TARGET(动作)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5、管理表规则"><span class="nav-text">2.5、管理表规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6、保存规则：（-etc-syconfig-iptables）"><span class="nav-text">2.6、保存规则：（/etc/syconfig/iptables）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7、关闭防火墙"><span class="nav-text">2.7、关闭防火墙</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、NAT规则："><span class="nav-text">3、NAT规则：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
