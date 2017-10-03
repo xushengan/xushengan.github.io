@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="###系统启动流程 ###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统启动流程">
+<meta property="og:url" content="xushengan.github.io/2017/09/25/boot/boot/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:description" content="###系统启动流程 ###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-03T07:17:13.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统启动流程">
+<meta name="twitter:description" content="###系统启动流程 ###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/2017/09/25/boot/boot/"/>
+
+
+
+
+
+  <title> 系统启动流程 | Xu_Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学而后知不足</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-net">
+          <a href="/categories/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-elk">
+          <a href="/categories/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/25/boot/boot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                系统启动流程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T16:26:44+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###系统启动流程</p>
+<p>###1、POST<br>Post-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区</p>
+<blockquote>
+<p>BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提供的一些程序，设置启动参数，硬盘模式，主板功能，CPU功能。</p>
+</blockquote>
+<h3 id="2、读取MBR（512bytes）"><a href="#2、读取MBR（512bytes）" class="headerlink" title="2、读取MBR（512bytes）"></a>2、读取MBR（512bytes）</h3><ul>
+<li>加载Bootloader（446Bytes）：引导程序，linux常见引导程序grub或grub2，旧版lilo</li>
+</ul>
+<h3 id="3、GRUB启动引导系统"><a href="#3、GRUB启动引导系统" class="headerlink" title="3、GRUB启动引导系统"></a>3、GRUB启动引导系统</h3><p>stage1（512byte）:MBR扇区，加载引导程序，加载stage1_5<br>stage1_5：加载文件系统驱动，使grub能够识别boot所在分区的文件系统    #哪里的文件系统<br>stage2：加载stage2文件，根据grub.conf配置文件加载内核（vmlinuz-xxx.img）和临时文件系统（initramfs-xxx.img，存放内核常用的驱动，特别是硬盘驱动。解压后具有完整的目录结构/sbin/init）</p>
+<h4 id="3-1、grub-conf-配置文件"><a href="#3-1、grub-conf-配置文件" class="headerlink" title="3.1、grub.conf 配置文件"></a>3.1、grub.conf 配置文件</h4><ul>
+<li>如果boot未分区则/boot/grub/grub.conf，如果boot独立分区/grub/grub.conf</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">default=0    #默认以第一个title指定的参数启动，从0开始计</div><div class="line">timeout=5    #等待超时时间，超过5秒则以default设置启动</div><div class="line">splashimage=(hd0,0)/grub/splash.xpm.gz    #背景图片，xpm格式</div><div class="line">hiddenmenu    #隐藏title的具体内容</div><div class="line">title CentOS 6 (2.6.32-642.el6.x86_64)</div><div class="line">        root (hd0,0)    #指定启动分区为第一个硬盘第一个分区</div><div class="line">        kernel /vmlinuz-2.6.32-642.el6.x86_64     #指定启动内核文件（临时根文件目录/boot，真正的根目录还未挂载）</div><div class="line">        #传递给内核的参数</div><div class="line">        ro     #以只读方式挂载根分区，保证安全，必写</div><div class="line">        root=UUID=e0d3246f-0ecd-4f4f-b197-2348c7f60d3d    #指定真正的根分区位置，必须指定</div><div class="line">        rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM</div><div class="line">        rhgb     #红帽图形化启动（启动进度条）</div><div class="line">        quiet    #静默模式，不输出内核启动信息</div><div class="line">        initrd /initramfs-2.6.32-642.el6.x86_64.img    #指定临时根文件系统（驱动文件）</div></pre></td></tr></table></figure>
+<h3 id="4、内核引导系统"><a href="#4、内核引导系统" class="headerlink" title="4、内核引导系统"></a>4、内核引导系统</h3><p>在initramfs进行初始化操作。加载驱动程序，初始化完成之后，以只读ro方式切换到真正的根文件系统的/sbin/init进程（系统第一个进程）</p>
+<h3 id="5、init初始化（读取-etc中的配置文件）"><a href="#5、init初始化（读取-etc中的配置文件）" class="headerlink" title="5、init初始化（读取/etc中的配置文件）"></a>5、init初始化（读取/etc中的配置文件）</h3><ul>
+<li><p>1、/etc/inittab    指定默认运行级别 本质是对应/etc/rc.d/rcX.d文件夹，启动相应的服务</p>
+</li>
+<li><p>2、/etc/rc.sysinit   </p>
+<blockquote>
+<p>激活udev和selinux<br>设置内核参数/etc/sysctl.conf<br>设置clock<br>设置键盘布局<br>启用swap<br>设置hostname<br>重新挂载root分区，以读写模式<br>激活RAID和LVM设备<br>激活磁盘限额<br>检查和挂载其他文件系统/etc/fstab       </p>
+</blockquote>
+</li>
+<li><p>3、/etc/rc.d/rcX.d</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">[root@caicai ~]# ls /etc/rc.d/rc3.d/</div><div class="line">K01smartd          K89netconsole      S24nfslock</div><div class="line">K02oddjobd         K89rdisc           S24rpcgssd</div><div class="line">K05wdaemon         K92pppoe-server    S25blk-availability</div><div class="line">K10psacct          K95firstboot       S25cups</div><div class="line">K10saslauthd       K95rdma            S25netfs</div><div class="line">K15htcacheclean    K99rngd            S26acpid</div><div class="line">K15httpd           S01sysstat         S26haldaemon</div><div class="line">K30spice-vdagentd  S02lvm2-monitor    S26udev-post</div><div class="line">K50dnsmasq         S08ip6tables       S28autofs</div><div class="line">K50kdump           S08iptables        S50bluetooth</div><div class="line">K60nfs             S10network         S55sshd</div><div class="line">K61nfs-rdma        S11auditd          S58ntpd</div><div class="line">K69rpcsvcgssd      S11portreserve     S80postfix</div><div class="line">K73winbind         S12rsyslog         S82abrt-ccpp</div><div class="line">K75ntpdate         S13cpuspeed        S82abrtd</div><div class="line">K75quota_nld       S13irqbalance      S90crond</div><div class="line">K76ypbind          S13rpcbind         S95atd</div><div class="line">K84wpa_supplicant  S15mdmonitor       S99certmonger</div><div class="line">K87restorecond     S22messagebus      S99local    #用户自己定义的开机初始化操作/etc/rc.local</div><div class="line">K88sssd            S23NetworkManager</div></pre></td></tr></table></figure>
+<p><strong>关于K/S+NUM+SCRIPTS</strong></p>
+<blockquote>
+<p>K=kill script    关闭<br>S=start script    启动<br>整个是符号链接，指向/etc/init.d/对应脚本文件 S10network –&gt; /etc/init.d/network start<br>NUM    编号，决定启动先后顺序    </p>
+</blockquote>
+<ul>
+<li><p>如果运行级别为3，系统会启用/sbin/mingetty生成一个登陆界面。输入用户名和密码后，会检查以下文件：<br>文件|描述<br>—|—<br>/etc/nologin|默认不存在，由用户自己创建。用户名在该文件，不许登陆<br>/etc/usertty|默认不存在。对用户做出附加访问限制<br>/etc/securetty|登记的终端才允许使用，不存在则任何终端都可以登陆<br>/etc/passwd&amp;/etc/shadow|检查用户名密码是否正确，判断对应的环境变量HOME,PATH,SHELL,TERM,LOGJAM</p>
+</li>
+<li><p>用户名密码验证通过后，记录到/var/log/lastlog日志登陆信息，提示未读邮件/var/spool/mail，读取启动文件/etc/profile,~/.bash_profile,~/.bash_login,~/.bashrc，最后取得SHELL进入交互界面</p>
+</li>
+<li><p>图形化相关文件/etc/X11/prefdm</p>
+</li>
+</ul>
+<p>####第六步：启动完成</p>
+<p>####进入单用户模式（用于系统维护，密码修改，无法远程，只能通过本地控制台）<br>    进grub给内核添加参数：single 或 s 或 1</p>
+<p>####加密grub</p>
+<ol>
+<li><p>grub-md5-crypt    生成md5密码，并保存</p>
+</li>
+<li><p>将密码写入grub.conf<br>pass –md5 密码MD5值</p>
+</li>
+</ol>
+<p>####拯救模式:当文件系统损坏，grub损坏等原因无法进入系统<br>从光盘启动进去拯救操作系统，<br>umount /mnt/sysimagee/boot/<br>fsck修复<br>mount -a<br>chroot /mnt/sysimage(要回去可以exit退出再df)</p>
+<p>####修改内核参数</p>
+<p>#####临时修改网络参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</div></pre></td></tr></table></figure></p>
+<p>#####永久修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">目录</div><div class="line">vim /etc/sysctl.conf</div><div class="line">格式</div><div class="line">net.ipv4.ip_forward = 0</div><div class="line">net.ipv4.icmp_echo_ignore_all</div><div class="line">加载一下修改的配置</div><div class="line">sysctl -p</div></pre></td></tr></table></figure></p>
+<p>#####用脚本再/etc/rc.local开机备份/etc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ![-d /var/etcbakup];then</div><div class="line">mkdir    /var/etcbakup</div><div class="line">fi</div><div class="line">tar -czf  /var/etcbakup/etc-`date +%F`.tar.gz   /etc</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/24/iptables/iptables/" rel="next" title="iptables">
+                <i class="fa fa-chevron-left"></i> iptables
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/03/vmstat/vmstat/" rel="prev" title="vmstat 监视内存使用情况">
+                vmstat 监视内存使用情况 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2、读取MBR（512bytes）"><span class="nav-text">2、读取MBR（512bytes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、GRUB启动引导系统"><span class="nav-text">3、GRUB启动引导系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1、grub-conf-配置文件"><span class="nav-text">3.1、grub.conf 配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、内核引导系统"><span class="nav-text">4、内核引导系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、init初始化（读取-etc中的配置文件）"><span class="nav-text">5、init初始化（读取/etc中的配置文件）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
