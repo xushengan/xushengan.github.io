@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="###系统启动流程 ###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是">
+<meta name="description" content="1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="系统启动流程">
 <meta property="og:url" content="xushengan.github.io/2017/09/25/boot/boot/index.html">
 <meta property="og:site_name" content="Xu_Blog">
-<meta property="og:description" content="###系统启动流程 ###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是">
+<meta property="og:description" content="1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-03T07:17:13.764Z">
+<meta property="og:updated_time" content="2017-10-03T07:23:25.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统启动流程">
-<meta name="twitter:description" content="###系统启动流程 ###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是">
+<meta name="twitter:description" content="1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提">
 
 
 
@@ -395,8 +395,7 @@
       
 
       
-        <p>###系统启动流程</p>
-<p>###1、POST<br>Post-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区</p>
+        <h3 id="1、POST"><a href="#1、POST" class="headerlink" title="1、POST"></a>1、POST</h3><p>Post-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区</p>
 <blockquote>
 <p>BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提供的一些程序，设置启动参数，硬盘模式，主板功能，CPU功能。</p>
 </blockquote>
@@ -620,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2、读取MBR（512bytes）"><span class="nav-text">2、读取MBR（512bytes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、GRUB启动引导系统"><span class="nav-text">3、GRUB启动引导系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1、grub-conf-配置文件"><span class="nav-text">3.1、grub.conf 配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、内核引导系统"><span class="nav-text">4、内核引导系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、init初始化（读取-etc中的配置文件）"><span class="nav-text">5、init初始化（读取/etc中的配置文件）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、POST"><span class="nav-text">1、POST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、读取MBR（512bytes）"><span class="nav-text">2、读取MBR（512bytes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、GRUB启动引导系统"><span class="nav-text">3、GRUB启动引导系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1、grub-conf-配置文件"><span class="nav-text">3.1、grub.conf 配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、内核引导系统"><span class="nav-text">4、内核引导系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、init初始化（读取-etc中的配置文件）"><span class="nav-text">5、init初始化（读取/etc中的配置文件）</span></a></li></ol></div>
             
 
           </div>

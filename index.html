@@ -545,12 +545,12 @@
       
         
           
-          ###系统启动流程
-###1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区
+          1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区
 
 BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提供的一些程序，设置启动参数，硬盘模式，主板功能，CPU功能。
 
-2、读取M
+2、读取MBR（512bytes）
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
