@@ -95,10 +95,14 @@
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-30T23:50:44.343Z">
+<meta property="og:image" content="/2017/09/25/boot/1.jpg">
+<meta property="og:image" content="/2017/09/25/boot/2.jpg">
+<meta property="og:image" content="/2017/09/25/boot/3.jpg">
+<meta property="og:updated_time" content="2017-10-05T03:18:12.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统启动流程">
 <meta name="twitter:description" content="1、POSTPost-On Self-Test（加电自检）由bios（Basic Input/Output System）负责对外围硬件设备做检测，若有问题则会报警。bois设置设备启动项：CD-ROM光盘， HDD硬盘。假如设置为HDD，则设备会自动去读HDD的第一个扇区  BIOS是烧录在ROM（Read-Only Memory）中的一段启动程序，虽然是只读设备，但是用户仍然可以通过bois提">
+<meta name="twitter:image" content="/2017/09/25/boot/1.jpg">
 
 
 
@@ -443,6 +447,9 @@
 <h4 id="修改内核参数"><a href="#修改内核参数" class="headerlink" title="修改内核参数"></a>修改内核参数</h4><h5 id="临时修改网络参数"><a href="#临时修改网络参数" class="headerlink" title="临时修改网络参数"></a>临时修改网络参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</div></pre></td></tr></table></figure>
 <h5 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a>永久修改</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">目录</div><div class="line">vim /etc/sysctl.conf</div><div class="line">格式</div><div class="line">net.ipv4.ip_forward = 0</div><div class="line">net.ipv4.icmp_echo_ignore_all</div><div class="line">加载一下修改的配置</div><div class="line">sysctl -p</div></pre></td></tr></table></figure>
 <h5 id="用脚本在-etc-rc-local开机备份-etc"><a href="#用脚本在-etc-rc-local开机备份-etc" class="headerlink" title="用脚本在/etc/rc.local开机备份/etc"></a>用脚本在/etc/rc.local开机备份/etc</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ![-d /var/etcbakup];then</div><div class="line">mkdir    /var/etcbakup</div><div class="line">fi</div><div class="line">tar -czf  /var/etcbakup/etc-`date +%F`.tar.gz   /etc</div></pre></td></tr></table></figure>
+<img src="/2017/09/25/boot/1.jpg" alt="1.jpg" title="">
+<img src="/2017/09/25/boot/2.jpg" alt="2.jpg" title="">
+<img src="/2017/09/25/boot/3.jpg" alt="3.jpg" title="">
 
       
     </div>
