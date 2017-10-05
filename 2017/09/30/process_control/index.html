@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -87,17 +87,18 @@
 
 
 
-<meta name="description" content="##常用命令 系统资源相关命令top12345678top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombieCpu(s):  0.0%us,  0.7%sy,  0.0%">
+<meta name="description" content="系统资源相关命令top12345678top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombieCpu(s):  0.0%us,  0.7%sy,  0.0%ni, 99.">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xu_Blog">
+<meta property="og:title" content="mysql基础">
 <meta property="og:url" content="xushengan.github.io/2017/09/30/process_control/index.html">
 <meta property="og:site_name" content="Xu_Blog">
-<meta property="og:description" content="##常用命令 系统资源相关命令top12345678top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombieCpu(s):  0.0%us,  0.7%sy,  0.0%">
+<meta property="og:description" content="系统资源相关命令top12345678top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombieCpu(s):  0.0%us,  0.7%sy,  0.0%ni, 99.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-30T10:53:20.775Z">
+<meta property="og:updated_time" content="2017-10-05T00:29:42.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xu_Blog">
-<meta name="twitter:description" content="##常用命令 系统资源相关命令top12345678top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombieCpu(s):  0.0%us,  0.7%sy,  0.0%">
+<meta name="twitter:title" content="mysql基础">
+<meta name="twitter:description" content="系统资源相关命令top12345678top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombieCpu(s):  0.0%us,  0.7%sy,  0.0%ni, 99.">
 
 
 
@@ -131,7 +132,7 @@
 
 
 
-  <title>  | Xu_Blog </title>
+  <title> mysql基础 | Xu_Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -321,7 +322,7 @@
             
             
               
-                
+                mysql基础
               
             
           </h1>
@@ -346,6 +347,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -372,11 +395,11 @@
       
 
       
-        <p>##常用命令</p>
-<h3 id="系统资源相关命令"><a href="#系统资源相关命令" class="headerlink" title="系统资源相关命令"></a>系统资源相关命令</h3><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00</div><div class="line">Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombie</div><div class="line">Cpu(s):  0.0%us,  0.7%sy,  0.0%ni, 99.3%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</div><div class="line">Mem:   1920472k total,  1701040k used,   219432k free,   146740k buffers</div><div class="line">Swap:        0k total,        0k used,        0k free,   509732k cached</div><div class="line"></div><div class="line">PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND </div><div class="line">25104 mysql     20   0 1320m 455m 5336 S  0.0 24.3  37:57.63 mysqld                401 root      20   0  778m  76m 6632 S  0.0  4.1   2:26.33 python3.6</div></pre></td></tr></table></figure>
+        <h3 id="系统资源相关命令"><a href="#系统资源相关命令" class="headerlink" title="系统资源相关命令"></a>系统资源相关命令</h3><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">top - 17:55:12 up 120 days,  1:50,  1 user,  load average: 0.00, 0.00, 0.00</div><div class="line">Tasks:  94 total,   1 running,  93 sleeping,   0 stopped,   0 zombie</div><div class="line">Cpu(s):  0.0%us,  0.7%sy,  0.0%ni, 99.3%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</div><div class="line">Mem:   1920472k total,  1701040k used,   219432k free,   146740k buffers</div><div class="line">Swap:        0k total,        0k used,        0k free,   509732k cached</div><div class="line"></div><div class="line">PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND </div><div class="line">25104 mysql     20   0 1320m 455m 5336 S  0.0 24.3  37:57.63 mysqld                401 root      20   0  778m  76m 6632 S  0.0  4.1   2:26.33 python3.6</div></pre></td></tr></table></figure>
 <p>1、当前实时间，已开机时间，登陆用户数，系统负载<br>2、任务：总任务数，正在运行，休眠，停止，僵尸<br>3、cpu；用户使用，系统使用，改变过优先级的进程使用，空闲，等待，硬中断，软中断，表示本应该分配给虚拟机的资源被其他虚拟机或物理机本身占用而产生等待的比<br>4、总内存，已使用，空闲，写入硬盘的缓冲区<br>5、交换分区，总数，使用，空闲，cpu与内存的缓存</p>
 <p>在top下按<br>1  #查看CPU核心数量<br>C  #按照cpu使用率排序<br>M  #按照内存使用率排序</p>
-<h4 id="系统负载"><a href="#系统负载" class="headerlink" title="系统负载"></a>系统负载</h4><h4 id="进程的优先级-PR-NI"><a href="#进程的优先级-PR-NI" class="headerlink" title="进程的优先级(PR+NI):"></a>进程的优先级(PR+NI):</h4><p>越低越优先</p>
+<h4 id="系统负载"><a href="#系统负载" class="headerlink" title="系统负载"></a>系统负载</h4><p>分别表示系统在过去1分钟、5分钟、15分钟内运行进程队列中的平均进程数量</p>
+<h4 id="进程的优先级-PR-NI"><a href="#进程的优先级-PR-NI" class="headerlink" title="进程的优先级(PR+NI):"></a>进程的优先级(PR+NI):</h4><p>越低越优先</p>
 <p>PR（prioity）：优先级，用户不能控制的，默认20，RT（real time）实时<br>NI(nice值)：用户能够操作的优先级，范围-20~19,默认0<br>nice -n N command 将命令的nice值改为N<br>nice -n -20 ping 10.1.1.254<br>renice -n N PID根据进程修改nice值</p>
 <h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><p>ps aux    #使用标准输出格式显示所有终端进程和系统进程的详细信息</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</div><div class="line">root     20829  0.0  0.2 207636  4184 ?        Ss   Sep18   1:13 php-fpm: master process (/usr/local/php/etc/php-f</div><div class="line">nginx    20830  0.0  2.0 252840 38696 ?        S    Sep18  10:59 php-fpm: pool www nginx    20831  0.0  2.0 253436 39456 ?        S    Sep18  10:58 php-fpm: pool www</div></pre></td></tr></table></figure>
@@ -387,9 +410,8 @@
 <p>#free -m<br>             total       used       free     shared    buffers     cached<br>Mem:          1875       1661        214          0        143        497<br>-/+ buffers/cache:       1020        855<br>Swap:            0          0          0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### uptime</div></pre></td></tr></table></figure></p>
 <p>18:01:42 up 120 days,  1:56,  1 user,  load average: 0.07, 0.03, 0.01<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### w</div></pre></td></tr></table></figure></p>
 <p>18:29:33 up 120 days,  2:24,  1 user,  load average: 0.00, 0.00, 0.00<br>USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT<br>root     pts/1    121.8.227.29     17:40    0.00s  0.07s  0.00s w<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### vmstat</div></pre></td></tr></table></figure></p>
-<p>procs ———–memory———- —swap– —–io—- –system– —–cpu—–<br> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st<br> 1  0      0 219168 146784 509904    0    0     1     2    3    1  0  0 100  0  0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### netstat</div></pre></td></tr></table></figure></p>
-<p>```</p>
-<h4 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h4><h4 id="打包和压缩"><a href="#打包和压缩" class="headerlink" title="打包和压缩"></a>打包和压缩</h4><h4 id="df"><a href="#df" class="headerlink" title="df"></a>df</h4><h4 id="du"><a href="#du" class="headerlink" title="du"></a>du</h4><h4 id="mv-cp-rm"><a href="#mv-cp-rm" class="headerlink" title="mv,cp,rm,"></a>mv,cp,rm,</h4><h4 id="find-locate"><a href="#find-locate" class="headerlink" title="find,locate"></a>find,locate</h4><p>参考<br><a href="http://blog.csdn.net/lizhiqiang50/article/details/52058042" target="_blank" rel="external">http://blog.csdn.net/lizhiqiang50/article/details/52058042</a><br><a href="http://www.wufangbo.com/linux-top-st/" target="_blank" rel="external">http://www.wufangbo.com/linux-top-st/</a><br><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/top.html" target="_blank" rel="external">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/top.html</a></p>
+<p>procs ———–memory———- —swap– —–io—- –system– —–cpu—–<br> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st<br> 1  0      0 219168 146784 509904    0    0     1     2    3    1  0  0 100  0  0<br>```</p>
+<p>参考<br><a href="http://blog.csdn.net/lizhiqiang50/article/details/52058042" target="_blank" rel="external">http://blog.csdn.net/lizhiqiang50/article/details/52058042</a><br><a href="http://www.wufangbo.com/linux-top-st/" target="_blank" rel="external">http://www.wufangbo.com/linux-top-st/</a><br><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/top.html" target="_blank" rel="external">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/top.html</a></p>
 
       
     </div>
@@ -411,6 +433,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
 
       
         
@@ -430,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/01/mysql/" rel="prev" title="Linux网络配置">
-                Linux网络配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/01/mysql/" rel="prev" title="mysql基础">
+                mysql基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -504,7 +532,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -513,7 +541,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -522,7 +550,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -557,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统资源相关命令"><span class="nav-text">系统资源相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#top"><span class="nav-text">top</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统负载"><span class="nav-text">系统负载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的优先级-PR-NI"><span class="nav-text">进程的优先级(PR+NI):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ps"><span class="nav-text">ps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lsof"><span class="nav-text">lsof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打包和压缩"><span class="nav-text">打包和压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#df"><span class="nav-text">df</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#du"><span class="nav-text">du</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mv-cp-rm"><span class="nav-text">mv,cp,rm,</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find-locate"><span class="nav-text">find,locate</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统资源相关命令"><span class="nav-text">系统资源相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#top"><span class="nav-text">top</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统负载"><span class="nav-text">系统负载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的优先级-PR-NI"><span class="nav-text">进程的优先级(PR+NI):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ps"><span class="nav-text">ps</span></a></li></ol></li></ol></div>
             
 
           </div>

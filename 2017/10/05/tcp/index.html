@@ -1,0 +1,959 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="net," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、传输层的基本问题为什么有传输层互联网通信的真正断点是主机的进程，即端到端的通信应该是进程之间的通信，而网络层只完成了把分组送到主机的功能，因此还需要一个层次把分组传到主机的具体进程 什么是传输层传输层向它上面的应用层提供通信服务，把网络层的分组交付到具体的进程，包括复用和分用两个重要功能：1、复用指的是发送方不同的进程可以使用同一个传输层协议传送数据，2、分用指接收方的传输层在剥去报文的首部后">
+<meta name="keywords" content="net">
+<meta property="og:type" content="article">
+<meta property="og:title" content="传输层">
+<meta property="og:url" content="xushengan.github.io/2017/10/05/tcp/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:description" content="一、传输层的基本问题为什么有传输层互联网通信的真正断点是主机的进程，即端到端的通信应该是进程之间的通信，而网络层只完成了把分组送到主机的功能，因此还需要一个层次把分组传到主机的具体进程 什么是传输层传输层向它上面的应用层提供通信服务，把网络层的分组交付到具体的进程，包括复用和分用两个重要功能：1、复用指的是发送方不同的进程可以使用同一个传输层协议传送数据，2、分用指接收方的传输层在剥去报文的首部后">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/2017/10/05/tcp/1.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/2.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/3.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/4.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/5.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/6.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/7.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/8.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/9.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/10.jpg">
+<meta property="og:image" content="/2017/10/05/tcp/11.jpg">
+<meta property="og:updated_time" content="2017-10-05T00:40:32.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="传输层">
+<meta name="twitter:description" content="一、传输层的基本问题为什么有传输层互联网通信的真正断点是主机的进程，即端到端的通信应该是进程之间的通信，而网络层只完成了把分组送到主机的功能，因此还需要一个层次把分组传到主机的具体进程 什么是传输层传输层向它上面的应用层提供通信服务，把网络层的分组交付到具体的进程，包括复用和分用两个重要功能：1、复用指的是发送方不同的进程可以使用同一个传输层协议传送数据，2、分用指接收方的传输层在剥去报文的首部后">
+<meta name="twitter:image" content="/2017/10/05/tcp/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/2017/10/05/tcp/"/>
+
+
+
+
+
+  <title> 传输层 | Xu_Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学然后知不足</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-net">
+          <a href="/categories/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-elk">
+          <a href="/categories/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/10/05/tcp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                传输层
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-05T08:40:32+08:00">
+                2017-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/net/" itemprop="url" rel="index">
+                    <span itemprop="name">net</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、传输层的基本问题"><a href="#一、传输层的基本问题" class="headerlink" title="一、传输层的基本问题"></a>一、传输层的基本问题</h3><h3 id="为什么有传输层"><a href="#为什么有传输层" class="headerlink" title="为什么有传输层"></a>为什么有传输层</h3><p>互联网通信的真正断点是主机的进程，即端到端的通信应该是进程之间的通信，而网络层只完成了把分组送到主机的功能，因此还需要一个层次把分组传到主机的具体进程</p>
+<h3 id="什么是传输层"><a href="#什么是传输层" class="headerlink" title="什么是传输层"></a>什么是传输层</h3><p>传输层向它上面的应用层提供通信服务，把网络层的分组交付到具体的进程，包括复用和分用两个重要功能：<br>1、复用指的是发送方不同的进程可以使用同一个传输层协议传送数据，<br>2、分用指接收方的传输层在剥去报文的首部后能够把这些数据交付给真正的应用程序。</p>
+<h4 id="传输层是怎么做的"><a href="#传输层是怎么做的" class="headerlink" title="传输层是怎么做的"></a>传输层是怎么做的</h4><p>1.1、面向连接、可靠的传输控制协议TCP（Transmission Control Protocol） 和 无连接、不可靠的用户数据报协议UDP(User Datagram Protocol)<br>1.2、两种报文统称：运输协议数据单元TPDU，分别称为TCP报文段和UDP用户数据包（这里是有原因的）</p>
+<h4 id="2、端口号"><a href="#2、端口号" class="headerlink" title="2、端口号"></a>2、端口号</h4><p>在报文段中占16位，总大小为65535，<br>2.1、服务器端使用的端口号：系统端口号0-1023和登记端口号：1024-65535<br>2.2、客户端使用的端口号：49152-65535</p>
+<p>###二、UDP</p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>1、UDP无连接，发送前不需要建立连接<br>2、尽最大努力交付<br>3、面向报文的，用户给的报文段多大，就传输多大<br>4、UDP没有拥塞机制，所以当很多人同时使用UDP的时候，容易造成严重的网络拥塞<br>5、UDP支持一对一，一对多，多对多和多对一的交互通信<br>6、UDP首部开销小，仅8字节</p>
+<h4 id="首部"><a href="#首部" class="headerlink" title="首部"></a>首部</h4><img src="/2017/10/05/tcp/1.jpg" alt="1.jpg" title="">
+<p>###字段<br>源端口|2|源端口，在需要对方回信的时候使用，不用可以设为0<br>–|–|–<br>目的端口|2|交付给具体进程时必须使用<br>长度|2|UDP用户数据包的长度，最小值是8（单位是字节）<br>校验和|2|检验UDP用户数据传输中是否有错，校验UDP首部和数据部分（IP协议只校验首部）</p>
+<p>在计算校验和时候，需要子啊UDP数据报前临时添加伪首部，包括源目IP和0不知道什么，17应该是类型，然后是UDP长度</p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>1、UDP我觉得最典型的一个运用是用UDP高端口报端去做traceroute，中间利用超时的差错报文，最后到达后利用icmp端口不可达报文<br>2、用到UDP的协议有dns\dhcp\tftp\rip\snmp\nfs\igmp\电话视频</p>
+<h3 id="三、TCP"><a href="#三、TCP" class="headerlink" title="三、TCP"></a>三、TCP</h3><h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><p>1、面向连接（三次握手四次挥手）<br>2、端到端的，点到点的<br>3、可靠交付<br>4、全双工通信<br>5、面向字节流，并不把程序的报文直接封装，而是按接收方的窗口和网络的拥塞情况去安排字节流<br>6、连接的端点是套接字socket</p>
+<h4 id="首部-1"><a href="#首部-1" class="headerlink" title="首部"></a>首部</h4><img src="/2017/10/05/tcp/2.jpg" alt="2.jpg" title="">
+<h4 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h4><table>
+<thead>
+<tr>
+<th>源端口</th>
+<th>16</th>
+<th>源端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的端口</td>
+<td>16</td>
+<td>目的端口</td>
+</tr>
+<tr>
+<td>序号</td>
+<td>32</td>
+<td>2的32次方-1个，每一个字节都按顺序编号，字节流的起始序号必须在连接建立时设置。</td>
+</tr>
+<tr>
+<td>确认号</td>
+<td>32</td>
+<td>期望收到的下一个报文段的第一个数据字节的序号，譬如序号501，len200，则最后的序号为700，ack回701</td>
+</tr>
+<tr>
+<td>数据偏移</td>
+<td>4</td>
+<td>指tcp报文段的数据起始处距离tcp报文起始处的距离，4字节为单位，所以首部最长也是60字节</td>
+</tr>
+<tr>
+<td>保留位</td>
+<td>6</td>
+<td>以后使用</td>
+</tr>
+<tr>
+<td>控制位</td>
+<td>6</td>
+<td>说明报文段的性质</td>
+</tr>
+<tr>
+<td>URG</td>
+<td>1</td>
+<td>表明紧急指针字段有效，应用程序告诉发送方有tcp的紧急数据要传输，与后面紧急指针配合使用</td>
+</tr>
+<tr>
+<td>ACK</td>
+<td>1</td>
+<td>ACK=1时，确认号字段有效</td>
+</tr>
+<tr>
+<td>PSH</td>
+<td>1</td>
+<td>PSH=1，则接收方将尽快把报文交付给进程</td>
+</tr>
+<tr>
+<td>RST</td>
+<td>1</td>
+<td>表明tcp出现严重差错，释放连接，然后重新建立。RST=1还可以用来拒绝一个报文或决绝打开连接，成为重建位或重置位</td>
+</tr>
+<tr>
+<td>SYN</td>
+<td>1</td>
+<td>同步SYN，SYN=1表示连接请求或者连接接受报文</td>
+</tr>
+<tr>
+<td>FIN</td>
+<td>1</td>
+<td>终止FIN，FIN=1表示发送方已经发送完毕，请求释放连接释放连接</td>
+</tr>
+<tr>
+<td>窗口</td>
+<td>2</td>
+<td>表示发送本报文的一方的接受窗口，窗口值作为接收方让发送方设置其发送窗口的一句</td>
+</tr>
+<tr>
+<td>检验和</td>
+<td>2</td>
+<td>同样校验首部和数据，伪首部和UDP一样，但把第四个字段改为6，表示tcp</td>
+</tr>
+<tr>
+<td>紧急指针</td>
+<td>2</td>
+<td>应用程序告诉tcp紧急数据的最后字节的位置即使窗口为0也可以发送</td>
+</tr>
+<tr>
+<td>选项</td>
+<td>0-40</td>
+<td>最早只有MSS，表示tcp数据报的数据部分的最大长度，不包括前面的所有首部，是tcp报文段减去tcp首部长度，MSS考虑的更多是分片的问题，现在还有窗口扩大；时间戳；选择确认SACK</td>
+</tr>
+<tr>
+<td>填充</td>
+<td>–</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="可靠传输的基本原理"><a href="#可靠传输的基本原理" class="headerlink" title="可靠传输的基本原理"></a>可靠传输的基本原理</h4><p>由于IP曾是不可靠的传输，所以TCP必须采用适当的措施才能使两个传输层变得可靠<br>理想的传输条件<br>1、传输信道不产生差错<br>2、不管发送方以多块的速度发送数据，接受方总是来得及处理数据。<br>实际情况不是这样，所以我们要针对这两个理想条件去设计</p>
+<h5 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h5><p>发一个分组就等确认，确认后再发一个分组<br>1、无差错情况<br>2、超时重传<br>每发送一个分组就要设置一个超时计时器，到期前收到则撤销<br>2.1必须保留已发送的分组<br>2.2对分组进行编号，以便确定哪个已经回复，哪个没有回复<br>2.3超时定时器的时间设置应该比往返RTT要长一些(有几条公式)<br>3、确认丢失和确认迟到<br>A向B发送，没有收到ack并超时重传，B收到包的行为<br>3.1、接受（假设之前没有接收到这个包）或丢弃（之前已经接受到这个包）<br>3.2、向a确认（因为a重传就表明a没有收到ack）<br>4.信道利用率<br>4.1停止等待的效率太低，可以一次传多个再等</p>
+<h5 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h5><p>发送方可以连续发送多个分组，每收到一个确认就把窗口向前滑动<br>接收方累计确认，对按序到达的最后一个分组发送确认，表明这个分组位置的都收到了</p>
+<p>保活定时器和坚持定时器（发送窗口为0，后发送窗口不为0的值丢失了）</p>
+<h4 id="tcp可靠传输的实现"><a href="#tcp可靠传输的实现" class="headerlink" title="tcp可靠传输的实现"></a>tcp可靠传输的实现</h4><h5 id="1、以字节为单位的滑动窗口"><a href="#1、以字节为单位的滑动窗口" class="headerlink" title="1、以字节为单位的滑动窗口"></a>1、以字节为单位的滑动窗口</h5><p>原理：根据接收方给出的窗口值，发送方构造自己的发送窗口<br>凡是已经发送但是没收到ack确认的报文，都留在窗口内，以便超时重传</p>
+<p>发送窗口=窗口值-（已发送-已确认）</p>
+<img src="/2017/10/05/tcp/3.jpg" alt="3.jpg" title="">
+<h5 id="2、超时重传"><a href="#2、超时重传" class="headerlink" title="2、超时重传"></a>2、超时重传</h5><p>a=0.125，第一RTTs=RTT<br><img src="/2017/10/05/tcp/4.jpg" alt="4.jpg" title=""></p>
+<img src="/2017/10/05/tcp/5.jpg" alt="5.jpg" title="">
+<img src="/2017/10/05/tcp/6.jpg" alt="6.jpg" title="">
+<p>b=0.25,第一个RTTD=RTTS/2<br> 在计算平均RTTS的时候，只要报文段重传了，就不用来计算往返时间样本，这样的出加权平均RTTS和RTO就比较准确，同时报文每重传一次，就把超时重传时间x2</p>
+<h5 id="3、选择确认sack"><a href="#3、选择确认sack" class="headerlink" title="3、选择确认sack"></a>3、选择确认sack</h5><p>以前都只ack=目前已经接收到的所有序号+1，但对于接受乱序的，发送方只能全部重发，sack需要在建立tcp连接的时候就加入允许sack选项，在以后收到乱序的时候，通告已接受的边界（40字节，2字节表明使用sack,一个序号4字节，8个序号，共4段),然而sack文档未指明发送方如何响应，因此大部分实现还是全部重传。</p>
+<h4 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h4><p>为什么<br>发送放发送过快，就方可能来不及接受，造成数据丢失，因此流量控制就是让发送方的发送速率不要太快，让接收方来得及接受。</p>
+<p>1、滑动窗口<br>1、以字节为单位的滑动窗口<br>原理：根据接收方给出的窗口值，发送方构造自己的发送窗口<br>凡是已经发送但是没收到ack确认的报文，都留在窗口内，以便超时重传</p>
+<p>发送窗口=窗口值-（已发送-已确认）</p>
+<p>发送方的发送窗口不能超过超过接收方给出的接受窗口的数字，同时，窗口的单位是字节，不是报文段，第一个窗口的大小应该为MSS的字节数<br>有一个问题是，接收方先发送了一个rwnd=0，发送方收到后，接收方接受缓存又有一些空间，因此重新发送非空的rwnd=100，但此包丢失，<br> 那么收发双方陷入相互等待的死锁，为解决这个问题，tcp为每个链接设置一个持续计时器，收到0窗口时启动，即使结束再发一个令窗口的探测报文，接受方收到后给出现在的窗口值，如果仍然为0，则重新启动持续计时器。</p>
+<p>2、必须考虑效率问题<br>tcp有三种发送时机<br>1、缓存中的字节数等于MSS的时候，组成一个报文发送<br>2、发送方的应用程序制定进程要求发送的报文段，用到tcp的push<br>3、设置一个计时器，计时器到期后就把缓存的数据装入报文段并发送</p>
+<p>nagle算法<br>解决的问题是进程一个字节一个字节地送到缓冲区，每次发报文就是40字节头部加1字节内容，浪费网络资源<br>怎么做：<br>nagle规定，发送方的第一个字节数据先发送出去，把后面到大的数据字节都存起来，当收到第一字节的ack时候，再把缓存区的数据发送出去，然后继续缓存字节，等待上一次报文的ack<br>nagle还规定当数据达到发送窗口大小的一般或者已达到报文段的最大长度时，就立即发送一个报文段，。</p>
+<p>糊涂窗口综合症<br>解决的问题是，接受进程每次只接受一字节，然后tcp接受方返回窗口值等于1，然后发送方只发送1字节，进行下去<br>解决问题，让接受方等待一段时间，使得接收缓存已有足够空间容纳一个较长的报文段，或者等到接受缓存已有一半空闲空间，达到其中一个条件才确认窗口大小。<br>以上两种方法配合使用，以节省网络资源<br>3、</p>
+<h4 id="TCP拥塞控制原理"><a href="#TCP拥塞控制原理" class="headerlink" title="TCP拥塞控制原理"></a>TCP拥塞控制原理</h4><p>为什么<br>真个网络系统的各个部分不匹配，仅仅提高某个部分的性能，可能会造成后面的机器拥塞情况更加严重，比如加大缓存区的大小，但链路容量和处理机的速度未提高，造成大部分分组在等待队列排队，而发送方已经超时了。因此只有所有的部分平衡了，问题才会解决</p>
+<p>拥塞控制就是防止过多的数据注入到网络中，这样可以使网络中的路由器或者链路不过载，使网络能够承受现有的网络负荷，拥塞控制是一个全局性的过程<br>而流量控制做的是抑制发送端发送数据的速率，以便接收端来得及接受<br>1、慢启动<br>发送方维持两个值，一个是拥塞窗口cwnd，一个慢开始门限ssthresh(初始值是怎么设置的)<br>cwnd窗口的初始值为一个最大报文段MSS的数值，每收到一个对新的报文段的确认，就把拥塞窗口增加之多一个MSS的数值，1，2，4，8，16，32，64这样增加..<br>2、拥塞避免<br>拥塞避免算法的思路是：当慢启动达到慢启动门限的时候，转为拥塞避免算法，cwnd不再成倍增加，而是没经过一个RTT才+1，使cwnd按照线性规律缓慢增长。当出现拥塞（丢包时），把ssthresh设置为cwnd的一般，cwnd=1，重新进入慢启动。<br>拥塞后的乘法减小和拥塞避免算法的加法增大，常称为AMID<br>AMID=乘法减小+加法增加</p>
+<p>在超时之前<br>3、快重传<br>快重传要求接收方每接收到一个失序的报文段后就立即发出重复确认，当发出报文后连续收到3个重复确认，比如ack=201,下次应该收到201(100)，但是收到了301(100），401(100)，501(100)，却没有201（100），此时后面收到的3个包都应该马上回复ack=201，这样发送方就应该猜测201（100）丢包，马上重传<br>4、快恢复<br>与快重传结合使用的是快恢复算法，在遇到拥塞后，乘法减小使ssthresh等于cwnd/2,然后由于连续收到3个ack，则表明网络应该正常，数据包是由于其他原因丢失的，所以此时的cwnd=ssthresh+3,并且每收到一个重复的ack，cwnd继续加1，直到收到新的ack，则表明之前丢失的包已经传到接收放，cwnd=ssthresh,然后执行拥塞避免算法。</p>
+<p>由于要考虑接收方的接受窗口，因此，实际的发送窗口<br>发送方窗口上限制=min[rwnd,cwnd]</p>
+<img src="/2017/10/05/tcp/7.jpg" alt="7.jpg" title="">
+<img src="/2017/10/05/tcp/8.jpg" alt="8.jpg" title="">
+<h4 id="随机早期检测RED"><a href="#随机早期检测RED" class="headerlink" title="随机早期检测RED"></a>随机早期检测RED</h4><p>由于路由有先进先出的规则，所以如果出现拥塞，那么将丢弃后面来的所有连接，造成超时重传，而且路由器上通常有很多ip，ip也有各自的tcp连接，这种情况下的丢弃会同时影响非常多的tcp连接，在同一时间都进入慢开始，术语叫做全局同步。<br>解决方法是在没有发生拥塞的时候，若队列的平均长度超过了最低门限，就以一定的概率丢弃一些分组，使平均队列保持在较低的水平</p>
+<h4 id="TCP连接建立"><a href="#TCP连接建立" class="headerlink" title="TCP连接建立"></a>TCP连接建立</h4><p>三个问题<br>1、确定对方存在<br>2、协商参数（最大窗口值、是否使用扩大窗口、时间戳、服务质量等）<br>3、能够对运输实体资源进行分配（缓存大小，连接表中的项目）</p>
+<p>TCP连接</p>
+<img src="/2017/10/05/tcp/9.jpg" alt="9.jpg" title="">
+<table>
+<thead>
+<tr>
+<th>客户端</th>
+<th>服务端</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLOSED</td>
+<td>CLOSED</td>
+</tr>
+<tr>
+<td>SYN-SENT,SYN=1,seq=x,不能携带数据，但消耗一个序号</td>
+<td>SYN-RCVD,SYN=ACK=1,ack=x+1,seq=y，消耗一个序号</td>
+</tr>
+<tr>
+<td>ESTAB-LISHED,ACK=1,ack=y+1,seq=x+1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>####为什么需要第三握手？<br>A为客户端，B为服务器<br>主要是为了防止已失效的链接请求报文突然又传到了B，因而产生错误<br>具体情况是这样的，A传送syn给B，第一丢失后继续重传，然后完成握手，随后第一次丢失的SYN到达B，此时，如果无三次握手，则B接受请求并进入establish状态，而A并不知情，此时将消耗服务器的资源</p>
+<h4 id="连接释放"><a href="#连接释放" class="headerlink" title="连接释放"></a>连接释放</h4><img src="/2017/10/05/tcp/10.jpg" alt="10.jpg" title="">
+<table>
+<thead>
+<tr>
+<th>客户端</th>
+<th>服务器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.FIN-WAIT-1，发送FIN=1,seq=u，消耗一个序号</td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td>2.CLOSE-WAIT,ACK=1,seq=v,ack=u+1,通知应用程序释放A-B方向的连接。</td>
+</tr>
+<tr>
+<td>此时A已经没有数据发送了，但是B若发送数据，A仍要接收，此时称为半关闭状态</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3.FIN-WAIT-2,A接受到B的ack后就进入，并等待B发出连接释放的报文段</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>4.LAST-ACKFIN=1,ACK=1,seq=w,ack=u+1，此时B的进程已经没有数据需要发送</td>
+</tr>
+<tr>
+<td>5.ACK=1,seq=u+1,ack=w+1,对B的关闭确认，进入TIME-WAIT，等待2MSL(共4min)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>6.CLOSED,B在接收到A的回复后关闭连接</td>
+</tr>
+<tr>
+<td>7.TIME-WAIT等待2MSL（最长报文段寿命）后进入CLOSED</td>
+<td>-</td>
+</tr>
+<tr>
+<td>8.CLOSED</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h4 id="为什么必须要等2MSL，有两个理由"><a href="#为什么必须要等2MSL，有两个理由" class="headerlink" title="为什么必须要等2MSL，有两个理由"></a>为什么必须要等2MSL，有两个理由</h4><p>1、最后的ACK可能丢失，如果A直接关闭连接，那么B就无法正常关闭，（如果发生重传，则重置2MSL）<br>2、A发送完ack并等待2MSL后，可以使本次连接持续时间内产生的所有报文段都从网络消失，这样下一个新的连接就不会出现这种旧的连接请求报文段。</p>
+<p>TCP总状态机<br>连接建立<br>数据传送<br>链接释放</p>
+<img src="/2017/10/05/tcp/11.jpg" alt="11.jpg" title="">
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/net/" rel="tag"># net</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/05/cgi/" rel="next" title="初探cgi">
+                <i class="fa fa-chevron-left"></i> 初探cgi
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、传输层的基本问题"><span class="nav-text">一、传输层的基本问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么有传输层"><span class="nav-text">为什么有传输层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是传输层"><span class="nav-text">什么是传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#传输层是怎么做的"><span class="nav-text">传输层是怎么做的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、端口号"><span class="nav-text">2、端口号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性"><span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#首部"><span class="nav-text">首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用"><span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、TCP"><span class="nav-text">三、TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-1"><span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#首部-1"><span class="nav-text">首部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字段"><span class="nav-text">字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠传输的基本原理"><span class="nav-text">可靠传输的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#停止等待协议"><span class="nav-text">停止等待协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连续ARQ协议"><span class="nav-text">连续ARQ协议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp可靠传输的实现"><span class="nav-text">tcp可靠传输的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、以字节为单位的滑动窗口"><span class="nav-text">1、以字节为单位的滑动窗口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、超时重传"><span class="nav-text">2、超时重传</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、选择确认sack"><span class="nav-text">3、选择确认sack</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP流量控制"><span class="nav-text">TCP流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP拥塞控制原理"><span class="nav-text">TCP拥塞控制原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机早期检测RED"><span class="nav-text">随机早期检测RED</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP连接建立"><span class="nav-text">TCP连接建立</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接释放"><span class="nav-text">连接释放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么必须要等2MSL，有两个理由"><span class="nav-text">为什么必须要等2MSL，有两个理由</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

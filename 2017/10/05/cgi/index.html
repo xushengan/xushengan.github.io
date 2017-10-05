@@ -1,0 +1,820 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,cgi," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="CGI即通用网关接口(Common Gateway Interface)，是外部应用程序（CGI程序）与Web服务器之间的接口标准，是在CGI程序和Web服务器之间传递信息的规则。 cgi究竟是一个什么脚本 cgi接口是怎么实现的，在哪里实现的 首先把我了解的都写下来，再慢慢整理一下吧 1、CGICGI（common gateway interface） ,是web服务器与外部程序(比如java，">
+<meta name="keywords" content="linux,cgi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探cgi">
+<meta property="og:url" content="xushengan.github.io/2017/10/05/cgi/index.html">
+<meta property="og:site_name" content="Xu_Blog">
+<meta property="og:description" content="CGI即通用网关接口(Common Gateway Interface)，是外部应用程序（CGI程序）与Web服务器之间的接口标准，是在CGI程序和Web服务器之间传递信息的规则。 cgi究竟是一个什么脚本 cgi接口是怎么实现的，在哪里实现的 首先把我了解的都写下来，再慢慢整理一下吧 1、CGICGI（common gateway interface） ,是web服务器与外部程序(比如java，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-05T00:22:41.307Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探cgi">
+<meta name="twitter:description" content="CGI即通用网关接口(Common Gateway Interface)，是外部应用程序（CGI程序）与Web服务器之间的接口标准，是在CGI程序和Web服务器之间传递信息的规则。 cgi究竟是一个什么脚本 cgi接口是怎么实现的，在哪里实现的 首先把我了解的都写下来，再慢慢整理一下吧 1、CGICGI（common gateway interface） ,是web服务器与外部程序(比如java，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="xushengan.github.io/2017/10/05/cgi/"/>
+
+
+
+
+
+  <title> 初探cgi | Xu_Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xu_Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学然后知不足</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-net">
+          <a href="/categories/net" rel="section">
+            
+            网络
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-elk">
+          <a href="/categories/elk" rel="section">
+            
+            ELK
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/computer" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/10/05/cgi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初探cgi
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-05T08:21:58+08:00">
+                2017-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>CGI即通用网关接口(Common Gateway Interface)，是外部应用程序（CGI程序）与Web服务器之间的接口标准，是在CGI程序和Web服务器之间传递信息的规则。</p>
+<p>cgi究竟是一个什么脚本</p>
+<p>cgi接口是怎么实现的，在哪里实现的</p>
+<p>首先把我了解的都写下来，再慢慢整理一下吧</p>
+<h4 id="1、CGI"><a href="#1、CGI" class="headerlink" title="1、CGI"></a>1、CGI</h4><p>CGI（common gateway interface） ,是web服务器与外部程序(比如java，python,shell，.exe等)通信的标准接口协议，实现两者之间的通信规范，注意它是一个协议。</p>
+<h4 id="2、CGI"><a href="#2、CGI" class="headerlink" title="2、CGI"></a>2、CGI</h4><p>在有外部请求需要调用CGI的时候,webserverfork出一个子进程(因为是fork,子进程有请求的信息)，由子进程 初始化cgi脚本解释器（php的话就是解析php.ini)，然后子进程将包含的用户请求的一些信息，包括url,get、post的数据，http header，http正文等，通过CGI以规范的形式（在cgi时是环境变量，标准输入输出，但是不知道fastcgi通过socket是否也这样传）传到CGI脚本（或者成为CGI进程，index.php就是一个CGI脚本），解析器（sh，php）解析完cgi脚本之后，返回标准输出，然后退出，这是整个CGI的生命周期。</p>
+<h4 id="3、apache有内置的mod-php模块"><a href="#3、apache有内置的mod-php模块" class="headerlink" title="3、apache有内置的mod_php模块"></a>3、apache有内置的mod_php模块</h4><p>不需要通过cgi，应该是以进程内通信解决的吧，好处是速度快，坏处是比较庞大，apache和php集成在一起，php拥有者即使apache拥有者，权限（权限问题在这里是一个值得注意的问题）是比较高的。</p>
+<h4 id="4、apache的mod-cgi"><a href="#4、apache的mod-cgi" class="headerlink" title="4、apache的mod_cgi"></a>4、apache的mod_cgi</h4><p>就是实现刚才所说的CGI接口的具体模式，当要访问/cgi-bin/目录的时候，apache会fork出子进程，以cgi接口的规范给目录下的具体脚本传递参数，由于cgi是基于标准输入和环境变量传递参数和结果的，因此我认为使用的时候webserver和cgi解析器需要部署在同一台机器。</p>
+<h4 id="5、fastcgi"><a href="#5、fastcgi" class="headerlink" title="5、fastcgi"></a>5、fastcgi</h4><p>容易发现，cgi有两个缺点,一个是需要重复创建和销毁进程，在高并发的时候会降低系统的稳定性，另一个是cgi脚本解析器（php）只能和webserver部署在同一台机器，耦合程度高。<br>fastcgi依然是一个协议！它做的事情有两个，一个是担当进程管理器的角色，一个是解耦，由于通过socket的方式传递信息，webserver可以和cgi解析器部署在不同机器，实现分布式部署。<br>一、进程管理器，分为master和worker两部分，在启动时先初始化php.ini及基础环境，再生成一定数量的子进程（注意是进程而不是线程），这些子进程（包含了php解析器)，在有请求到达时，master把web server传递过来的符合cgi规范的信息传递到子进程，子进程正常处理请求后返回结果，处理完成后不销毁进程！，而是继续等待下一个请求，这就是fastcgi的进程管理功能。<br>二、解耦，fastcgi协议规定webserver端通过socket传递客户请求的规范信息，因此webserver和cgi脚本解释器不需要部署在同一台机器，因此可以实现分布式部署，达到解耦的目的。</p>
+<h4 id="6、关于php-cgi和php-fpm"><a href="#6、关于php-cgi和php-fpm" class="headerlink" title="6、关于php-cgi和php-fpm"></a>6、关于php-cgi和php-fpm</h4><p>两者的关系有很多种描述，有的说php-fpm就是php-cgi的基础上增加进程管理功能，php-fpm的管理对象是php-cgi，有的说php-fpm是独立的，删除php-cgi也不影响php-fpm。<br>我个人偏向于后者，理由后说，先理一理cgi,fastcgi与php-cgi和php-fpm的逻辑。（已经找到理由，看第7点）</p>
+<p>上面说了，cgi和fastcgi实际是接口协议，那么既然是接口，接口的两边是什么呢？模型应该是这样：<br>web servver &lt;====cgi/fastcgi===&gt; cgi脚本解析器(以及具体需要解析的cgi脚本)</p>
+<p>最早最容易混淆的就是cgi，cgi程序，cgi脚本这些概念，理一理：<br>1、cgi：就是一个协议，规定了通讯双方以一个规范去传递http请求或回复的信息<br>2、cgi脚本：我需要借助例子才成讲清,下面就是一个cgi脚本（也是一个shell脚本），接受cgi传过来的信息，以标准输出返回html页面代码，然后，这里bash就是这个cgi脚本的cgi脚本解析器，到这里，我认为就比较容易理解了，webserver需要通过一个外部程序去实现动态请求，什么是外部程序？可以是exe,也可以是bash、php、python这样的程序，当我们用下面这个脚本做动态请求回复时候，模型应该是这样的 启动bash–&gt;处理test.sh 等同于启动php–&gt;处理index.php</p>
+<p>我们需要先启动一个bash,再在bash执行脚本，这就是cgi脚本解析器和cgi脚本！！</p>
+<p>同样地，我们需要使用php，但是php不像bash、python这些直接执行脚本就能够得出结果的，所以就有了php-cgi、php-fpm，你可以用刚才的例子，去想像有一个shell-cgi，shell-fpm是管理shell这个程序的，但是现在我们管理php。那么说到这里应该更容易理解了，php-cgi是以php的形式实现管理单个php解释器接受参数，处理请求，返回结果的管理器。而php-fpm是以php形式实现管理多个php解析器接收参数，处理请求，返回结果的管理器，php-fpm像是php-cgi的升级，但是应该没有实际的管理关系，毕竟看到php-fpm的子进程名称也全是php-fpm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash </div><div class="line"> </div><div class="line">echo &apos;Content-type: test/html&apos; </div><div class="line">echo &apos;&apos; </div><div class="line">echo &apos;&lt;html&gt;&apos; </div><div class="line">echo &apos;&lt;head&gt;&apos; </div><div class="line">echo &apos;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charst=UTF-8&quot;&gt;&apos;  </div><div class="line">echo &apos;&lt;title&gt;Hello World&lt;/title&gt;&apos; </div><div class="line">echo &apos;&lt;/head&gt;&apos; </div><div class="line">echo &apos;&lt;body&gt;&apos; </div><div class="line">echo &apos;Hello World&apos; </div><div class="line">echo &apos;&lt;/body&gt;&apos; </div><div class="line">echo &apos;&lt;/html&gt;&apos; </div><div class="line"> </div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<h4 id="（未完成）6、上面都是一些理解，下面需要说cgi-fastcgi的一些硬性参数，指标。"><a href="#（未完成）6、上面都是一些理解，下面需要说cgi-fastcgi的一些硬性参数，指标。" class="headerlink" title="//（未完成）6、上面都是一些理解，下面需要说cgi\fastcgi的一些硬性参数，指标。"></a>//（未完成）6、上面都是一些理解，下面需要说cgi\fastcgi的一些硬性参数，指标。</h4><h4 id="7、php-cgi"><a href="#7、php-cgi" class="headerlink" title="7、php-cgi"></a>7、php-cgi</h4><p>之前忽略，php-cgi的用处就在这里。前面也分析了php是需要初始化解析器的，虽然apache的mod_php可以直接解析php,不需要解析器，但是使用cgi模块时候，找到cgi目录后，并不能直接解析php而需要php解析器，所以php-cgi是用来初始化mod_cgi模式的php解析器的。<br>当使用apache内置fastcgi进程管理模块即mod-fastcgi时，由该模块管理php-cgi，当使用php-fpm的管理进程的时候，就直接管理php-fpm（内含php解释器），而不是php-cgi</p>
+<h4 id="8、cgi接口传递的一些环境变量"><a href="#8、cgi接口传递的一些环境变量" class="headerlink" title="8、cgi接口传递的一些环境变量"></a>8、cgi接口传递的一些环境变量</h4><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CONTENT_TYPE</td>
+<td>这个环境变量的值指示所传递来的信息的MIME类型。目前，环境变量CONTENT_TYPE一般都是：application/x-www-form-urlencoded,他表示数据来自于HTML表单。</td>
+</tr>
+<tr>
+<td>CONTENT_LENGTH</td>
+<td>如果服务器与CGI程序信息的传递方式是POST，这个环境变量即使从标准输入STDIN中可以读到的有效数据的字节数。这个环境变量在读取所输入的数据时必须使用。</td>
+</tr>
+<tr>
+<td>HTTP_COOKIE</td>
+<td>客户机内的 COOKIE 内容。</td>
+</tr>
+<tr>
+<td>HTTP_USER_AGENT</td>
+<td>提供包含了版本数或其他专有数据的客户浏览器信息。</td>
+</tr>
+<tr>
+<td>PATH_INFO</td>
+<td>这个环境变量的值表示紧接在CGI程序名之后的其他路径信息。它常常作为CGI程序的参数出现。</td>
+</tr>
+<tr>
+<td>QUERY_STRING</td>
+<td>如果服务器与CGI程序信息的传递方式是GET，这个环境变量的值即使所传递的信息。这个信息经跟在CGI程序名的后面，两者中间用一个问号’?’分隔。</td>
+</tr>
+<tr>
+<td>REMOTE_ADDR</td>
+<td>这个环境变量的值是发送请求的客户机的IP地址，例如上面的192.168.1.67。这个值总是存在的。而且它是Web客户机需要提供给Web服务器的唯一标识，可以在CGI程序中用它来区分不同的Web客户机。</td>
+</tr>
+<tr>
+<td>REMOTE_HOST</td>
+<td>这个环境变量的值包含发送CGI请求的客户机的主机名。如果不支持你想查询，则无需定义此环境变量。</td>
+</tr>
+<tr>
+<td>REQUEST_METHOD</td>
+<td>提供脚本被调用的方法。对于使用 HTTP/1.0 协议的脚本，仅 GET 和 POST 有意义。</td>
+</tr>
+<tr>
+<td>SCRIPT_FILENAME</td>
+<td>CGI脚本的完整路径</td>
+</tr>
+<tr>
+<td>SCRIPT_NAME</td>
+<td>CGI脚本的的名称</td>
+</tr>
+<tr>
+<td>SERVER_NAME</td>
+<td>这是你的 WEB 服务器的主机名、别名或IP地址。</td>
+</tr>
+<tr>
+<td>SERVER_SOFTWARE</td>
+<td>这个环境变量的值包含了调用CGI程序的HTTP服务器的名称和版本号。例如，上面的值为Apache/2.2.14(Unix)</td>
+</tr>
+</tbody>
+</table>
+<p>参考： <a href="http://blog.csdn.net/duanxinpeng/article/details/53121431" target="_blank" rel="external">http://blog.csdn.net/duanxinpeng/article/details/53121431</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux-cgi/" rel="tag"># linux,cgi</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/03/vmstat/vmstat/" rel="next" title="vmstat 监视内存使用情况">
+                <i class="fa fa-chevron-left"></i> vmstat 监视内存使用情况
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/05/tcp/" rel="prev" title="传输层">
+                传输层 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Xu" />
+          <p class="site-author-name" itemprop="name">Xu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、CGI"><span class="nav-text">1、CGI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、CGI"><span class="nav-text">2、CGI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、apache有内置的mod-php模块"><span class="nav-text">3、apache有内置的mod_php模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、apache的mod-cgi"><span class="nav-text">4、apache的mod_cgi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、fastcgi"><span class="nav-text">5、fastcgi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、关于php-cgi和php-fpm"><span class="nav-text">6、关于php-cgi和php-fpm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（未完成）6、上面都是一些理解，下面需要说cgi-fastcgi的一些硬性参数，指标。"><span class="nav-text">//（未完成）6、上面都是一些理解，下面需要说cgi\fastcgi的一些硬性参数，指标。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、php-cgi"><span class="nav-text">7、php-cgi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、cgi接口传递的一些环境变量"><span class="nav-text">8、cgi接口传递的一些环境变量</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
