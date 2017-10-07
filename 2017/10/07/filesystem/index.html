@@ -91,14 +91,17 @@
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux文件系统:ext2">
-<meta property="og:url" content="xushengan.github.io/2017/09/24/filesystem/filesystem/index.html">
+<meta property="og:url" content="xushengan.github.io/2017/10/07/filesystem/index.html">
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="linux基础:文件系统文件系统有几个比较重要的组成：super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个blockblock：实际记录档案内容，若档案太大则会占用多个block ext2结构由于indoe和block的数量实际很多，如果每次都遍历全部">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/2017/10/07/filesystem/2.jpg">
+<meta property="og:image" content="/2017/10/07/filesystem/3.jpg">
 <meta property="og:updated_time" content="2017-10-07T09:55:27.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件系统:ext2">
 <meta name="twitter:description" content="linux基础:文件系统文件系统有几个比较重要的组成：super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个blockblock：实际记录档案内容，若档案太大则会占用多个block ext2结构由于indoe和block的数量实际很多，如果每次都遍历全部">
+<meta name="twitter:image" content="/2017/10/07/filesystem/2.jpg">
 
 
 
@@ -126,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="xushengan.github.io/2017/09/24/filesystem/filesystem/"/>
+  <link rel="canonical" href="xushengan.github.io/2017/10/07/filesystem/"/>
 
 
 
@@ -301,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/24/filesystem/filesystem/">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/10/07/filesystem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -337,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T13:55:16+08:00">
-                2017-09-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-07T18:01:32+08:00">
+                2017-10-07
               </time>
             
 
@@ -397,7 +400,7 @@
       
         <h3 id="linux基础-文件系统"><a href="#linux基础-文件系统" class="headerlink" title="linux基础:文件系统"></a>linux基础:文件系统</h3><p>文件系统有几个比较重要的组成：<br>super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息<br>inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个block<br>block：实际记录档案内容，若档案太大则会占用多个block</p>
 <h3 id="ext2结构"><a href="#ext2结构" class="headerlink" title="ext2结构"></a>ext2结构</h3><p>由于indoe和block的数量实际很多，如果每次都遍历全部inode和block的话效率会比较低，因此ext2实际上分成多个block group，结合硬盘结构，如下图：</p>
-
+<img src="/2017/10/07/filesystem/2.jpg" alt="2.jpg" title="">
 <h3 id="各部分的含义"><a href="#各部分的含义" class="headerlink" title="各部分的含义"></a>各部分的含义</h3><h4 id="1、-super-block"><a href="#1、-super-block" class="headerlink" title="1、 super block"></a>1、 super block</h4><ul>
 <li>记录文件系统的相关信息<br>1、block与inode总量<br>2、已经使用和未使用的inode/block数量<br>3、block和inode的大小（block为1,2,4K;inode为128bytes或256BYTES）<br>4、文件系统的挂在时间、最近一次写入时间、最近一次金叉磁盘（fsck）时间等文件系统的相关信息<br>5、一个valid bit数值，若此档案被挂在则为0，否则为1</li>
 </ul>
@@ -438,7 +441,7 @@
 </ul>
 <h4 id="indoe注意的地方"><a href="#indoe注意的地方" class="headerlink" title="indoe注意的地方"></a>indoe注意的地方</h4><p>ext2的block为128bytes（新的ext4和xfs可以到256byets)<br>每个文件一个inode<br>文件系统的文件数量和inode数量有关<br>读取文件时先找到inode，并分析inode里面记录的权限和使用者的权限是否符合。</p>
 <p>设想一个文件100M,block 1k,一个文件有102400个block即一个indoe要指向102400个block，记录一block 4bytes,不是不是够呢？实际上会采用直接和间接结合的方式来处理，间接指的是借用block来记录block号<br>12个直接，1个间接，1个双间接，1个三间接完成这项任务</p>
-
+<img src="/2017/10/07/filesystem/3.jpg" alt="3.jpg" title="">
 <h5 id="super-block的信息"><a href="#super-block的信息" class="headerlink" title="super block的信息"></a>super block的信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">[root@~]#dumpe2fs -h /dev/xvda1    #dumpe2fs仅查看super block的信息</div><div class="line">dumpe2fs 1.41.12 (17-May-2010)</div><div class="line">Filesystem volume name:   &lt;none&gt;    #文件系统的名称，不一样有</div><div class="line">Last mounted on:          /         #上一次挂在目录的位置</div><div class="line">Filesystem UUID:          3d083579-f5d9-4df5-9347-8d27925805d4    #UUID</div><div class="line">Filesystem magic number:  0xEF53</div><div class="line">Filesystem revision #:    1 (dynamic)</div><div class="line">Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent flex_bg sparse_super large_file huge_file uninit_bg dir_nlink extra_isize</div><div class="line">Filesystem flags:         signed_directory_hash </div><div class="line">Default mount options:    user_xattr acl    #挂在时候默认加上的参数</div><div class="line">Filesystem state:         clean</div><div class="line">Errors behavior:          Continue</div><div class="line">Filesystem OS type:       Linux</div><div class="line">Inode count:              2621440    #inode总数</div><div class="line">Block count:              10485504    #block总数</div><div class="line">Reserved block count:     524275    #保留block</div><div class="line">Free blocks:              7442337    #空闲block</div><div class="line">Free inodes:              2302345    #空闲indoe</div><div class="line">First block:              0</div><div class="line">Block size:               4096        #block大小4k</div><div class="line">Fragment size:            4096</div><div class="line">Reserved GDT blocks:      1021</div><div class="line">Blocks per group:         32768</div><div class="line">Fragments per group:      32768</div><div class="line">Inodes per group:         8192</div><div class="line">Inode blocks per group:   512</div><div class="line">Flex block group size:    16</div><div class="line">Filesystem created:       Thu Feb 23 07:28:11 2017    #文件系统创建时间</div><div class="line">Last mount time:          Sun Jun 11 16:05:11 2017    #挂载时间</div><div class="line">Last write time:          Sat Apr 15 01:10:06 2017    #写时间</div><div class="line">Mount count:              15</div><div class="line">Maximum mount count:      -1</div><div class="line">Last checked:             Thu Feb 23 07:28:11 2017    #最后一次检查</div><div class="line">Check interval:           0 (&lt;none&gt;)</div><div class="line">Lifetime writes:          28 GB</div><div class="line">Reserved blocks uid:      0 (user root)</div><div class="line">Reserved blocks gid:      0 (group root)</div><div class="line">First inode:              11</div><div class="line">Inode size:	          256        #inode大小</div><div class="line">Required extra isize:     28</div><div class="line">Desired extra isize:      28</div><div class="line">Journal inode:            8</div><div class="line">First orphan inode:       2108484</div><div class="line">Default directory hash:   half_md4</div><div class="line">Directory Hash Seed:      76cfbecf-5ff1-41c6-9fa1-31db7a3073e4</div><div class="line">Journal backup:           inode blocks</div><div class="line">Journal features:         journal_incompat_revoke</div><div class="line">Journal size:             128M        #journal日志信息大小</div><div class="line">Journal length:           32768</div><div class="line">Journal sequence:         0x00102c10</div><div class="line">Journal start:            23319</div></pre></td></tr></table></figure>
 <h4 id="group-1"><a href="#group-1" class="headerlink" title="group 1"></a>group 1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Group 0: (Blocks 0-32767) [ITABLE_ZEROED]</div><div class="line">  Checksum 0x3305, unused inodes 2638</div><div class="line">  Primary superblock at 0, Group descriptors at 1-3</div><div class="line">  Reserved GDT blocks at 4-1024</div><div class="line">  Block bitmap at 1025 (+1025), Inode bitmap at 1041 (+1041)</div><div class="line">  Inode table at 1057-1568 (+1057)</div><div class="line">  16448 free blocks, 2656 free inodes, 920 directories, 2638 unused inodes</div><div class="line">  Free blocks: 16271, 16321-32767</div><div class="line">  Free inodes: 4953-4968, 5553-8192</div></pre></td></tr></table></figure>
       
@@ -476,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/22/flume/flume/" rel="next" title="Flume（基础概念&配置）">
-                <i class="fa fa-chevron-left"></i> Flume（基础概念&配置）
+              <a href="/2017/10/03/vmstat/vmstat/" rel="next" title="vmstat 监视内存使用情况">
+                <i class="fa fa-chevron-left"></i> vmstat 监视内存使用情况
               </a>
             
           </div>
@@ -485,10 +488,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/24/filepermission/filepermission/" rel="prev" title="Linux文件权限">
-                Linux文件权限 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
