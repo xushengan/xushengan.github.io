@@ -1453,7 +1453,7 @@ block
               
                 
                 <a class="post-title-link" href="/2017/09/24/filesystem/filesystem/" itemprop="url">
-                  未命名
+                  Linux文件系统:ext2
                 </a>
               
             
@@ -1479,6 +1479,28 @@ block
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1507,10 +1529,9 @@ block
       
         
           
-          ##文件系统（ext2 ext3 ext4）
-vim /boot/config-2.6.32-642.13.1.el6.x86_64
-
-          
+          linux基础:文件系统文件系统有几个比较重要的组成：super block：记录文件系统的总体情况，包括inode/block的总量，使用量、剩余量以及文件系统的格式和更多的信息inode：记录文件系统的权限、属性和对应的block号，一个文件对应一个blockblock：实际记录档案内容，若档案太大则会占用多个block
+ext2结构由于indoe和block的数量实际很多，如果每次都遍历全部inode和block的话效率会比较低，因此ext2实际上分成多个block group，结合硬盘结
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/24/filesystem/filesystem/#more" rel="contents">
