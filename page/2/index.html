@@ -246,6 +246,14 @@
         </li>
       
         
+        <li class="menu-item menu-item-life">
+          <a href="/categories/life" rel="section">
+            
+            menu.life
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -288,6 +296,154 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/24/iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu_Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/24/iptables/" itemprop="url">
+                  iptables
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T22:08:43+08:00">
+                2017-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1、基本概念实际上就是一种包过滤型防火墙。就是通过书写一些接受哪些包，拒绝哪些包的规则，实现数据包的过滤。这些规则存储在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。
+1.framework：netfilter hooks function钩子函数，实现网络过滤器的基本框架。2.rule utils：iptables 规则管理工具
+1.1、基本概念1、kernel的netfilter实现的过滤功能，不是服务（deamon）
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/24/iptables/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1258,169 +1414,8 @@ Flume 使用 java 编写，其需要运行在 Java1.7 或更高版本之上。
   
   
 
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xu_Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/20/test/" itemprop="url">
-                  文件权限
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T18:51:16+08:00">
-                2017-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1、基础权限
-权限（是相对于文件来说的）1.1、查看权限ls -l（ll）|rw-| r- |r-–|—|–拥有者的权限|所属组的权限|其他人
-
-1.2、基本权限：
-
-
-r
-readable，可读
-
-
-
-
-文件
-可以查看文件内容（cat,vim,more,less）
-
-
-目录
-可以查看目录   
-
-
-w
-writable，可写
-
-
-文件
-可以修改文件内容（vim）
-
-
-目录
-可以修改目录的内容（创建文件，目录，修改文件名，删除文件或目录）
-
-
-x
-excutable，可执行
-
-
-文件
-可以修改文
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/20/test/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/python/">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/elk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -1442,7 +1437,7 @@ excutable，可执行
             
               
                 
-                <a class="post-title-link" href="/2017/09/20/python/" itemprop="url">
+                <a class="post-title-link" href="/2017/09/20/elk/" itemprop="url">
                   hello
                 </a>
               
@@ -1482,8 +1477,8 @@ excutable，可执行
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/elk/" itemprop="url" rel="index">
+                    <span itemprop="name">elk</span>
                   </a>
                 </span>
 
@@ -1520,10 +1515,11 @@ excutable，可执行
         
           
           1234567import matplotlib.pyplot as pltimport numpy as npx = np.arange(20)y = x**2plt.plot(x, y)
+
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/20/python/#more" rel="contents">
+            <a class="btn" href="/2017/09/20/elk/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1697,8 +1693,8 @@ type: “linux”    #指定类型
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/elk/">
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="xushengan.github.io/2017/09/20/test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu">
@@ -1720,8 +1716,8 @@ type: “linux”    #指定类型
             
               
                 
-                <a class="post-title-link" href="/2017/09/20/elk/" itemprop="url">
-                  hello
+                <a class="post-title-link" href="/2017/09/20/test/" itemprop="url">
+                  文件权限
                 </a>
               
             
@@ -1747,28 +1743,6 @@ type: “linux”    #指定类型
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/elk/" itemprop="url" rel="index">
-                    <span itemprop="name">elk</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1797,12 +1771,48 @@ type: “linux”    #指定类型
       
         
           
-          1234567import matplotlib.pyplot as pltimport numpy as npx = np.arange(20)y = x**2plt.plot(x, y)
+          1、基础权限
+权限（是相对于文件来说的）1.1、查看权限ls -l（ll）|rw-| r- |r-–|—|–拥有者的权限|所属组的权限|其他人
 
-          
+1.2、基本权限：
+
+
+r
+readable，可读
+
+
+
+
+文件
+可以查看文件内容（cat,vim,more,less）
+
+
+目录
+可以查看目录   
+
+
+w
+writable，可写
+
+
+文件
+可以修改文件内容（vim）
+
+
+目录
+可以修改目录的内容（创建文件，目录，修改文件名，删除文件或目录）
+
+
+x
+excutable，可执行
+
+
+文件
+可以修改文
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/20/elk/#more" rel="contents">
+            <a class="btn" href="/2017/09/20/test/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1885,7 +1895,7 @@ type: “linux”    #指定类型
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
