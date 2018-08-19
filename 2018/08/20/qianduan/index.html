@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Xu_Blog">
 <meta property="og:description" content="前端知识点概述关键词：node、前端 前言工作需要，小运维要开始学习前端和后台的知识去搭建一个面向内部的系统，以前几次课程设计遇到需要前端的都没有做好，这次算是从头开始学习的。 为什么要用前端呢？因为前端能方便操作，数据可视化之后能加直观。况且不通过界面，我暂时还不知道人们怎么和后台去交互信息。 前端是什么？由什么组成？简单从百度百科查  前端即网站前台部分，运行在PC端，移动端等浏览器上展现给用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-19T17:09:30.536Z">
+<meta property="og:updated_time" content="2018-08-19T17:15:55.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端知识点概述">
 <meta name="twitter:description" content="前端知识点概述关键词：node、前端 前言工作需要，小运维要开始学习前端和后台的知识去搭建一个面向内部的系统，以前几次课程设计遇到需要前端的都没有做好，这次算是从头开始学习的。 为什么要用前端呢？因为前端能方便操作，数据可视化之后能加直观。况且不通过界面，我暂时还不知道人们怎么和后台去交互信息。 前端是什么？由什么组成？简单从百度百科查  前端即网站前台部分，运行在PC端，移动端等浏览器上展现给用">
@@ -390,18 +390,18 @@
 <p>——百度百科</p>
 </blockquote>
 <p>所以前端有设计和实现，本文目前只讨论实现部分，html,css,js是最重要的。很多资料都说学习前端，主要就是搞定这三种语言，但是又没有讲清楚其各自的功能，下面简单对其介绍，详情可以自己再资料：</p>
-<h5 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h5><p>HTML是网页的骨架，HTML对内容的显示进行了标识，只要有html写好了，我们的网页也算有基本内容可以看了</p>
-<h5 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h5><p>只有html的页面，还是比较抽的，css可以为页面排版布局，让它更加漂亮。</p>
-<h5 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h5><p>有了上面两个，页面已经比较好看了，但是html+css，只能做到页面之间的通过重新加载方式的方式转跳，如果想做出移动鼠标就动态显示标题的摘要信息，或者动态地从后台取数据填充html表格，都需要通过js帮忙。</p>
+<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML是网页的骨架，HTML对内容的显示进行了标识，只要有html写好了，我们的网页也算有基本内容可以看了</p>
+<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><p>只有html的页面，还是比较抽的，css可以为页面排版布局，让它更加漂亮。</p>
+<h4 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h4><p>有了上面两个，页面已经比较好看了，但是html+css，只能做到页面之间的通过重新加载方式的方式转跳，如果想做出移动鼠标就动态显示标题的摘要信息，或者动态地从后台取数据填充html表格，都需要通过js帮忙。</p>
 <h3 id="怎么学习前端"><a href="#怎么学习前端" class="headerlink" title="怎么学习前端"></a>怎么学习前端</h3><p>既然前端就由这三个东西组成，那我就学习这三个东西就行了啊，为什么网上一搜前端，各种node,angular，vue,react，还有什么bootstrap，jQuery，elment-ui各种各种奇怪的东西，很多模板或者包都要npm下载，这又是什么鬼。下面浅谈对上面这几个东西的认识：</p>
-<h5 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h5><blockquote>
+<h4 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h4><blockquote>
 <p>Node.js is a platform built on Chrome’s JavaScript runtime for easily building fast, scalable network applications. </p>
 </blockquote>
 <p>我认为就是node就是一个承载JS语言的平台，它可以来做简单的后端，同时还有很多其他作用，比如包管理和作为一个server，我对其作为中间层的用法比较有感，前后端分离的话，如果全部js都在客户端再异步请求ajax，那么虽然服务器的压力小了，但是用户加载的速度就慢了，node本身可以解释js，那么就把js在node层解析完再回传HTML页面可能是一个较好的选择。</p>
 <p><a href="https://blog.csdn.net/ganluren008/article/details/78622295?locationNum=4&amp;fps=1" target="_blank" rel="external">参考:node作为中间层的一些看法</a></p>
-<h5 id="vue-js、angularjs、react"><a href="#vue-js、angularjs、react" class="headerlink" title="vue.js、angularjs、react"></a>vue.js、angularjs、react</h5><p>这三个，我暂时的认识是JS框架，即可以让我们更简单地写JS，同时它们还有一些路由功能，代替java或python这种后端的路由层或者叫C层</p>
-<h5 id="Bootsrtap和elment-ui"><a href="#Bootsrtap和elment-ui" class="headerlink" title="Bootsrtap和elment-ui"></a>Bootsrtap和elment-ui</h5><p>目前的理解都是前端CSS框架，即有好看的样式，引入时候加class就可以直接使用。但是它们的js功能暂时还没有用到。不过还是有一些简单的js功能的。</p>
-<h5 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h5><p>jQuery应该是对原生js的封装，使用jQuery写的依然是js功能，另外它对ajax的支持还是比较好的。</p>
+<h4 id="vue-js、angularjs、react"><a href="#vue-js、angularjs、react" class="headerlink" title="vue.js、angularjs、react"></a>vue.js、angularjs、react</h4><p>这三个，我暂时的认识是JS框架，即可以让我们更简单地写JS，同时它们还有一些路由功能，代替java或python这种后端的路由层或者叫C层</p>
+<h4 id="Bootsrtap和elment-ui"><a href="#Bootsrtap和elment-ui" class="headerlink" title="Bootsrtap和elment-ui"></a>Bootsrtap和elment-ui</h4><p>目前的理解都是前端CSS框架，即有好看的样式，引入时候加class就可以直接使用。但是它们的js功能暂时还没有用到。不过还是有一些简单的js功能的。</p>
+<h4 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h4><p>jQuery应该是对原生js的封装，使用jQuery写的依然是js功能，另外它对ajax的支持还是比较好的。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>目前的学习方向，由于组内的大家都没有使用vue等js框架的经验，因此我们选用bootstrap（css）和jQuery(js)作为前端的部分,有余力的话想去学习一下vue.js。上面是最近学习的一些体会，很多概念由于写作的时间原因没有去查官方的资料，以后有时间再整改。</p>
 
       
@@ -566,7 +566,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端知识点概述"><span class="nav-text">前端知识点概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用前端呢？"><span class="nav-text">为什么要用前端呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端是什么？由什么组成？"><span class="nav-text">前端是什么？由什么组成？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML"><span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSS"><span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JS"><span class="nav-text">JS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么学习前端"><span class="nav-text">怎么学习前端</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#node-js"><span class="nav-text">node.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#vue-js、angularjs、react"><span class="nav-text">vue.js、angularjs、react</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bootsrtap和elment-ui"><span class="nav-text">Bootsrtap和elment-ui</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jQuery"><span class="nav-text">jQuery</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-text">小结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端知识点概述"><span class="nav-text">前端知识点概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用前端呢？"><span class="nav-text">为什么要用前端呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端是什么？由什么组成？"><span class="nav-text">前端是什么？由什么组成？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML"><span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS"><span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS"><span class="nav-text">JS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么学习前端"><span class="nav-text">怎么学习前端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#node-js"><span class="nav-text">node.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue-js、angularjs、react"><span class="nav-text">vue.js、angularjs、react</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bootsrtap和elment-ui"><span class="nav-text">Bootsrtap和elment-ui</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery"><span class="nav-text">jQuery</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-text">小结</span></a></li></ol></li></ol></div>
             
 
           </div>
